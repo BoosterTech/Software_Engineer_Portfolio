@@ -1,0 +1,170 @@
+# Audit Remediation Plan
+
+Source: full engineering audit, 2026-01 (branch `feature/share-icon`).
+Severity model: P0 critical · P1 high · P2 medium · P3 low · P4 informational.
+Audit evidence: Lighthouse perf 0.68 / a11y 1.0 / BP 1.0 / SEO 1.0,
+LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
+
+## Immediate (P0/P1)
+
+### 1. Defer the talking-portrait video — `preload="metadata"`
+
+- **File:** `src/features/portfolio/Home/TalkingPortrait.js:61`
+- **FACT:** `preload="auto"` on a permanently mounted `<video>` downloads
+  `profile-dark-en.mp4` (~1,214 KB) on every initial load — ~76% of the
+  1,593 KiB page weight. The video element is also the LCP element (~2,960 ms).
+- **IMPACT:** all visitors pay the payload for a user-triggered feature most
+  never tap; heaviest cost lands on the low-end mobile devices this site
+  targets.
+- **FIX:** `preload="metadata"` (still gets first frame for poster-less
+  states); in `handlePlay`, call `video.load()` before `video.play()`. The
+  still underlay already covers idle visuals — zero UX regression.
+- **VERIFY:** `npm run lighthouse:check` — expect byte weight ≈380 KiB and
+  LCP improvement; confirm playback still works on the A22.
+
+### 2. Triage `npm audit` (38 vulns, 21 high — transitive tooling)
+
+- **FACT:** findings live in dev/build chains (`react-scripts` → SVGO/PostCSS,
+  `@lhci/cli` → puppeteer/`extract-zip`, `serialize-javascript`, `tmp`,
+  `underscore`, `uuid`). `npm audit fix --force` proposes breaking downgrades
+  (`react-scripts@0.0.0`) — rejected.
+- **IMPACT:** low runtime exposure (static site, no secrets, no server);
+  real exposure is the CI/dev machines running the toolchain.
+- **FIX:** no forced fixes. Track as strategic debt (item 11). CI already
+  pins via `npm ci`.
+
+## Next (P2)
+
+### 3. Replace fake-SVG icon `styledcomponents.svg`
+
+- **File:** `src/images/styledcomponents.svg` (194 KB — a 1984×1984 base64
+  WebP inside an SVG wrapper), imported eagerly in
+  `Home/ToolsShowcase/index.js`; ~142 KB transferred, rendered ~60 px.
+- **FIX:** export the embedded image as a real `.webp` sized ~2× render
+  dims (~120 px → ~5–10 KB), update the import. Follows the repo's own
+  "raster = WebP ~2×" rule.
+- **Expected:** −135 KB initial weight (~9% of total).
+
+### 4. Harden the Lighthouse gate
+
+- **File:** `.lighthouserc.js`
+- **FACT:** assertions cover only LCP and CLS; TBT (the worst metric at
+  1,640 ms), byte weight, and performance score are unguarded. `numberOfRuns: 1`.
+- **FIX:** add assertions — `total-blocking-time` max ~2,500 ms (current+
+  headroom), `total-byte-weight` budget, `categories:performance` floor;
+  bump `numberOfRuns` to 3 for variance.
+
+### 5. Decorative-animation budget for low-end devices
+
+- **FACT:** TBT 1,640 ms with 20 long tasks; `StarField` runs 60 always-on
+  `opacity`/`transform` loops on a `position:fixed` layer (never offscreen),
+  plus `gradientShift`, `float`, twinkle, and orbit observers. The
+  `.portrait-playing` freeze already proved cumulative animation load stalls
+  low-end Android.
+- **FIX (cheapest first):** pause `StarField` when `document.hidden` and/or
+  via IntersectionObserver on scroll-idle; consider dropping star count on
+  `max-width: lg`. Measure TBT delta in Lighthouse before/after.
+
+### 6. Recompress `social_preview.png`
+
+- **FACT:** 933 KB at 1200×630 — fetched by every share tap (file attach)
+  and every scraper.
+- **FIX:** recompress/quantize PNG to ≤300 KB, or ship a WebP og:image with
+  PNG fallback if platform support is verified.
+
+## Later (P3)
+
+### 7. Mobile menu Escape key
+
+- **File:** `src/common/Navigation/index.js` — menu closes on link click,
+  backdrop tap, and breakpoint change, but not Escape. Closed panel is
+  correctly `visibility:hidden` (no focus trap), so this is a convenience
+  gap, not a trap.
+- **FIX:** `keydown` listener while `isMenuOpen`, Escape → close + return
+  focus to the hamburger toggle.
+
+### 8. Unify nav-height tokens
+
+- **FACT:** three names for one concept — `--navbar-height` (base.js,
+  backdrop), `--nav-height`/`--nav-height-mobile` (homeStyles), and runtime
+  `--nav-height-actual` (ResizeObserver).
+- **FIX:** consolidate to `--nav-height` + `--nav-height-mobile` tokens and
+  keep `--nav-height-actual` as the measured override only.
+
+### 9. E2E hardening
+
+- **File:** `e2e/portfolio.spec.js`
+- Replace `waitForTimeout` sleeps (×10) with state-based waits
+  (`expect.poll`, `toHaveAttribute`, scroll-position assertions).
+- Replace `getComputedStyle().backgroundColor` carousel assertions with the
+  `aria-current` attribute on `NavDot` — user-facing, not implementation.
+- Add a mobile-menu share-row case and an Escape-close case (pairs with #7).
+
+### 10. `.gitattributes` for line endings
+
+- **FACT:** `format:check` fails on Windows (54 files flagged) because
+  `autocrlf` checks out CRLF while Prettier expects LF; Ubuntu CI is green.
+  Newly written files are LF — the tree is mixed.
+- **FIX:** `* text=auto eol=lf` in `.gitattributes`, then a one-time
+  `git add --renormalize .` on a dedicated chore branch (do not mix into
+  feature work).
+
+### 11. Branch coverage headroom
+
+- **FACT:** branch coverage 72.03% vs the 70% gate — ~2 pt margin.
+- **FIX:** opportunistically cover error/edge paths (share error, video
+  error, scroll-spy bottom forcing) rather than chasing a number.
+
+## Optional / Strategic
+
+### 12. CRA → Vite (or equivalent) toolchain migration
+
+- **Limitation today:** `react-scripts@5.0.1` is frozen upstream; it anchors
+  most of the 38 audit findings and the ejected-config debt never shrinks.
+- **Benefit:** retires most transitive vulns, faster builds, modern plugins.
+- **Cost:** moderate — config port, jest→vitest decision, `%PUBLIC_URL%`
+  handling, `scripts/*` and Lighthouse/E2E wiring re-verification.
+- **Risk:** low for a static SPA; biggest detail is preserving the
+  `PUBLIC_URL=/Software_Engineer_Portfolio` deploy behavior and the
+  `serve-e2e.js` prefix strip.
+- **Verdict:** schedule when convenient — current setup is functional and
+  all gates are green; this is not urgent.
+
+### 13. axe-core in tests
+
+- Add `@axe-core/playwright` to one E2E pass (or jest-axe to key components).
+  Lighthouse a11y = 1.0 already; this catches what Lighthouse misses
+  (focus order, live regions) as regression protection.
+
+## Quick wins (≤1 day total, low regression risk)
+
+| # | Change | Saving |
+|---|---|---|
+| 1 | `preload="metadata"` | ~1.2 MB initial payload |
+| 3 | WebP for styled-components icon | ~135 KB |
+| 6 | Recompress social preview | ~600 KB per fetch |
+| 4 | `numberOfRuns: 3` + TBT assert | real regression gate |
+| 10 | `.gitattributes` eol=lf | kills CRLF false-failures |
+
+## Do not change (verified good — regression risk of "improvement")
+
+- LazyMotion + `domMax` + `m.*` discipline
+- `.portrait-playing` animation freeze (verified on-device fix)
+- Theme bootstrap preload script in `index.html` (keeps `href`/`src`
+  identical — required for the preload to dedupe)
+- `react-scroll` owning all scrolling; no CSS `scroll-behavior`
+- Two-context state model — no state library
+- `dangerouslySetInnerHTML` on trusted static copy (document the contract)
+- System font stack (measured Inter preload ≈1 s LCP — rejected)
+- No `content-visibility` on section roots (measured anchor drift)
+- Chromium-only E2E for this scope
+
+## Order of execution
+
+1. Video preload (1) — biggest measurable win; deploy-worthy alone.
+2. Icon replacement (3) + preview recompress (6) — same asset pass.
+3. Lighthouse assertions (4) — lands the gate *after* the wins so baselines
+   reflect the improved build.
+4. StarField pause (5) — measure, don't guess.
+5. P3 batch (7–11) — opportunistic, one chore PR.
+6. Strategic items (12–13) — roadmap discussion, not now.

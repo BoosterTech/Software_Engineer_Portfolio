@@ -101,6 +101,12 @@ export const pl = {
     themeToggleLabel: "Przełącz tryb ciemny",
     languageGroupLabel: "Selektor języka",
     languageSelectLabel: "Wybierz język",
+    shareLabel: "Udostępnij to portfolio",
+    shareTitle: "Dariusz Podczasik — Software Engineer",
+    shareText:
+      "Zobacz portfolio Dariusza — projektowanie wspomagane AI i nowoczesne aplikacje webowe.",
+    shareCopied: "Link skopiowany",
+    shareError: "Nie udało się skopiować linku",
   },
   projects: {
     header: "Proȷekty",

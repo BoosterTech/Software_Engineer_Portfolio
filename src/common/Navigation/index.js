@@ -1,6 +1,8 @@
 import DarkModeToggle from "common/DarkModeToggle";
 import { useLanguage } from "common/LanguageProvider";
 import { LanguageSwitch } from "common/LanguageSwitch";
+import ShareButton from "common/ShareButton";
+import ShareMenuItem from "common/ShareButton/ShareMenuItem";
 import useContent from "common/useContent";
 import { useMediaQuery } from "common/useMediaQuery";
 import { useScrollSpy } from "common/useScrollSpy";
@@ -39,6 +41,7 @@ const Navigation = () => {
 
   const isCompact = useMediaQuery(`(max-width: ${COMPACT_MAX_PX}px)`);
   const isMobile = useMediaQuery(`(max-width: ${themes.breakpoint.md})`);
+  const isDesktopNav = useMediaQuery(`(min-width: ${DESKTOP_MIN_PX}px)`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef(null);
   const [hidden, setHidden] = useState(false);
@@ -159,6 +162,7 @@ const Navigation = () => {
     >
       <TopRow>
         <LanguageSwitch onOpen={() => setIsMenuOpen(false)} />
+        {isDesktopNav && <ShareButton />}
         <DarkModeToggle />
       </TopRow>
       <Link
@@ -234,6 +238,7 @@ const Navigation = () => {
             </MobileNavItem>
           );
         })}
+        <ShareMenuItem />
       </MobileMenuPanel>
     </StyledList>
   );

@@ -93,6 +93,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
     themeToggleLabel: "Toggle dark mode",
     languageGroupLabel: "Language selector",
     languageSelectLabel: "Select language",
+    shareLabel: "Share this portfolio",
+    shareTitle: "Dariusz Podczasik — Software Engineer",
+    shareText:
+      "Check out Dariusz's portfolio — AI-directed engineering and modern web applications.",
+    shareCopied: "Link copied",
+    shareError: "Couldn't copy link",
   },
   projects: {
     header: "Proȷects",
