@@ -95,6 +95,12 @@ export const es = {
     themeToggleLabel: "Cambiar modo oscuro",
     languageGroupLabel: "Selector de idioma",
     languageSelectLabel: "Seleccionar idioma",
+    shareLabel: "Compartir este portafolio",
+    shareTitle: "Dariusz Podczasik — Software Engineer",
+    shareText:
+      "Mira el portafolio de Dariusz — ingeniería dirigida por IA y aplicaciones web modernas.",
+    shareCopied: "Enlace copiado",
+    shareError: "No se pudo copiar el enlace",
   },
   projects: {
     header: "Proyectos",
