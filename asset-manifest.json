@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Software_Engineer_Portfolio/static/js/main.c44a5c04.js",
+    "main.js": "/Software_Engineer_Portfolio/static/js/main.61176b1e.js",
     "static/js/0.902dd922.chunk.js": "/Software_Engineer_Portfolio/static/js/0.902dd922.chunk.js",
     "static/media/plasma_library_modal.webp": "/Software_Engineer_Portfolio/static/media/plasma_library_modal.8a95b0de88511ae9a8f9.webp",
     "static/media/styledcomponents.svg": "/Software_Engineer_Portfolio/static/media/styledcomponents.5d6d3e9b5c60f98a34c882b1550e2de1.svg",
@@ -35,10 +35,10 @@
     "static/media/SpainIcon.webp": "/Software_Engineer_Portfolio/static/media/SpainIcon.5d26e5e4930f577bef31.webp",
     "static/media/PolandIcon.webp": "/Software_Engineer_Portfolio/static/media/PolandIcon.d81506378ccd2919c639.webp",
     "static/media/gitHubIcon.webp": "/Software_Engineer_Portfolio/static/media/gitHubIcon.9938594eed4f82555dd1.webp",
-    "main.c44a5c04.js.map": "/Software_Engineer_Portfolio/static/js/main.c44a5c04.js.map",
+    "main.61176b1e.js.map": "/Software_Engineer_Portfolio/static/js/main.61176b1e.js.map",
     "0.902dd922.chunk.js.map": "/Software_Engineer_Portfolio/static/js/0.902dd922.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.c44a5c04.js"
+    "static/js/main.61176b1e.js"
   ]
 }
