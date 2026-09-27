@@ -183,6 +183,6 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
    perf-score sensors (baselines: TBT ~1.4 s, weight 244 KiB).
 4. ~~StarField pause (5)~~ ✅ MEASURED — delta inside noise floor; only the
    `prefers-reduced-motion` a11y fix remains worthwhile.
-5. ~~P3 batch (7–11)~~ ✅ DONE — except item 10's renormalize commit, which
-   still needs its own chore branch by design.
+5. ~~P3 batch (7–11)~~ ✅ DONE — item 10 resolved via `.gitattributes` +
+   worktree refresh (index was already LF; no renormalize commit needed).
 6. Strategic items (12–13) — roadmap discussion, not now.
