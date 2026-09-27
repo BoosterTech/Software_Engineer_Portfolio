@@ -1,9 +1,8 @@
 {
   "files": {
-    "main.js": "/Software_Engineer_Portfolio/static/js/main.61176b1e.js",
+    "main.js": "/Software_Engineer_Portfolio/static/js/main.232f5416.js",
     "static/js/0.902dd922.chunk.js": "/Software_Engineer_Portfolio/static/js/0.902dd922.chunk.js",
     "static/media/plasma_library_modal.webp": "/Software_Engineer_Portfolio/static/media/plasma_library_modal.8a95b0de88511ae9a8f9.webp",
-    "static/media/styledcomponents.svg": "/Software_Engineer_Portfolio/static/media/styledcomponents.5d6d3e9b5c60f98a34c882b1550e2de1.svg",
     "static/media/movie_browser_modal.webp": "/Software_Engineer_Portfolio/static/media/movie_browser_modal.1213b749f635f41d2fbb.webp",
     "static/media/PlasmaLibraryProject.webp": "/Software_Engineer_Portfolio/static/media/PlasmaLibraryProject.82593bf04a7ec052e4e6.webp",
     "static/media/WTMMusicProject.webp": "/Software_Engineer_Portfolio/static/media/WTMMusicProject.d7fb426c2b42df71976e.webp",
@@ -21,6 +20,7 @@
     "static/media/react_quiz_modal.webp": "/Software_Engineer_Portfolio/static/media/react_quiz_modal.11d2fd64b3fca6f44c13.webp",
     "static/media/tasks_list_modal.webp": "/Software_Engineer_Portfolio/static/media/tasks_list_modal.5c92849fc6dc70d8cc5a.webp",
     "static/media/React_wordmark_light.svg": "/Software_Engineer_Portfolio/static/media/React_wordmark_light.3339606fb5212c86ab134b76f7a0c46f.svg",
+    "static/media/styledcomponents.webp": "/Software_Engineer_Portfolio/static/media/styledcomponents.fc062ed8c1b7e0d59d19.webp",
     "static/media/Supabase_wordmark_light.svg": "/Software_Engineer_Portfolio/static/media/Supabase_wordmark_light.d0cafd382a80e8d07678cb15478afa9a.svg",
     "static/media/reactQueryIcon.webp": "/Software_Engineer_Portfolio/static/media/reactQueryIcon.ecf8d722f4ade4cc6933.webp",
     "index.html": "/Software_Engineer_Portfolio/index.html",
@@ -35,10 +35,10 @@
     "static/media/SpainIcon.webp": "/Software_Engineer_Portfolio/static/media/SpainIcon.5d26e5e4930f577bef31.webp",
     "static/media/PolandIcon.webp": "/Software_Engineer_Portfolio/static/media/PolandIcon.d81506378ccd2919c639.webp",
     "static/media/gitHubIcon.webp": "/Software_Engineer_Portfolio/static/media/gitHubIcon.9938594eed4f82555dd1.webp",
-    "main.61176b1e.js.map": "/Software_Engineer_Portfolio/static/js/main.61176b1e.js.map",
+    "main.232f5416.js.map": "/Software_Engineer_Portfolio/static/js/main.232f5416.js.map",
     "0.902dd922.chunk.js.map": "/Software_Engineer_Portfolio/static/js/0.902dd922.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.61176b1e.js"
+    "static/js/main.232f5416.js"
   ]
 }
