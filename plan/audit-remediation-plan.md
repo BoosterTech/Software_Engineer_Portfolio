@@ -51,16 +51,22 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 - **MEASURED (median of 3, post-remediation):** perf 0.70 · LCP 2,789 ms ·
   TBT 1,432 ms · CLS 0 · **244 KiB** total weight. All assertions pass.
 
-### 5. Decorative-animation budget for low-end devices
+### 5. Decorative-animation budget for low-end devices ✅ MEASURED — pause skipped
 
-- **FACT:** TBT 1,640 ms with 20 long tasks; `StarField` runs 60 always-on
-  `opacity`/`transform` loops on a `position:fixed` layer (never offscreen),
-  plus `gradientShift`, `float`, twinkle, and orbit observers. The
-  `.portrait-playing` freeze already proved cumulative animation load stalls
-  low-end Android.
-- **FIX (cheapest first):** pause `StarField` when `document.hidden` and/or
-  via IntersectionObserver on scroll-idle; consider dropping star count on
-  `max-width: lg`. Measure TBT delta in Lighthouse before/after.
+- **MEASURED (CDP trace, prod build, 4× CPU throttle, 6 s steady-state
+  windows, run→freeze→run):** freezing all 60 star animations
+  (`animation: none`) saved ~880 ms/6 s of renderer time — **below the
+  1,330 ms run-to-run noise floor**. The twinkle is compositor-cheap; a
+  pause mechanism has no measurable main-thread payoff. Chrome also already
+  suspends compositor animation in hidden tabs, so `document.hidden`
+  wiring would buy ~0. Perf-motivated pause: **rejected on evidence**.
+- **SIDE FINDING:** `UpdateLayoutTree` burns 2.0–2.8 s per 6 s idle window
+  in *every* state (stars frozen included) — something else continuously
+  dirties layout at idle (`gradientShift`/marquee/IO churn are candidates).
+  Separate investigation if TBT becomes a priority.
+- **REMAINING → DONE (a11y, not perf):** `StarField` spans now honor
+  `prefers-reduced-motion: reduce` (`animation: none` — stars render
+  static). Verified in prod build via Playwright media emulation.
 
 ### 6. Recompress `social_preview.png` ✅ DONE
 
@@ -174,6 +180,7 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
    weight, −820 KB per share/scrape.
 3. ~~Lighthouse assertions (4)~~ ✅ DONE — median-of-3 + TBT/byte-weight/
    perf-score sensors (baselines: TBT ~1.4 s, weight 244 KiB).
-4. StarField pause (5) — measure, don't guess.
+4. ~~StarField pause (5)~~ ✅ MEASURED — delta inside noise floor; only the
+   `prefers-reduced-motion` a11y fix remains worthwhile.
 5. P3 batch (7–11) — opportunistic, one chore PR.
 6. Strategic items (12–13) — roadmap discussion, not now.
