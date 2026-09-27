@@ -89,7 +89,6 @@ export const tokens = css`
     --color-footer-texture-opacity: 0.25;
 
     /* Layout tokens */
-    --navbar-height: 64px;
     --container-max-width: 1200px;
 
     /* Spacing */

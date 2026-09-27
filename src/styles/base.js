@@ -5,7 +5,9 @@ export const base = css`
   html {
     box-sizing: border-box;
     scrollbar-gutter: stable;
-    scroll-padding-top: calc(var(--navbar-height) + var(--spacing-md));
+    scroll-padding-top: calc(
+      var(--nav-height-actual, var(--nav-height)) + var(--spacing-md)
+    );
     scrollbar-width: thin;
     scrollbar-color: var(--color-secondary) var(--color-surface);
   }
