@@ -131,6 +131,40 @@ describe("ShareButton", () => {
     );
   });
 
+  it("copies via the legacy execCommand path when the clipboard API is missing", async () => {
+    const execCommand = jest.fn().mockReturnValue(true);
+    Object.defineProperty(document, "execCommand", {
+      value: execCommand,
+      configurable: true,
+    });
+    renderWithProviders(<ShareButton />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /share this portfolio/i })
+    );
+
+    const tooltip = screen.getByTestId("share-tooltip");
+    await waitFor(() => expect(tooltip).toHaveTextContent(/link copied/i));
+    expect(execCommand).toHaveBeenCalledWith("copy");
+    delete document.execCommand;
+  });
+
+  it("shows the error tooltip when the legacy copy path fails too", async () => {
+    Object.defineProperty(document, "execCommand", {
+      value: jest.fn().mockReturnValue(false),
+      configurable: true,
+    });
+    renderWithProviders(<ShareButton />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /share this portfolio/i })
+    );
+
+    const tooltip = screen.getByTestId("share-tooltip");
+    await waitFor(() => expect(tooltip).toHaveTextContent(/couldn't copy/i));
+    delete document.execCommand;
+  });
+
   it("shows the error tooltip when copying fails", async () => {
     Object.defineProperty(navigator, "clipboard", {
       value: { writeText: jest.fn().mockRejectedValue(new Error("denied")) },

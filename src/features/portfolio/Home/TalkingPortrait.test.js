@@ -51,6 +51,38 @@ describe("TalkingPortrait", () => {
     ).toBeInTheDocument();
   });
 
+  it("returns to idle when the video reports an error", () => {
+    renderWithProviders(<Home id="home" />, {
+      initialLanguage: "English",
+      initialIsDark: true,
+    });
+
+    const button = screen.getByRole("button", { name: /hear me/i });
+    fireEvent.click(button);
+    expect(button).toBeDisabled(); // loading until "playing" fires
+
+    fireEvent.error(screen.getByTestId("talking-portrait-video"));
+    expect(
+      screen.getByRole("button", { name: /hear me/i })
+    ).toHaveAttribute("aria-busy", "false");
+  });
+
+  it("returns to idle when play() throws synchronously", () => {
+    playSpy.mockImplementation(() => {
+      throw new Error("play blocked");
+    });
+    renderWithProviders(<Home id="home" />, {
+      initialLanguage: "English",
+      initialIsDark: true,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /hear me/i }));
+    expect(playSpy).toHaveBeenCalled();
+    expect(
+      screen.getByRole("button", { name: /hear me/i })
+    ).toHaveAttribute("aria-busy", "false");
+  });
+
   it("renders the video with a localized button in Polish", () => {
     renderWithProviders(<Home id="home" />, {
       initialLanguage: "Polish",
