@@ -41,14 +41,15 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   + `iconWidth`/`iconHeight` updated; fake SVG deleted.
 - **MEASURED:** 194 KB source / ~142 KB transferred → **6.9 KB** (−95%).
 
-### 4. Harden the Lighthouse gate
+### 4. Harden the Lighthouse gate ✅ DONE
 
 - **File:** `.lighthouserc.js`
-- **FACT:** assertions cover only LCP and CLS; TBT (the worst metric at
-  1,640 ms), byte weight, and performance score are unguarded. `numberOfRuns: 1`.
-- **FIX:** add assertions — `total-blocking-time` max ~2,500 ms (current+
-  headroom), `total-byte-weight` budget, `categories:performance` floor;
-  bump `numberOfRuns` to 3 for variance.
+- **SHIPPED:** `numberOfRuns: 1 → 3` (median kills ±20% run noise) plus three
+  new error-level assertions: `total-blocking-time ≤ 2,600 ms`,
+  `total-byte-weight ≤ 400 KiB`, `categories:performance ≥ 0.5`.
+  Ceilings sit above measured baselines — regression sensors, not budgets.
+- **MEASURED (median of 3, post-remediation):** perf 0.70 · LCP 2,789 ms ·
+  TBT 1,432 ms · CLS 0 · **244 KiB** total weight. All assertions pass.
 
 ### 5. Decorative-animation budget for low-end devices
 
@@ -171,8 +172,8 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 1. ~~Video preload (1)~~ ✅ DONE — −1.2 MB initial payload.
 2. ~~Icon replacement (3) + preview recompress (6)~~ ✅ DONE — −135 KB page
    weight, −820 KB per share/scrape.
-3. Lighthouse assertions (4) — lands the gate *after* the wins so baselines
-   reflect the improved build.
+3. ~~Lighthouse assertions (4)~~ ✅ DONE — median-of-3 + TBT/byte-weight/
+   perf-score sensors (baselines: TBT ~1.4 s, weight 244 KiB).
 4. StarField pause (5) — measure, don't guess.
 5. P3 batch (7–11) — opportunistic, one chore PR.
 6. Strategic items (12–13) — roadmap discussion, not now.
