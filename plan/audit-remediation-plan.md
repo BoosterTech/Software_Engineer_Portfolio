@@ -7,20 +7,18 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Immediate (P0/P1)
 
-### 1. Defer the talking-portrait video — `preload="metadata"`
+### 1. Defer the talking-portrait video — `preload="metadata"` ✅ DONE
 
-- **File:** `src/features/portfolio/Home/TalkingPortrait.js:61`
-- **FACT:** `preload="auto"` on a permanently mounted `<video>` downloads
-  `profile-dark-en.mp4` (~1,214 KB) on every initial load — ~76% of the
-  1,593 KiB page weight. The video element is also the LCP element (~2,960 ms).
-- **IMPACT:** all visitors pay the payload for a user-triggered feature most
-  never tap; heaviest cost lands on the low-end mobile devices this site
-  targets.
-- **FIX:** `preload="metadata"` (still gets first frame for poster-less
-  states); in `handlePlay`, call `video.load()` before `video.play()`. The
-  still underlay already covers idle visuals — zero UX regression.
-- **VERIFY:** `npm run lighthouse:check` — expect byte weight ≈380 KiB and
-  LCP improvement; confirm playback still works on the A22.
+- **File:** `src/features/portfolio/Home/TalkingPortrait.js`
+- **SHIPPED:** `preload="auto"` → `preload="metadata"`; test assertion updated
+  to guard the deferral (`TalkingPortrait.test.js`). `play()` on tap triggers
+  the real download — no explicit `load()` needed.
+- **MEASURED (Lighthouse, same config):** total bytes 1,593 KiB → **380 KiB
+  (−76%)**; MP4 not fetched on initial load at all; LCP element moved from
+  `<video>` to the portrait `<img>`; LCP ~2.9 s (paint-bound, unchanged);
+  CLS 0. Perf score ~unchanged (TBT-dominated, single-run noise).
+- **Remaining verify:** confirm tap-to-play still works on the A22 on the
+  deployed build (metadata preload adds a small fetch on first tap).
 
 ### 2. Triage `npm audit` (38 vulns, 21 high — transitive tooling)
 
@@ -35,15 +33,13 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Next (P2)
 
-### 3. Replace fake-SVG icon `styledcomponents.svg`
+### 3. Replace fake-SVG icon `styledcomponents.svg` ✅ DONE
 
-- **File:** `src/images/styledcomponents.svg` (194 KB — a 1984×1984 base64
-  WebP inside an SVG wrapper), imported eagerly in
-  `Home/ToolsShowcase/index.js`; ~142 KB transferred, rendered ~60 px.
-- **FIX:** export the embedded image as a real `.webp` sized ~2× render
-  dims (~120 px → ~5–10 KB), update the import. Follows the repo's own
-  "raster = WebP ~2×" rule.
-- **Expected:** −135 KB initial weight (~9% of total).
+- **SHIPPED:** extracted the embedded 1984×1984 WebP from the SVG wrapper and
+  re-encoded to a real `src/images/styledcomponents.webp` at 200×200 (2× the
+  ~100 px max card render, per the repo rule). `ToolsShowcase/index.js` import
+  + `iconWidth`/`iconHeight` updated; fake SVG deleted.
+- **MEASURED:** 194 KB source / ~142 KB transferred → **6.9 KB** (−95%).
 
 ### 4. Harden the Lighthouse gate
 
@@ -65,12 +61,15 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   via IntersectionObserver on scroll-idle; consider dropping star count on
   `max-width: lg`. Measure TBT delta in Lighthouse before/after.
 
-### 6. Recompress `social_preview.png`
+### 6. Recompress `social_preview.png` ✅ DONE
 
-- **FACT:** 933 KB at 1200×630 — fetched by every share tap (file attach)
-  and every scraper.
-- **FIX:** recompress/quantize PNG to ≤300 KB, or ship a WebP og:image with
-  PNG fallback if platform support is verified.
+- **SHIPPED:** replaced with `public/social_preview.jpg` — same 1200×630 dims,
+  JPEG q85, **113 KB** (−88%). Updated `og:image` + `twitter:image` in
+  `public/index.html` and the share-attach path/type in
+  `useShareAction.js` (`preview.jpg`, `image/jpeg`); PNG deleted.
+- **WHY JPEG over WebP:** og:image WebP support is still inconsistent across
+  scrapers (Facebook documents jpg/png/gif); JPEG q85 is universal and the
+  card has no alpha.
 
 ## Later (P3)
 
@@ -136,6 +135,14 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   Lighthouse a11y = 1.0 already; this catches what Lighthouse misses
   (focus order, live regions) as regression protection.
 
+## Field findings (post-audit, during verification)
+
+- **Windows share Copy broken by file attachment** ✅ FIXED — with a file
+  payload in `navigator.share()`, the Windows OS share dialog's Copy put the
+  image on the clipboard instead of the URL (paste yields nothing). File
+  attach is now mobile-only in `useShareAction.js`; desktop shares URL-only.
+  Guarded by a dedicated test; convention recorded in `AGENTS.md`.
+
 ## Quick wins (≤1 day total, low regression risk)
 
 | # | Change | Saving |
@@ -161,8 +168,9 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Order of execution
 
-1. Video preload (1) — biggest measurable win; deploy-worthy alone.
-2. Icon replacement (3) + preview recompress (6) — same asset pass.
+1. ~~Video preload (1)~~ ✅ DONE — −1.2 MB initial payload.
+2. ~~Icon replacement (3) + preview recompress (6)~~ ✅ DONE — −135 KB page
+   weight, −820 KB per share/scrape.
 3. Lighthouse assertions (4) — lands the gate *after* the wins so baselines
    reflect the improved build.
 4. StarField pause (5) — measure, don't guess.

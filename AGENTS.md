@@ -97,6 +97,12 @@ auth, no database, no state library. Keep it that way.
   `<a>` with no href: unfocusable by keyboard, invisible as links to screen
   readers and crawlers. `handleClick` calls `preventDefault`, so the hash never
   jumps natively; smooth scroll still applies.
+- Sharing: `common/ShareButton` (desktop toolbar icon) and
+  `ShareButton/ShareMenuItem` (labeled row in the mobile menu) both use
+  `useShareAction`. The `social_preview.jpg` file attachment is **mobile-only**
+  (`navigator.userAgentData?.mobile` → `(pointer: coarse)` fallback) — verified:
+  on Windows the OS share dialog's Copy grabs the attached file instead of the
+  URL, so pasting yields nothing. Desktop must stay URL-only.
 
 ## i18n
 

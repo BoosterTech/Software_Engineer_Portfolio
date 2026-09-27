@@ -18,6 +18,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - **Project Showcase**: Highlighting my best work with detailed descriptions and links.
 - **Accessibility**: ARIA roles/labels on interactive elements, keyboard navigation (arrow keys for carousel, Enter/Space for toggles, Escape for fullscreen), dynamic `<html lang>` attribute.
 - **Image Optimization**: WebP format with lazy loading for fast page loads.
+- **Native Sharing**: Web Share API with clipboard fallback; the branded social preview attaches to the share payload on mobile.
 
 ---
 
@@ -31,7 +32,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - **Animations**: framer-motion
 - **Deployment**: gh-pages
 - **Image Optimization**: WebP assets, `loading="lazy"` on below-the-fold images
-- **E2E Testing**: Playwright (5 tests: scroll nav, language switch, dark mode, carousel next/prev, carousel dot-click)
+- **E2E Testing**: Playwright (10 tests: scroll nav, language switch, dark mode, carousel arrows/dots, modal focus trap + arrow nav, mobile menu open/close, backdrop dismiss)
 - **Quality & CI**: ESLint, Prettier, Jest, Playwright, GitHub Actions
 - **Build-time Guardrails**: `size-check`, `format:check`, `lint`, `bundle:check`, `test:coverage`, `lighthouse:check`, `check:colors`, `check:circular`, `test:e2e`
 
@@ -40,17 +41,17 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 ## 🏗️ Architecture & Maintenance
 
 - Decisions are recorded in `plan/architecture-playbook.md`.
-- Active work is tracked in `plan/premium-ux-followup-plan.md`; contributor/agent conventions live in `AGENTS.md`.
+- Active work is tracked in `plan/audit-remediation-plan.md` (completed plans live in `plan/` and `plan/archive/`); contributor/agent conventions live in `AGENTS.md`.
 - Recent boundary cleanup: `StarField` and `Main` are now standalone `src/common/` components, `src/themes.js` contains only breakpoints, and components read localized copy through `src/common/useContent.js`.
 - **State management**: language and theme mode (`isDark`) are handled by `LanguageProvider` and `ThemeModeProvider` in `src/common/`; `@reduxjs/toolkit` and `react-redux` were removed.
 - Shared primitives: `src/common/Card` provides `$glass`, `$bordered`, and `$hoverable` variants and is now used by `About` feature cards, `Contact` tiles, `Footer` social links, `Projects` tiles, and `ToolsShowcase` feature cards.
 - Content: all UI copy lives in `src/content/translations/` (English/Polish/Spanish parity enforced by `translations.test.js`), including `home.toolsShowcase` for the technology section; `projects.js` remains a single module under the size-check exclusion.
 - Color-token guard: `npm run check:colors` runs in CI and fails the build if any hardcoded colors are found in any `src/**/*.js` or `src/**/*.jsx` file (with an allowlist for `tokens.js`, `contactIcons.js`, and `animations.js`).
 - Circular-dependency guard: `npm run check:circular` (via `madge`) runs in CI and fails the build if any import cycles are introduced.
-- Bundle-impact gate: PR template requires `npm run build && npm run bundle:check` and confirmation that no chunk exceeds the 350 KB gzipped budget.
+- Bundle-impact gate: PR template requires `npm run build && npm run bundle:check` and confirmation that the total gzipped bundle stays under the 250 KB budget.
 - Fixed section slugs: `home`, `about`, `projects`, `contact` are used for `react-scroll` anchors in all languages.
-- Quality gates: `npm run test:coverage` enforces the 70% Jest coverage thresholds in CI (58 tests across 11 suites), `npm run test:e2e` runs 5 Playwright E2E tests (scroll, language switch, dark mode, carousel next/prev, carousel dot-click) against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the LCP/CLS budgets in `.lighthouserc.js`.
-- Performance: Framer Motion loads via `LazyMotion` with an async `domMax` feature bundle (use `m.*`, never `motion.*`); the hero portrait is media-scoped preloaded in `public/index.html`; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
+- Quality gates: `npm run test:coverage` enforces the 70% Jest coverage thresholds in CI (71 tests across 12 suites), `npm run test:e2e` runs 10 Playwright E2E tests against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the LCP/CLS budgets in `.lighthouserc.js`.
+- Performance: Framer Motion loads via `LazyMotion` with an async `domMax` feature bundle (use `m.*`, never `motion.*`); the hero portrait is media-scoped preloaded in `public/index.html`; the talking-portrait video stays at `preload="metadata"` so its ~1.2 MB MP4 only downloads on tap; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
 
 ---
 
