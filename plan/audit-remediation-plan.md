@@ -137,11 +137,20 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 - **Verdict:** schedule when convenient — current setup is functional and
   all gates are green; this is not urgent.
 
-### 13. axe-core in tests
+### 13. axe-core in tests — ✅ SHIPPED
 
-- Add `@axe-core/playwright` to one E2E pass (or jest-axe to key components).
-  Lighthouse a11y = 1.0 already; this catches what Lighthouse misses
-  (focus order, live regions) as regression protection.
+- `@axe-core/playwright@4.13.0` added; `e2e/accessibility.spec.js` scans five
+  states: homepage light/dark, open project modal, scrolled-page + modal dark
+  (reaches the whileInView-mounted terminal), open mobile menu. Violations
+  fail the test; `wcag2a/2aa/21a/21aa` tags.
+- axe immediately caught what Lighthouse's static audit missed — three real
+  contrast bugs: white text on `--color-dark-primary` CTAs (3.48 → fixed via
+  new `--color-on-primary` token), `body` had no `background-color` (backdrop
+  was a `body::before` image axe can't resolve — now a solid fallback under
+  it), and terminal palette tokens under 4.5:1 (comment + variable, both
+  themes). All fixed; 15/15 axe runs green.
+- Convention recorded in `AGENTS.md`: scans must wait for finite animations
+  to finish first (mid-fade opacity sampling produces flaky contrast reads).
 
 ## Field findings (post-audit, during verification)
 

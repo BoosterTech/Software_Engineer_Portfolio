@@ -84,6 +84,11 @@ auth, no database, no state library. Keep it that way.
   (see `CarouselSlide`'s `ExpandButton`).
 - Small icon buttons needing a ≥24px hit area: keep the visual size, expand the box
   with `padding` + `background-clip: content-box` (see `NavDot` in Projects/styled.js).
+- Text on `--color-primary` backgrounds uses `--color-on-primary` (white in
+  light, deep navy in dark — the dark primary is too bright for white text,
+  WCAG 3.48 < 4.5). `body` carries `background-color: var(--color-background)`
+  as an opaque fallback under the `body::before` wallpaper image — needed for
+  correct contrast math while the image loads, and for axe to resolve it.
 - Nav height vocabulary is fixed: `--nav-height` (64px desktop) and
   `--nav-height-mobile` (80px) are the only static tokens; `--nav-height-actual`
   is the ResizeObserver-measured runtime override, always consumed as
@@ -143,6 +148,12 @@ auth, no database, no state library. Keep it that way.
   `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
   `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
   `aria-expanded`, focus)
+- `e2e/accessibility.spec.js` runs `@axe-core/playwright` scans (wcag2a/2aa/
+  21a/21aa) on key app states — new violations fail the suite. Before
+  `analyze()`, wait for finite animations to finish: axe samples rendered
+  pixels and mid-fade opacity produces flaky contrast reads. Scan dark theme
+  via `addInitScript(localStorage.theme = "dark")`, not the toggle — the
+  bootstrap applies it pre-paint with zero transition
 
 ## Verify before committing
 
