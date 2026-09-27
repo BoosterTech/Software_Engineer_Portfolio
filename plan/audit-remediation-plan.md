@@ -103,15 +103,16 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   on `NavDot`. Added the share-row and Escape-close mobile cases —
   **12 E2E tests, all green, zero sleeps**.
 
-### 10. `.gitattributes` for line endings — PARTIAL
+### 10. `.gitattributes` for line endings ✅ DONE
 
 - **FACT:** `format:check` fails on Windows (54 files flagged) because
   `autocrlf` checks out CRLF while Prettier expects LF; Ubuntu CI is green.
   Newly written files are LF — the tree is mixed.
-- **SHIPPED:** `.gitattributes` with `* text=auto eol=lf` created.
-- **REMAINING:** the one-time `git add --renormalize .` still needs its own
-  chore branch — it rewrites ~50 files' line endings and must not ride
-  inside a feature diff.
+- **SHIPPED:** `.gitattributes` (`* text=auto eol=lf`) + one-time worktree
+  refresh (`git rm -r --cached .` + `git reset --hard`). `git ls-files
+  --eol` showed the index was already all-LF (autocrlf converted on commit)
+  — only the 100 on-disk copies were CRLF — so **no renormalize commit was
+  needed at all**. `format:check` is now green on Windows (was 54 flags).
 
 ### 11. Branch coverage headroom ✅ DONE
 

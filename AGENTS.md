@@ -158,10 +158,10 @@ npm run test:e2e    # needs the build above; serves it via scripts/serve-e2e.js
 npm run lighthouse:check  # perf gate: median-of-3 runs; LCP/CLS/TBT/byte-weight/perf-score assertions in .lighthouserc.js
 ```
 
-Note: `format:check` can false-fail on Windows checkouts — `core.autocrlf`
-produces CRLF while Prettier expects LF. `.gitattributes` pins `eol=lf`; the
-one-time `git add --renormalize .` cleanup is tracked in
-`plan/audit-remediation-plan.md` item 10 and must land on its own branch.
+Note: `.gitattributes` pins `* text=auto eol=lf` — always write files with
+LF endings, even on Windows (`core.autocrlf` would otherwise hand you CRLF
+on checkout and Prettier flags it). If `format:check` flags files you
+barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
 
 ## Dependency installs
 
