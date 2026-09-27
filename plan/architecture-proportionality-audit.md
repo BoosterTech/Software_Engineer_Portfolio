@@ -118,8 +118,8 @@ No enterprise patterns or excessive abstractions detected. The architecture is p
 - Circular dependency check (madge)
 - File size limit (300 lines)
 - Bundle size budget (350 KB gzipped)
-- Lighthouse CI (LCP ≤ 2.5s, CLS ≤ 0.1)
-- Playwright E2E (5 critical paths, now in CI)
+- Lighthouse CI, median of 3 runs (LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, weight ≤ 400 KiB, perf ≥ 0.5)
+- Playwright E2E (10 tests, now in CI)
 - Prettier formatting
 - PR template with quality checklist
 - Architecture playbook

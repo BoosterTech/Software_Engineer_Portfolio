@@ -146,7 +146,7 @@ npm run check:circular
 npm run size-check
 npm run build       # before shipping UI changes
 npm run test:e2e    # needs the build above; serves it via scripts/serve-e2e.js
-npm run lighthouse:check  # perf gate: LCP/CLS budgets in .lighthouserc.js
+npm run lighthouse:check  # perf gate: median-of-3 runs; LCP/CLS/TBT/byte-weight/perf-score assertions in .lighthouserc.js
 ```
 
 ## Dependency installs

@@ -12,7 +12,7 @@ module.exports = {
         "largest-contentful-paint": ["error", { maxNumericValue: 4000 }],
         "cumulative-layout-shift": ["error", { maxNumericValue: 0.1 }],
         // Regression sensors, not tight budgets: ceilings sit above the
-        // measured post-remediation baselines (~2.0s TBT, ~245 KiB weight)
+        // measured post-remediation baselines (~1.4s TBT, ~244 KiB weight)
         // so real regressions fail CI without flapping on noise.
         "total-blocking-time": ["error", { maxNumericValue: 2600 }],
         "total-byte-weight": ["error", { maxNumericValue: 400 * 1024 }],
