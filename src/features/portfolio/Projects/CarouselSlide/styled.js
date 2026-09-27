@@ -135,7 +135,7 @@ export const CTAButton = styled(Button)`
           }
         `
       : css`
-          color: var(--color-white);
+          color: var(--color-on-primary);
           background: var(--color-primary);
           border: 1px solid var(--color-primary);
 

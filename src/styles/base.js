@@ -20,6 +20,7 @@ export const base = css`
 
   body {
     min-height: 100vh;
+    background-color: var(--color-background);
     overflow-x: hidden;
     overflow-x: clip;
     color: var(--color-text-primary);
