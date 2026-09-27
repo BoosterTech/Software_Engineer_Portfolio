@@ -18,7 +18,7 @@ auth, no database, no state library. Keep it that way.
 - `src/content/` — all user-facing copy (`translations/` per language, `projects.js`)
 - Styles live in a co-located `styled.js` (or `<Name>.styles.js`) per component folder
 - `plan/` — architecture and roadmap docs; `architecture-playbook.md` is the source of truth,
-  `premium-ux-followup-plan.md` tracks active work, `plan/archive/` holds superseded plans
+  `audit-remediation-plan.md` tracks active work, `plan/archive/` holds superseded plans
 
 ## Hard rules (CI-enforced)
 
