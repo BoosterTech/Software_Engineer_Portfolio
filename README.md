@@ -59,10 +59,9 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 
 ### � WTM AI Music Generation Website
 
-- **Description**: AI-powered music generation website.
-- **Tech Stack**: React, Redux, Styled-Components.
-- **Live Demo**: [WTM AI Music](https://wtm-music-ai-gen.vercel.app)
-- **GitHub Repo**: [WTM-Music-AI-Gen](https://github.com/BoosterTech/WTM-Music-AI-Gen)
+- **Description**: Production-grade SaaS platform for generating and managing AI-generated music.
+- **Tech Stack**: Next.js 16, React 19, TypeScript.
+- **Status**: Private SaaS — repository and deployment are not public.
 
 ### 🏡 The Paradise Lodge
 
