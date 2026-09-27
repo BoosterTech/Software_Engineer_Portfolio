@@ -8,8 +8,9 @@ const TALKING_PORTRAIT_SRC = `${process.env.PUBLIC_URL}/talking-portrait/profile
 
 /**
  * Click-to-play AI talking portrait, layered over the still in every
- * language/theme variant. Always mounted, preloaded, and paused on the first
- * frame while idle — ProfileImage underneath keeps swaps flicker-free.
+ * language/theme variant. Always mounted but not preloaded — `preload`
+ * stays at "metadata" so the ~1.2 MB MP4 only downloads on tap;
+ * ProfileImage underneath keeps swaps flicker-free.
  * Tap calls play(); on end/stop it seeks back to the first frame.
  *
  * While playing, a `portrait-playing` class on <html> freezes every CSS
@@ -58,7 +59,7 @@ const TalkingPortrait = ({ poster }) => {
         src={TALKING_PORTRAIT_SRC}
         poster={poster}
         playsInline
-        preload="auto"
+        preload="metadata"
         $active={status === "playing"}
         aria-label={home.hearMeLabel}
         aria-hidden={status !== "playing"}

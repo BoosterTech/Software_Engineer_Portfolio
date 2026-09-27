@@ -3,7 +3,7 @@ import nextIcon from "images/nextIcon.webp";
 import reactIcon from "images/React_wordmark_light.svg";
 import reactQueryIcon from "images/reactQueryIcon.webp";
 import reduxIcon from "images/redux.svg";
-import styledComponentsIcon from "images/styledcomponents.svg";
+import styledComponentsIcon from "images/styledcomponents.webp";
 import supabaseIcon from "images/Supabase_wordmark_light.svg";
 import typeScriptIcon from "images/typeScriptIcon.webp";
 import vercelIcon from "images/vercelIcon.webp";
@@ -79,8 +79,8 @@ const orbitTechnologies = [
     id: "styled",
     name: "Styled Components",
     icon: styledComponentsIcon,
-    iconWidth: 318,
-    iconHeight: 318,
+    iconWidth: 200,
+    iconHeight: 200,
   },
   {
     id: "supabase",

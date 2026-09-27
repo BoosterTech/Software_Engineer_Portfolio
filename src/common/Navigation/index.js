@@ -44,6 +44,7 @@ const Navigation = () => {
   const isDesktopNav = useMediaQuery(`(min-width: ${DESKTOP_MIN_PX}px)`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef(null);
+  const hamburgerRef = useRef(null);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -132,6 +133,18 @@ const Navigation = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
   const handleClick = () => {
     setIsMenuOpen(false);
   };
@@ -207,6 +220,7 @@ const Navigation = () => {
         })}
       </MenuContainer>
       <HamburgerButton
+        ref={hamburgerRef}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label={nav.menuToggleLabel}
         aria-expanded={isMenuOpen}

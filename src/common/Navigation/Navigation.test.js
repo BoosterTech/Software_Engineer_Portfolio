@@ -1,4 +1,4 @@
-import { act, screen, within } from "@testing-library/react";
+import { act, fireEvent, screen, within } from "@testing-library/react";
 import Navigation from "common/Navigation";
 import { menuItems } from "common/Navigation/menuItems";
 import { renderWithProviders } from "test-utils";
@@ -78,6 +78,18 @@ describe("Navigation", () => {
     } finally {
       global.IntersectionObserver = OriginalObserver;
     }
+  });
+
+  it("closes the mobile menu on Escape and returns focus to the toggle", () => {
+    renderWithProviders(<Navigation />);
+
+    const toggle = screen.getByLabelText("Toggle navigation menu");
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveFocus();
   });
 
   it("renders icons instead of text in compact mode", () => {

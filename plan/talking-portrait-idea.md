@@ -44,6 +44,15 @@ brand, so the talking photo is proof of the thing being sold.
   `profile-light-en.mp4` / pl / es variants to widen coverage.
 - `serve-e2e.js` serves `.mp4` as `video/mp4`.
 
+### Status update (audit remediation)
+
+The lazy-mount design above was superseded: the video is permanently mounted
+over the still (flicker guard) and now uses `preload="metadata"` — the ~1.2 MB
+MP4 downloads only on tap. Available in all languages and both themes; while
+playing, a `.portrait-playing` class on `<html>` pauses decorative CSS
+animations (verified low-end-Android stall fix). Clip re-encoded to 480×480
+H.264 (~1.2 MB).
+
 ## Open questions
 
 - pl/es clips or localized captions — currently English-only affordance.

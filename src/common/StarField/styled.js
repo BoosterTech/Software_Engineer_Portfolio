@@ -21,4 +21,10 @@ export const StarField = styled.div`
     animation: ${twinkle} 3s ease-in-out infinite;
     box-shadow: 0 0 6px 1px rgba(var(--color-white-rgb), 0.3);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    span {
+      animation: none;
+    }
+  }
 `;

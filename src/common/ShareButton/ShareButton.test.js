@@ -35,10 +35,42 @@ describe("ShareButton", () => {
     delete global.fetch;
   });
 
-  it("attaches the social preview when file sharing is supported", async () => {
+  it("attaches the social preview on mobile when file sharing is supported", async () => {
     global.fetch = jest.fn().mockResolvedValue({
       blob: () => Promise.resolve(new Blob(["img"], { type: "image/png" })),
     });
+    const share = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "share", {
+      value: share,
+      configurable: true,
+    });
+    Object.defineProperty(navigator, "canShare", {
+      value: jest.fn().mockReturnValue(true),
+      configurable: true,
+    });
+    // files attach only on mobile — desktop share dialogs mishandle them
+    Object.defineProperty(navigator, "userAgentData", {
+      value: { mobile: true },
+      configurable: true,
+    });
+    renderWithProviders(<ShareButton />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /share this portfolio/i })
+    );
+
+    await waitFor(() =>
+      expect(share).toHaveBeenCalledWith(
+        expect.objectContaining({ files: [expect.any(File)] })
+      )
+    );
+    delete navigator.canShare;
+    delete navigator.userAgentData;
+    delete global.fetch;
+  });
+
+  it("shares URL-only on desktop even when file sharing is supported", async () => {
+    global.fetch = jest.fn();
     const share = jest.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "share", {
       value: share,
@@ -54,11 +86,9 @@ describe("ShareButton", () => {
       screen.getByRole("button", { name: /share this portfolio/i })
     );
 
-    await waitFor(() =>
-      expect(share).toHaveBeenCalledWith(
-        expect.objectContaining({ files: [expect.any(File)] })
-      )
-    );
+    await waitFor(() => expect(share).toHaveBeenCalled());
+    expect(share.mock.calls[0][0].files).toBeUndefined();
+    expect(global.fetch).not.toHaveBeenCalled();
     delete navigator.canShare;
     delete global.fetch;
   });
@@ -99,6 +129,40 @@ describe("ShareButton", () => {
     expect(writeText).toHaveBeenCalledWith(
       expect.stringMatching(/^https?:\/\//)
     );
+  });
+
+  it("copies via the legacy execCommand path when the clipboard API is missing", async () => {
+    const execCommand = jest.fn().mockReturnValue(true);
+    Object.defineProperty(document, "execCommand", {
+      value: execCommand,
+      configurable: true,
+    });
+    renderWithProviders(<ShareButton />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /share this portfolio/i })
+    );
+
+    const tooltip = screen.getByTestId("share-tooltip");
+    await waitFor(() => expect(tooltip).toHaveTextContent(/link copied/i));
+    expect(execCommand).toHaveBeenCalledWith("copy");
+    delete document.execCommand;
+  });
+
+  it("shows the error tooltip when the legacy copy path fails too", async () => {
+    Object.defineProperty(document, "execCommand", {
+      value: jest.fn().mockReturnValue(false),
+      configurable: true,
+    });
+    renderWithProviders(<ShareButton />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /share this portfolio/i })
+    );
+
+    const tooltip = screen.getByTestId("share-tooltip");
+    await waitFor(() => expect(tooltip).toHaveTextContent(/couldn't copy/i));
+    delete document.execCommand;
   });
 
   it("shows the error tooltip when copying fails", async () => {

@@ -51,23 +51,30 @@ const useShareAction = () => {
   const share = async () => {
     if (navigator.share) {
       try {
-        // Attach the social preview when the platform supports file sharing —
-        // the image rides inside the share, not just as a link card.
         const payload = {
           title: nav.shareTitle,
           text: nav.shareText,
           url: SHARE_URL,
         };
-        try {
-          const res = await fetch(
-            `${process.env.PUBLIC_URL}/social_preview.png`
-          );
-          const file = new File([await res.blob()], "preview.png", {
-            type: "image/png",
-          });
-          if (navigator.canShare?.({ files: [file] })) payload.files = [file];
-        } catch {
-          // preview fetch failed — fall back to a URL-only share
+        // Attach the social preview only on mobile — its share sheets handle
+        // "link + image" cleanly. On desktop (Windows share dialog) a file
+        // payload hijacks the Copy action: the clipboard gets the image, not
+        // the URL, so pasting yields nothing (verified on Windows/Chrome).
+        const isMobile =
+          navigator.userAgentData?.mobile ??
+          window.matchMedia("(pointer: coarse)").matches;
+        if (isMobile) {
+          try {
+            const res = await fetch(
+              `${process.env.PUBLIC_URL}/social_preview.jpg`
+            );
+            const file = new File([await res.blob()], "preview.jpg", {
+              type: "image/jpeg",
+            });
+            if (navigator.canShare?.({ files: [file] })) payload.files = [file];
+          } catch {
+            // preview fetch failed — fall back to a URL-only share
+          }
         }
         await navigator.share(payload);
       } catch (err) {

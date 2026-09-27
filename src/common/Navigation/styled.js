@@ -195,7 +195,7 @@ export const MobileMenuBackdrop = styled.div`
   top: 100%;
   left: 0;
   width: 100%;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - var(--nav-height-actual, var(--nav-height-mobile)));
   background: rgba(var(--color-black-rgb), 0.4);
   opacity: 0;
   visibility: hidden;

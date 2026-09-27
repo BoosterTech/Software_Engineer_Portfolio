@@ -20,7 +20,7 @@ describe("TalkingPortrait", () => {
     pauseSpy.mockRestore();
   });
 
-  it("preloads paused on the first frame and plays on tap", () => {
+  it("defers the video download and plays on tap", () => {
     renderWithProviders(<Home id="home" />, {
       initialLanguage: "English",
       initialIsDark: true,
@@ -29,7 +29,8 @@ describe("TalkingPortrait", () => {
     const button = screen.getByRole("button", { name: /hear me/i });
     const video = screen.getByTestId("talking-portrait-video");
     expect(video).toHaveAttribute("src");
-    expect(video).toHaveAttribute("preload", "auto");
+    // metadata only — the ~1.2 MB MP4 must not download until tap
+    expect(video).toHaveAttribute("preload", "metadata");
     expect(video).not.toHaveAttribute("autoplay");
     // still image stays mounted underneath as the flicker guard
     expect(screen.getByAltText(/Portrait of Dariusz/i)).toBeInTheDocument();
@@ -48,6 +49,40 @@ describe("TalkingPortrait", () => {
     expect(
       screen.getByRole("button", { name: /hear me/i })
     ).toBeInTheDocument();
+  });
+
+  it("returns to idle when the video reports an error", () => {
+    renderWithProviders(<Home id="home" />, {
+      initialLanguage: "English",
+      initialIsDark: true,
+    });
+
+    const button = screen.getByRole("button", { name: /hear me/i });
+    fireEvent.click(button);
+    expect(button).toBeDisabled(); // loading until "playing" fires
+
+    fireEvent.error(screen.getByTestId("talking-portrait-video"));
+    expect(screen.getByRole("button", { name: /hear me/i })).toHaveAttribute(
+      "aria-busy",
+      "false"
+    );
+  });
+
+  it("returns to idle when play() throws synchronously", () => {
+    playSpy.mockImplementation(() => {
+      throw new Error("play blocked");
+    });
+    renderWithProviders(<Home id="home" />, {
+      initialLanguage: "English",
+      initialIsDark: true,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /hear me/i }));
+    expect(playSpy).toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: /hear me/i })).toHaveAttribute(
+      "aria-busy",
+      "false"
+    );
   });
 
   it("renders the video with a localized button in Polish", () => {

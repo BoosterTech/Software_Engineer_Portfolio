@@ -18,7 +18,7 @@ auth, no database, no state library. Keep it that way.
 - `src/content/` — all user-facing copy (`translations/` per language, `projects.js`)
 - Styles live in a co-located `styled.js` (or `<Name>.styles.js`) per component folder
 - `plan/` — architecture and roadmap docs; `architecture-playbook.md` is the source of truth,
-  `premium-ux-followup-plan.md` tracks active work, `plan/archive/` holds superseded plans
+  `audit-remediation-plan.md` tracks active work, `plan/archive/` holds superseded plans
 
 ## Hard rules (CI-enforced)
 
@@ -84,6 +84,11 @@ auth, no database, no state library. Keep it that way.
   (see `CarouselSlide`'s `ExpandButton`).
 - Small icon buttons needing a ≥24px hit area: keep the visual size, expand the box
   with `padding` + `background-clip: content-box` (see `NavDot` in Projects/styled.js).
+- Nav height vocabulary is fixed: `--nav-height` (64px desktop) and
+  `--nav-height-mobile` (80px) are the only static tokens; `--nav-height-actual`
+  is the ResizeObserver-measured runtime override, always consumed as
+  `var(--nav-height-actual, var(--nav-height[-mobile]))`. Do not reintroduce
+  a third static name (`--navbar-height` was removed for exactly this)
 - Theme mode (`isDark`) is shared state: `ThemeModeProvider`/`useThemeMode` in
   `src/common/ThemeModeProvider`. The provider owns `data-theme` on `<html>` and
   `localStorage.theme` — components must never read or write the DOM attr
@@ -97,6 +102,12 @@ auth, no database, no state library. Keep it that way.
   `<a>` with no href: unfocusable by keyboard, invisible as links to screen
   readers and crawlers. `handleClick` calls `preventDefault`, so the hash never
   jumps natively; smooth scroll still applies.
+- Sharing: `common/ShareButton` (desktop toolbar icon) and
+  `ShareButton/ShareMenuItem` (labeled row in the mobile menu) both use
+  `useShareAction`. The `social_preview.jpg` file attachment is **mobile-only**
+  (`navigator.userAgentData?.mobile` → `(pointer: coarse)` fallback) — verified:
+  on Windows the OS share dialog's Copy grabs the attached file instead of the
+  URL, so pasting yields nothing. Desktop must stay URL-only.
 
 ## i18n
 
@@ -128,6 +139,10 @@ auth, no database, no state library. Keep it that way.
   server); it serves `build/` and strips the `/Software_Engineer_Portfolio`
   prefix. Do not substitute `serve -s build` — it has no prefix rewrite, so
   asset requests fall back to `index.html` and the app never mounts
+- E2E waits must be condition-based — `expect.poll`, `toHaveAttribute`,
+  `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
+  `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
+  `aria-expanded`, focus)
 
 ## Verify before committing
 
@@ -140,8 +155,13 @@ npm run check:circular
 npm run size-check
 npm run build       # before shipping UI changes
 npm run test:e2e    # needs the build above; serves it via scripts/serve-e2e.js
-npm run lighthouse:check  # perf gate: LCP/CLS budgets in .lighthouserc.js
+npm run lighthouse:check  # perf gate: median-of-3 runs; LCP/CLS/TBT/byte-weight/perf-score assertions in .lighthouserc.js
 ```
+
+Note: `.gitattributes` pins `* text=auto eol=lf` — always write files with
+LF endings, even on Windows (`core.autocrlf` would otherwise hand you CRLF
+on checkout and Prettier flags it). If `format:check` flags files you
+barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
 
 ## Dependency installs
 
