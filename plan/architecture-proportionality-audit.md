@@ -117,9 +117,9 @@ No enterprise patterns or excessive abstractions detected. The architecture is p
 - ESLint import/order + no-relative-parent-imports
 - Circular dependency check (madge)
 - File size limit (300 lines)
-- Bundle size budget (350 KB gzipped)
+- Bundle size budget (350 KB/chunk, 250 KB total gzipped)
 - Lighthouse CI, median of 3 runs (LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, weight ≤ 400 KiB, perf ≥ 0.5)
-- Playwright E2E (10 tests, now in CI)
+- Playwright E2E (12 tests, now in CI)
 - Prettier formatting
 - PR template with quality checklist
 - Architecture playbook

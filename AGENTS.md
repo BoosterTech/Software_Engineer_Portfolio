@@ -84,6 +84,11 @@ auth, no database, no state library. Keep it that way.
   (see `CarouselSlide`'s `ExpandButton`).
 - Small icon buttons needing a ≥24px hit area: keep the visual size, expand the box
   with `padding` + `background-clip: content-box` (see `NavDot` in Projects/styled.js).
+- Nav height vocabulary is fixed: `--nav-height` (64px desktop) and
+  `--nav-height-mobile` (80px) are the only static tokens; `--nav-height-actual`
+  is the ResizeObserver-measured runtime override, always consumed as
+  `var(--nav-height-actual, var(--nav-height[-mobile]))`. Do not reintroduce
+  a third static name (`--navbar-height` was removed for exactly this)
 - Theme mode (`isDark`) is shared state: `ThemeModeProvider`/`useThemeMode` in
   `src/common/ThemeModeProvider`. The provider owns `data-theme` on `<html>` and
   `localStorage.theme` — components must never read or write the DOM attr
@@ -134,6 +139,10 @@ auth, no database, no state library. Keep it that way.
   server); it serves `build/` and strips the `/Software_Engineer_Portfolio`
   prefix. Do not substitute `serve -s build` — it has no prefix rewrite, so
   asset requests fall back to `index.html` and the app never mounts
+- E2E waits must be condition-based — `expect.poll`, `toHaveAttribute`,
+  `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
+  `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
+  `aria-expanded`, focus)
 
 ## Verify before committing
 
@@ -148,6 +157,11 @@ npm run build       # before shipping UI changes
 npm run test:e2e    # needs the build above; serves it via scripts/serve-e2e.js
 npm run lighthouse:check  # perf gate: median-of-3 runs; LCP/CLS/TBT/byte-weight/perf-score assertions in .lighthouserc.js
 ```
+
+Note: `format:check` can false-fail on Windows checkouts — `core.autocrlf`
+produces CRLF while Prettier expects LF. `.gitattributes` pins `eol=lf`; the
+one-time `git add --renormalize .` cleanup is tracked in
+`plan/audit-remediation-plan.md` item 10 and must land on its own branch.
 
 ## Dependency installs
 

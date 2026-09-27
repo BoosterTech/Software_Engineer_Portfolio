@@ -80,46 +80,46 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Later (P3)
 
-### 7. Mobile menu Escape key
+### 7. Mobile menu Escape key ✅ DONE
 
-- **File:** `src/common/Navigation/index.js` — menu closes on link click,
-  backdrop tap, and breakpoint change, but not Escape. Closed panel is
-  correctly `visibility:hidden` (no focus trap), so this is a convenience
-  gap, not a trap.
-- **FIX:** `keydown` listener while `isMenuOpen`, Escape → close + return
-  focus to the hamburger toggle.
+- **SHIPPED:** `keydown` listener active while `isMenuOpen` — Escape closes
+  the panel and returns focus to the hamburger toggle (`hamburgerRef`).
+  Covered by a unit test (Navigation.test.js) and the new E2E case.
 
-### 8. Unify nav-height tokens
+### 8. Unify nav-height tokens ✅ DONE
 
-- **FACT:** three names for one concept — `--navbar-height` (base.js,
-  backdrop), `--nav-height`/`--nav-height-mobile` (homeStyles), and runtime
-  `--nav-height-actual` (ResizeObserver).
-- **FIX:** consolidate to `--nav-height` + `--nav-height-mobile` tokens and
-  keep `--nav-height-actual` as the measured override only.
+- **SHIPPED:** `--navbar-height` deleted from `tokens.js`. `base.js`
+  `scroll-padding-top` and the `MobileMenuBackdrop` height now use
+  `var(--nav-height-actual, var(--nav-height[-mobile]))` — the measured
+  ResizeObserver value first, static token as the no-JS fallback. Bonus
+  correctness: mobile `scroll-padding` now pads against the real 80px nav,
+  not the 64px desktop constant.
 
-### 9. E2E hardening
+### 9. E2E hardening ✅ DONE
 
-- **File:** `e2e/portfolio.spec.js`
-- Replace `waitForTimeout` sleeps (×10) with state-based waits
-  (`expect.poll`, `toHaveAttribute`, scroll-position assertions).
-- Replace `getComputedStyle().backgroundColor` carousel assertions with the
-  `aria-current` attribute on `NavDot` — user-facing, not implementation.
-- Add a mobile-menu share-row case and an Escape-close case (pairs with #7).
+- **SHIPPED:** all 10 `waitForTimeout` sleeps replaced with
+  `expect.poll`/`toHaveAttribute`/`toBeFocused` condition waits; carousel
+  assertions moved from `getComputedStyle().backgroundColor` to `aria-current`
+  on `NavDot`. Added the share-row and Escape-close mobile cases —
+  **12 E2E tests, all green, zero sleeps**.
 
-### 10. `.gitattributes` for line endings
+### 10. `.gitattributes` for line endings — PARTIAL
 
 - **FACT:** `format:check` fails on Windows (54 files flagged) because
   `autocrlf` checks out CRLF while Prettier expects LF; Ubuntu CI is green.
   Newly written files are LF — the tree is mixed.
-- **FIX:** `* text=auto eol=lf` in `.gitattributes`, then a one-time
-  `git add --renormalize .` on a dedicated chore branch (do not mix into
-  feature work).
+- **SHIPPED:** `.gitattributes` with `* text=auto eol=lf` created.
+- **REMAINING:** the one-time `git add --renormalize .` still needs its own
+  chore branch — it rewrites ~50 files' line endings and must not ride
+  inside a feature diff.
 
-### 11. Branch coverage headroom
+### 11. Branch coverage headroom ✅ DONE
 
-- **FACT:** branch coverage 72.03% vs the 70% gate — ~2 pt margin.
-- **FIX:** opportunistically cover error/edge paths (share error, video
-  error, scroll-spy bottom forcing) rather than chasing a number.
+- **SHIPPED:** branch coverage **72.03% → 74.72%** via targeted edge tests —
+  `useShareAction` legacy `execCommand` fallback both outcomes (64%→86%
+  branches), `TalkingPortrait` `onError` + synchronous `play()` throw,
+  new `useScrollSpy.test.js` (spy-band, bottom-forcing, scroll-locked
+  early-return). No number-chasing — all three guard real behaviors.
 
 ## Optional / Strategic
 
@@ -182,5 +182,6 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
    perf-score sensors (baselines: TBT ~1.4 s, weight 244 KiB).
 4. ~~StarField pause (5)~~ ✅ MEASURED — delta inside noise floor; only the
    `prefers-reduced-motion` a11y fix remains worthwhile.
-5. P3 batch (7–11) — opportunistic, one chore PR.
+5. ~~P3 batch (7–11)~~ ✅ DONE — except item 10's renormalize commit, which
+   still needs its own chore branch by design.
 6. Strategic items (12–13) — roadmap discussion, not now.

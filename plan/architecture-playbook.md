@@ -277,7 +277,7 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Accessibility — ARIA roles, keyboard navigation, dynamic `<html lang>`
 
-- **What:** `LanguageProvider` sets `document.documentElement.lang` via `useEffect`. Projects carousel responds to Arrow Left/Right keys. `DarkModeToggle` has `role="switch"` + `aria-checked` + keyboard support. `LanguageSwitch` flags have `role="button"` + `aria-pressed` + keyboard support. `ComingSoonProject` fullscreen has `role="dialog"` + `aria-modal` + Escape-to-close. Navigation has `aria-label="Main navigation"`.
+- **What:** `LanguageProvider` sets `document.documentElement.lang` via `useEffect`. Projects carousel responds to Arrow Left/Right keys. `DarkModeToggle` has `role="switch"` + `aria-checked` + keyboard support. `LanguageSwitch` flags have `role="button"` + `aria-pressed` + keyboard support. `ComingSoonProject` fullscreen has `role="dialog"` + `aria-modal` + Escape-to-close. Navigation has `aria-label="Main navigation"`; the mobile menu closes on Escape and returns focus to the hamburger toggle.
 - **Why:** Screen readers and keyboard users need semantic roles and keyboard equivalents for all interactive elements. A static `<html lang="en">` misreports the page language when the user switches to Polish or Spanish.
 - **Trade-offs:** Added ~354 B to the bundle from ARIA attributes. The global arrow-key listener on the Projects section could conflict with other keyboard handlers if the user is focused on an input, but the portfolio has no text inputs.
 - **Future guidance:** Always add `role`, `aria-label`, and keyboard handlers to any new interactive element that isn't a native `<button>` or `<a>`. Update `LANG_MAP` in `LanguageProvider` when adding new languages.
