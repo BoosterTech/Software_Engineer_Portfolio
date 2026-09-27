@@ -62,9 +62,10 @@ describe("TalkingPortrait", () => {
     expect(button).toBeDisabled(); // loading until "playing" fires
 
     fireEvent.error(screen.getByTestId("talking-portrait-video"));
-    expect(
-      screen.getByRole("button", { name: /hear me/i })
-    ).toHaveAttribute("aria-busy", "false");
+    expect(screen.getByRole("button", { name: /hear me/i })).toHaveAttribute(
+      "aria-busy",
+      "false"
+    );
   });
 
   it("returns to idle when play() throws synchronously", () => {
@@ -78,9 +79,10 @@ describe("TalkingPortrait", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /hear me/i }));
     expect(playSpy).toHaveBeenCalled();
-    expect(
-      screen.getByRole("button", { name: /hear me/i })
-    ).toHaveAttribute("aria-busy", "false");
+    expect(screen.getByRole("button", { name: /hear me/i })).toHaveAttribute(
+      "aria-busy",
+      "false"
+    );
   });
 
   it("renders the video with a localized button in Polish", () => {

@@ -17,9 +17,19 @@ const Harness = () => {
 
 const active = () => screen.getByTestId("active").textContent;
 
-const mockPage = ({ scrollY = 0, scrollHeight = 5000, innerHeight = 800 } = {}) => {
-  Object.defineProperty(window, "scrollY", { value: scrollY, configurable: true });
-  Object.defineProperty(window, "innerHeight", { value: innerHeight, configurable: true });
+const mockPage = ({
+  scrollY = 0,
+  scrollHeight = 5000,
+  innerHeight = 800,
+} = {}) => {
+  Object.defineProperty(window, "scrollY", {
+    value: scrollY,
+    configurable: true,
+  });
+  Object.defineProperty(window, "innerHeight", {
+    value: innerHeight,
+    configurable: true,
+  });
   Object.defineProperty(document.documentElement, "scrollHeight", {
     value: scrollHeight,
     configurable: true,
@@ -50,12 +60,9 @@ describe("useScrollSpy", () => {
   });
 
   const intersect = (id) =>
-    act(() =>
-      observerCallback([{ target: { id }, isIntersecting: true }])
-    );
+    act(() => observerCallback([{ target: { id }, isIntersecting: true }]));
 
-  const scroll = () =>
-    act(() => window.dispatchEvent(new Event("scroll")));
+  const scroll = () => act(() => window.dispatchEvent(new Event("scroll")));
 
   it("activates the section that enters the spy band", () => {
     render(<Harness />);
