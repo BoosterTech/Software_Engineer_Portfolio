@@ -1,16 +1,20 @@
 const { test, expect } = require("@playwright/test");
 
+// Polls the section's viewport offset — a missing element yields Infinity so
+// the assertion keeps retrying instead of passing on null.
+const topOf = (page, id) =>
+  page.evaluate(
+    (sectionId) =>
+      document.getElementById(sectionId)?.getBoundingClientRect().top ??
+      Number.POSITIVE_INFINITY,
+    id
+  );
+
 test.describe("Portfolio E2E", () => {
   test("navigates to About via scroll", async ({ page }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-about"]').click();
-    await page.waitForTimeout(1000);
-    const aboutTop = await page.evaluate(() => {
-      const el = document.getElementById("about");
-      return el ? el.getBoundingClientRect().top : null;
-    });
-    expect(aboutTop).not.toBeNull();
-    expect(aboutTop).toBeLessThan(200);
+    await expect.poll(() => topOf(page, "about")).toBeLessThan(200);
   });
 
   test("switches language to Polish", async ({ page }) => {
@@ -43,43 +47,27 @@ test.describe("Portfolio E2E", () => {
   test("carousel navigates to next project via arrow button", async ({ page }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
-    await page.waitForTimeout(1000);
 
-    const activeDot = page.locator('[aria-label="Go to project 2"]');
-
-    const bgBefore = await activeDot.evaluate(
-      (el) => window.getComputedStyle(el).backgroundColor
-    );
+    const secondDot = page.locator('[aria-label="Go to project 2"]');
+    const thirdDot = page.locator('[aria-label="Go to project 3"]');
+    await expect(secondDot).toHaveAttribute("aria-current", "true");
 
     await page.locator('[aria-label="Next project"]').click();
-    await page.waitForTimeout(500);
 
-    const bgAfter = await activeDot.evaluate(
-      (el) => window.getComputedStyle(el).backgroundColor
-    );
-
-    expect(bgBefore).not.toBe(bgAfter);
+    await expect(thirdDot).toHaveAttribute("aria-current", "true");
+    await expect(secondDot).not.toHaveAttribute("aria-current");
   });
 
   test("carousel navigates to specific project via dot click", async ({ page }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
-    await page.waitForTimeout(1000);
 
     const thirdDot = page.locator('[aria-label="Go to project 3"]');
-
-    const bgBefore = await thirdDot.evaluate(
-      (el) => window.getComputedStyle(el).backgroundColor
-    );
+    await expect(thirdDot).not.toHaveAttribute("aria-current");
 
     await thirdDot.click();
-    await page.waitForTimeout(500);
 
-    const bgAfter = await thirdDot.evaluate(
-      (el) => window.getComputedStyle(el).backgroundColor
-    );
-
-    expect(bgBefore).not.toBe(bgAfter);
+    await expect(thirdDot).toHaveAttribute("aria-current", "true");
   });
 
   test("project modal opens, locks focus, and restores on close", async ({
@@ -87,7 +75,6 @@ test.describe("Portfolio E2E", () => {
   }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
-    await page.waitForTimeout(1000);
 
     const expandButton = page.locator('[aria-label*="Expand"]').first();
     await expandButton.click();
@@ -117,7 +104,6 @@ test.describe("Portfolio E2E", () => {
   }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
-    await page.waitForTimeout(1000);
 
     await page.locator('[aria-label*="Expand"]').first().click();
     const dialog = page.getByRole("dialog");
@@ -125,10 +111,7 @@ test.describe("Portfolio E2E", () => {
 
     const titleBefore = await dialog.getAttribute("aria-label");
     await page.keyboard.press("ArrowRight");
-    await page.waitForTimeout(300);
-    const titleAfter = await dialog.getAttribute("aria-label");
-
-    expect(titleAfter).not.toBe(titleBefore);
+    await expect(dialog).not.toHaveAttribute("aria-label", titleBefore);
   });
 
   test("carousel arrow keys only work inside the carousel region", async ({
@@ -136,24 +119,21 @@ test.describe("Portfolio E2E", () => {
   }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
-    await page.waitForTimeout(1000);
 
     const secondDot = page.locator('[aria-label="Go to project 2"]');
-    const dotState = () =>
-      secondDot.evaluate((el) => window.getComputedStyle(el).backgroundColor);
-    const before = await dotState();
+    const thirdDot = page.locator('[aria-label="Go to project 3"]');
+    await expect(secondDot).toHaveAttribute("aria-current", "true");
 
     // Focus outside the region — arrows must be ignored
     await page.locator('[data-testid="nav-link-projects"]').focus();
     await page.keyboard.press("ArrowRight");
-    await page.waitForTimeout(300);
-    expect(await dotState()).toBe(before);
+    await expect(secondDot).toHaveAttribute("aria-current", "true");
+    await expect(thirdDot).not.toHaveAttribute("aria-current");
 
     // Focus inside the region — arrows navigate
     await page.locator('[aria-label="Previous project"]').first().focus();
     await page.keyboard.press("ArrowRight");
-    await page.waitForTimeout(300);
-    expect(await dotState()).not.toBe(before);
+    await expect(thirdDot).toHaveAttribute("aria-current", "true");
   });
 });
 
@@ -177,15 +157,22 @@ test.describe("Mobile viewport", () => {
     await page
       .locator('[data-testid="mobile-menu"] >> text=Projects')
       .click();
-    await page.waitForTimeout(1000);
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect.poll(() => topOf(page, "projects")).toBeLessThan(300);
+  });
 
-    const projectsTop = await page.evaluate(() => {
-      const el = document.getElementById("projects");
-      return el ? el.getBoundingClientRect().top : null;
-    });
-    expect(projectsTop).not.toBeNull();
-    expect(projectsTop).toBeLessThan(300);
+  test("Escape closes the open menu and refocuses the toggle", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const toggle = page.locator('[aria-label="Toggle navigation menu"]');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+
+    await page.keyboard.press("Escape");
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(toggle).toBeFocused();
   });
 
   test("backdrop tap closes the open menu", async ({ page }) => {
@@ -194,10 +181,21 @@ test.describe("Mobile viewport", () => {
     const toggle = page.locator('[aria-label="Toggle navigation menu"]');
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await page.waitForTimeout(400);
+    await expect(
+      page.locator('[data-testid="mobile-menu"]')
+    ).toBeVisible();
 
     // Tap the backdrop, off the panel
     await page.mouse.click(20, 640);
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("mobile menu exposes a share row", async ({ page }) => {
+    await page.goto("/");
+
+    await page.locator('[aria-label="Toggle navigation menu"]').click();
+    const shareRow = page.locator('[data-testid="mobile-share-item"]');
+    await expect(shareRow).toBeVisible();
+    await expect(shareRow).toHaveText("Share this portfolio");
   });
 });
