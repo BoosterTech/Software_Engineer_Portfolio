@@ -1,5 +1,5 @@
 const { AxeBuilder } = require("@axe-core/playwright");
-const { test, expect } = require("@playwright/test");
+const { test, expect } = require("./fixtures");
 
 const formatViolations = (violations) =>
   violations
@@ -33,11 +33,12 @@ const scan = async (page) => {
 };
 
 test.describe("axe accessibility scans", () => {
+  // WebKit's axe injection is noticeably slower — the modal scans run close to
+  // the default 30s limit. Double it; a real regression still fails on content.
+  test.setTimeout(60_000);
   test("homepage, light theme", async ({ page }) => {
     await page.goto("/");
-    await expect(
-      page.locator('[data-testid="nav-link-home"]')
-    ).toBeVisible();
+    await expect(page.locator('[data-testid="nav-link-home"]')).toBeVisible();
     await scan(page);
   });
 

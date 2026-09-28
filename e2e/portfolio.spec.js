@@ -1,4 +1,4 @@
-const { test, expect } = require("@playwright/test");
+const { test, expect } = require("./fixtures");
 
 // Polls the section's viewport offset — a missing element yields Infinity so
 // the assertion keeps retrying instead of passing on null.
@@ -21,12 +21,12 @@ test.describe("Portfolio E2E", () => {
     await page.goto("/");
     await page.locator('[aria-label="Select language"]').click();
     await page.getByRole("option", { name: "Polish" }).click();
-    await expect(
-      page.locator('[data-testid="nav-link-about"]')
-    ).toHaveText("O mnie");
-    await expect(
-      page.locator('[data-testid="nav-link-home"]')
-    ).toHaveText("Strona główna");
+    await expect(page.locator('[data-testid="nav-link-about"]')).toHaveText(
+      "O mnie"
+    );
+    await expect(page.locator('[data-testid="nav-link-home"]')).toHaveText(
+      "Strona główna"
+    );
   });
 
   test("toggles dark mode", async ({ page }) => {
@@ -44,7 +44,9 @@ test.describe("Portfolio E2E", () => {
     expect(lightTheme).toBeNull();
   });
 
-  test("carousel navigates to next project via arrow button", async ({ page }) => {
+  test("carousel navigates to next project via arrow button", async ({
+    page,
+  }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
 
@@ -58,7 +60,9 @@ test.describe("Portfolio E2E", () => {
     await expect(secondDot).not.toHaveAttribute("aria-current");
   });
 
-  test("carousel navigates to specific project via dot click", async ({ page }) => {
+  test("carousel navigates to specific project via dot click", async ({
+    page,
+  }) => {
     await page.goto("/");
     await page.locator('[data-testid="nav-link-projects"]').click();
 
@@ -81,9 +85,7 @@ test.describe("Portfolio E2E", () => {
 
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
-    await expect(
-      dialog.getByRole("button", { name: "Close" })
-    ).toBeFocused();
+    await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
 
     // Focus stays trapped inside the modal
     await page.keyboard.press("Tab");
@@ -149,14 +151,10 @@ test.describe("Mobile viewport", () => {
 
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await expect(
-      page.locator('[data-testid="mobile-menu"]')
-    ).toBeVisible();
+    await expect(page.locator('[data-testid="mobile-menu"]')).toBeVisible();
 
     // Selecting a link navigates and closes the menu
-    await page
-      .locator('[data-testid="mobile-menu"] >> text=Projects')
-      .click();
+    await page.locator('[data-testid="mobile-menu"] >> text=Projects').click();
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect.poll(() => topOf(page, "projects")).toBeLessThan(300);
   });
@@ -181,9 +179,7 @@ test.describe("Mobile viewport", () => {
     const toggle = page.locator('[aria-label="Toggle navigation menu"]');
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await expect(
-      page.locator('[data-testid="mobile-menu"]')
-    ).toBeVisible();
+    await expect(page.locator('[data-testid="mobile-menu"]')).toBeVisible();
 
     // Tap the backdrop, off the panel
     await page.mouse.click(20, 640);

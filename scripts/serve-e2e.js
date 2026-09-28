@@ -37,6 +37,13 @@ http
       return res.end();
     }
     if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+      // Extensionless paths are SPA routes → fall back to index.html.
+      // Anything with a file extension is a real asset → honest 404, so a
+      // missing image/manifest fails tests instead of serving HTML silently.
+      if (path.extname(urlPath)) {
+        res.writeHead(404);
+        return res.end("Not found");
+      }
       file = path.join(ROOT, "index.html");
     }
 
