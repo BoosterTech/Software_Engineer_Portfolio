@@ -18,7 +18,8 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - `src/content/` — all user-facing copy (`translations/` per language, `projects.js`)
 - Styles live in a co-located `styled.js` (or `<Name>.styles.js`) per component folder
 - `plan/` — architecture and roadmap docs; `architecture-playbook.md` is the source of truth,
-  `audit-remediation-plan.md` tracks active work, `plan/archive/` holds superseded plans
+  `post-migration-audit-remediation.md` is the latest remediation record
+  (all items shipped), `plan/archive/` holds superseded plans
 - `scripts/` — production tooling (`serve-e2e.js`, checks, `remove-maps.js`);
   `scripts/probes/` holds reusable one-off diagnostic probes — see its README
   before running (needs a built site/server)

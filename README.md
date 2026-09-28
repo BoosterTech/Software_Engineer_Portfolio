@@ -42,7 +42,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 ## 🏗️ Architecture & Maintenance
 
 - Decisions are recorded in `plan/architecture-playbook.md`.
-- Active work is tracked in `plan/audit-remediation-plan.md` (completed plans live in `plan/` and `plan/archive/`); contributor/agent conventions live in `AGENTS.md`.
+- The latest remediation record is `plan/post-migration-audit-remediation.md` (all items shipped; completed plans live in `plan/` and `plan/archive/`); contributor/agent conventions live in `AGENTS.md`.
 - Recent boundary cleanup: `StarField` and `Main` are now standalone `src/common/` components, `src/themes.js` contains only breakpoints, and components read localized copy through `src/common/useContent.js`.
 - **State management**: language and theme mode (`isDark`) are handled by `LanguageProvider` and `ThemeModeProvider` in `src/common/`; `@reduxjs/toolkit` and `react-redux` were removed.
 - Shared primitives: `src/common/Card` provides `$glass`, `$bordered`, and `$hoverable` variants, used by `About` feature cards, `Contact` tiles, and `ToolsShowcase` feature cards; `src/common/Button` (`$variant`, `$size`) covers the Home CTAs and `Projects` actions.

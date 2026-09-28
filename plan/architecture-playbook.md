@@ -196,10 +196,10 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Run `depcheck` in CI and document every flag
 
-- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck` after `npm ci`. A `.depcheckrc` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages and `typescript` is a `madge` runtime peer (`detective-typescript` `require()`s it).
+- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck@1.4.7` after `npm ci`. A `.depcheckrc.yml` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages and `typescript` is a `madge` runtime peer (`detective-typescript` `require()`s it).
 - **Why:** Unused dependencies are the fastest way for a small project to become heavy. `depcheck` turns dependency cleanup from a manual chore into a CI-enforced rule and forces a one-line justification for every package that is kept despite not being imported.
 - **Trade-offs:** `npx --yes depcheck` downloads the package on every CI run. Pinning `depcheck` to `devDependencies` could be added later if install time or reproducibility becomes an issue.
-- **Future guidance:** Do not add a dependency without importing it or documenting why it is kept. Remove anything `depcheck` flags unless the `.depcheckrc` comment is defensible.
+- **Future guidance:** Do not add a dependency without importing it or documenting why it is kept. Remove anything `depcheck` flags unless the `.depcheckrc.yml` comment is defensible.
 
 ### Decision: Block circular dependencies with `madge`
 
