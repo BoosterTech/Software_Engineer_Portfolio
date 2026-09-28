@@ -959,6 +959,10 @@ A Software Engineer focused on building modern web applications and AI-powered S
   background-size: 200% 200%;
   ${Ph}
   ${Nh}
+
+  @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
+    display: block;
+  }
 `,_g=Q(ug)`
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   line-height: 1.6;
@@ -2399,6 +2403,10 @@ A Software Engineer focused on building modern web applications and AI-powered S
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   ${Ph}
+
+  @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
+    display: block;
+  }
 `,Sv=Q.p`
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   color: var(--color-text-secondary);
