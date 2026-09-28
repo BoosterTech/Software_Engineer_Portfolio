@@ -4,7 +4,7 @@ import { FaPlay } from "react-icons/fa";
 
 import { PortraitPlayButton, PortraitVideo } from "./homeStyles";
 
-const TALKING_PORTRAIT_SRC = `${process.env.PUBLIC_URL}/talking-portrait/profile-dark-en.mp4`;
+const TALKING_PORTRAIT_SRC = `${import.meta.env.BASE_URL}talking-portrait/profile-dark-en.mp4`;
 
 /**
  * Click-to-play AI talking portrait, layered over the still in every

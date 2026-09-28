@@ -78,7 +78,7 @@ describe("OrbitSection", () => {
   });
 
   it("pauses the marquee on tap and resumes on outside pointerdown", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     setWidth(500);
     renderOrbit();
 
@@ -90,8 +90,8 @@ describe("OrbitSection", () => {
     fireEvent.click(card);
     fireEvent.click(card);
 
-    jest.advanceTimersByTime(4000);
-    jest.useRealTimers();
+    vi.advanceTimersByTime(4000);
+    vi.useRealTimers();
   });
 
   it("updates when the window is resized across the breakpoint", async () => {

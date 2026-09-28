@@ -6,12 +6,12 @@ describe("ShareButton", () => {
   afterEach(() => {
     delete navigator.share;
     delete navigator.clipboard;
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("uses the native share sheet when available", async () => {
-    global.fetch = jest.fn().mockRejectedValue(new Error("no preview"));
-    const share = jest.fn().mockResolvedValue(undefined);
+    global.fetch = vi.fn().mockRejectedValue(new Error("no preview"));
+    const share = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "share", {
       value: share,
       configurable: true,
@@ -36,16 +36,16 @@ describe("ShareButton", () => {
   });
 
   it("attaches the social preview on mobile when file sharing is supported", async () => {
-    global.fetch = jest.fn().mockResolvedValue({
+    global.fetch = vi.fn().mockResolvedValue({
       blob: () => Promise.resolve(new Blob(["img"], { type: "image/png" })),
     });
-    const share = jest.fn().mockResolvedValue(undefined);
+    const share = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "share", {
       value: share,
       configurable: true,
     });
     Object.defineProperty(navigator, "canShare", {
-      value: jest.fn().mockReturnValue(true),
+      value: vi.fn().mockReturnValue(true),
       configurable: true,
     });
     // files attach only on mobile — desktop share dialogs mishandle them
@@ -70,14 +70,14 @@ describe("ShareButton", () => {
   });
 
   it("shares URL-only on desktop even when file sharing is supported", async () => {
-    global.fetch = jest.fn();
-    const share = jest.fn().mockResolvedValue(undefined);
+    global.fetch = vi.fn();
+    const share = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "share", {
       value: share,
       configurable: true,
     });
     Object.defineProperty(navigator, "canShare", {
-      value: jest.fn().mockReturnValue(true),
+      value: vi.fn().mockReturnValue(true),
       configurable: true,
     });
     renderWithProviders(<ShareButton />);
@@ -98,7 +98,7 @@ describe("ShareButton", () => {
       name: "AbortError",
     });
     Object.defineProperty(navigator, "share", {
-      value: jest.fn().mockRejectedValue(abort),
+      value: vi.fn().mockRejectedValue(abort),
       configurable: true,
     });
     renderWithProviders(<ShareButton />);
@@ -112,7 +112,7 @@ describe("ShareButton", () => {
   });
 
   it("falls back to clipboard copy with a visible tooltip", async () => {
-    const writeText = jest.fn().mockResolvedValue(undefined);
+    const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "clipboard", {
       value: { writeText },
       configurable: true,
@@ -132,7 +132,7 @@ describe("ShareButton", () => {
   });
 
   it("copies via the legacy execCommand path when the clipboard API is missing", async () => {
-    const execCommand = jest.fn().mockReturnValue(true);
+    const execCommand = vi.fn().mockReturnValue(true);
     Object.defineProperty(document, "execCommand", {
       value: execCommand,
       configurable: true,
@@ -151,7 +151,7 @@ describe("ShareButton", () => {
 
   it("shows the error tooltip when the legacy copy path fails too", async () => {
     Object.defineProperty(document, "execCommand", {
-      value: jest.fn().mockReturnValue(false),
+      value: vi.fn().mockReturnValue(false),
       configurable: true,
     });
     renderWithProviders(<ShareButton />);
@@ -167,7 +167,7 @@ describe("ShareButton", () => {
 
   it("shows the error tooltip when copying fails", async () => {
     Object.defineProperty(navigator, "clipboard", {
-      value: { writeText: jest.fn().mockRejectedValue(new Error("denied")) },
+      value: { writeText: vi.fn().mockRejectedValue(new Error("denied")) },
       configurable: true,
     });
     renderWithProviders(<ShareButton />);

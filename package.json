@@ -8,16 +8,15 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "5.0.1",
-    "react-scripts": "5.0.1",
     "react-scroll": "1.9.0",
     "styled-components": "6.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "react-scripts test --coverage --watchAll=false",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "start:lan": "vite --host",
+    "build": "vite build",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "predeploy": "npm run build && node scripts/remove-maps.js",
     "deploy": "gh-pages -d build",
     "size-check": "node scripts/check-file-size.js",
@@ -26,58 +25,34 @@
     "bundle:check": "node scripts/bundle-size.js",
     "check:colors": "node scripts/check-hardcoded-colors.js",
     "check:circular": "node scripts/check-circular.js",
-    "lighthouse:check": "cross-env PUBLIC_URL=. npm run build && lhci autorun",
+    "lighthouse:check": "vite build --base=./ && lhci autorun",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "e2e/**/*.spec.js"
-        ],
-        "rules": {
-          "testing-library/prefer-screen-queries": "off"
-        }
-      }
-    ]
-  },
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "branches": 70,
-        "functions": 70,
-        "lines": 70,
-        "statements": 70
-      }
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "^9.39.5",
     "@lhci/cli": "0.15.1",
     "@playwright/test": "1.62.1",
-    "@testing-library/jest-dom": "5.17.0",
+    "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "13.4.0",
-    "cross-env": "10.1.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "@vitest/coverage-v8": "5.0.1",
+    "eslint": "9.39.5",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jest-dom": "5.10.1",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-testing-library": "7.16.2",
     "gh-pages": "6.1.1",
+    "globals": "17.12.0",
+    "jsdom": "29.1.1",
     "madge": "8.0.0",
     "prettier": "3.9.8",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
   }
 }

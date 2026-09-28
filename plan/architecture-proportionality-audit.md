@@ -119,7 +119,7 @@ No enterprise patterns or excessive abstractions detected. The architecture is p
 - File size limit (300 lines)
 - Bundle size budget (350 KB/chunk, 250 KB total gzipped)
 - Lighthouse CI, median of 3 runs (LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, weight ≤ 400 KiB, perf ≥ 0.5)
-- Playwright E2E (12 tests, now in CI)
+- Playwright E2E (17 tests incl. axe-core WCAG scans, now in CI)
 - Prettier formatting
 - PR template with quality checklist
 - Architecture playbook
@@ -127,7 +127,7 @@ No enterprise patterns or excessive abstractions detected. The architecture is p
 ### Useful soon
 
 - Hardcoded colors check (✅ extended to all `.js`/`.jsx` files with allowlist)
-- Jest coverage threshold (✅ raised from 50% to 70%; current: 90% stmt / 78% branch)
+- Coverage threshold (✅ raised from 50% to 70%; Vitest v8 provider since the migration)
 - depcheck (already in CI)
 - JSDoc types (expand to all component props)
 
@@ -140,7 +140,7 @@ No enterprise patterns or excessive abstractions detected. The architecture is p
 - Custom ESLint rules
 - State management library (Zustand, Jotai)
 - CMS integration
-- Vite migration
+- ~~Vite migration~~ → later shipped (audit-remediation item 12): deferred correctly at audit time, done once react-scripts' abandonment made the dependency debt material (audit findings 38 → 12)
 - SSR / SSG
 - GraphQL / tRPC
 - Feature flags / A-B testing

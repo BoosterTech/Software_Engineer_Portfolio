@@ -36,9 +36,9 @@ const renderModal = (props = {}) =>
   renderWithProviders(
     <ProjectModal
       project={baseProject}
-      onClose={jest.fn()}
-      onPrev={jest.fn()}
-      onNext={jest.fn()}
+      onClose={vi.fn()}
+      onPrev={vi.fn()}
+      onNext={vi.fn()}
       hasPrev={true}
       hasNext={true}
       {...props}
@@ -47,8 +47,8 @@ const renderModal = (props = {}) =>
 
 describe("ProjectModal", () => {
   beforeEach(() => {
-    window.scrollTo = jest.fn();
-    window.HTMLElement.prototype.scrollTo = jest.fn();
+    window.scrollTo = vi.fn();
+    window.HTMLElement.prototype.scrollTo = vi.fn();
   });
 
   it("renders nothing without a project", () => {
@@ -121,10 +121,10 @@ describe("ProjectModal", () => {
   it("locks body scroll while open and restores it on unmount", () => {
     const { unmount } = renderModal();
 
-    expect(document.body.style.position).toBe("fixed");
+    expect(document.body).toHaveStyle("position: fixed");
 
     unmount();
-    expect(document.body.style.position).toBe("");
+    expect(document.body).not.toHaveStyle("position: fixed");
     expect(window.scrollTo).toHaveBeenCalled();
   });
 
@@ -142,7 +142,7 @@ describe("ProjectModal", () => {
   });
 
   it("calls onClose on Escape", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     renderModal({ onClose });
 
     fireEvent.keyDown(screen.getByRole("dialog"), { key: "Escape" });
@@ -150,8 +150,8 @@ describe("ProjectModal", () => {
   });
 
   it("navigates with ArrowLeft/ArrowRight when available", () => {
-    const onPrev = jest.fn();
-    const onNext = jest.fn();
+    const onPrev = vi.fn();
+    const onNext = vi.fn();
     renderModal({ onPrev, onNext });
 
     const dialog = screen.getByRole("dialog");
@@ -163,8 +163,8 @@ describe("ProjectModal", () => {
   });
 
   it("ignores arrow keys when navigation is unavailable", () => {
-    const onPrev = jest.fn();
-    const onNext = jest.fn();
+    const onPrev = vi.fn();
+    const onNext = vi.fn();
     renderModal({ onPrev, onNext, hasPrev: false, hasNext: false });
 
     const dialog = screen.getByRole("dialog");
@@ -187,8 +187,8 @@ describe("ProjectModal", () => {
   });
 
   it("calls onPrev/onNext from the nav buttons", () => {
-    const onPrev = jest.fn();
-    const onNext = jest.fn();
+    const onPrev = vi.fn();
+    const onNext = vi.fn();
     renderModal({ onPrev, onNext });
 
     fireEvent.click(screen.getByRole("button", { name: "Previous project" }));
@@ -199,7 +199,7 @@ describe("ProjectModal", () => {
   });
 
   it("calls onClose on backdrop click but not when clicking inside", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     renderModal({ onClose });
 
     fireEvent.click(screen.getByRole("dialog"));
@@ -244,7 +244,7 @@ describe("ProjectModal", () => {
   });
 
   it("closes via the close button", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     renderModal({ onClose });
 
     fireEvent.click(screen.getByRole("button", { name: "Close" }));

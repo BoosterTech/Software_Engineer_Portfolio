@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 import { LanguageProvider } from "common/LanguageProvider";
 import { ThemeModeProvider } from "common/ThemeModeProvider";
-import React from "react";
 import { ThemeProvider } from "styled-components";
 import { themes } from "themes";
 

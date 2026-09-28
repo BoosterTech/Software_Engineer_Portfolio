@@ -23,6 +23,7 @@ export const tokens = css`
     --color-text-secondary: #475569;
     --color-border: #e2e8f0;
     --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-on-primary: #ffffff;
 
     /* Dark theme colors */
     --color-dark-primary: #2b8de4;
@@ -65,13 +66,13 @@ export const tokens = css`
     --color-code-yellow: #ffbd2e;
     --color-code-green: #27c93f;
     --color-code-text: #24292f;
-    --color-code-comment: #6e7781;
+    --color-code-comment: #59636e;
     --color-code-keyword: #cf222e;
     --color-code-type: #953800;
     --color-code-string: #0a3069;
     --color-code-property: #0550ae;
     --color-code-boolean: #0550ae;
-    --color-code-variable: #e36209;
+    --color-code-variable: #b54708;
     --color-sun-orange: #ffb347;
     --color-sun-yellow: #ffcc33;
     --color-sun-yellow-rgb: 255, 204, 51;
@@ -140,6 +141,7 @@ export const tokens = css`
     --color-text-secondary: var(--color-dark-text-secondary);
     --color-border: var(--color-dark-border);
     --color-shadow: var(--color-dark-shadow);
+    --color-on-primary: var(--color-deep-navy);
     --color-panel-rgb: 8, 18, 37;
     --color-off-white: #f8fafc;
     --color-slate: #94a3b8;
@@ -157,7 +159,7 @@ export const tokens = css`
     --color-terminal-border: rgba(255, 255, 255, 0.1);
     --color-terminal-shadow: rgba(0, 0, 0, 0.5);
     --color-code-text: #abb2bf;
-    --color-code-comment: #5c6370;
+    --color-code-comment: #7f848e;
     --color-code-keyword: #c678dd;
     --color-code-type: #e5c07b;
     --color-code-string: #98c379;

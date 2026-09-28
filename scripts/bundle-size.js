@@ -3,7 +3,6 @@ const path = require("path");
 const zlib = require("zlib");
 
 const BUILD_DIR = path.join(__dirname, "..", "build");
-const STATIC_DIR = path.join(BUILD_DIR, "static");
 const MAX_SIZE = Number(process.env.BUNDLE_SIZE_LIMIT) || 350 * 1024;
 const MAX_TOTAL = Number(process.env.BUNDLE_TOTAL_LIMIT) || 250 * 1024;
 
@@ -23,10 +22,10 @@ function getFiles(dir, files = []) {
 }
 
 function main() {
-  const files = getFiles(STATIC_DIR);
+  const files = getFiles(BUILD_DIR);
 
   if (files.length === 0) {
-    console.log("No JS/CSS bundles found in build/static. Skipping check.");
+    console.log("No JS/CSS bundles found in build/. Skipping check.");
     return;
   }
 

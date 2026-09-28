@@ -30,6 +30,9 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   real exposure is the CI/dev machines running the toolchain.
 - **FIX:** no forced fixes. Track as strategic debt (item 11). CI already
   pins via `npm ci`.
+- **POST-MIGRATION UPDATE:** removing `react-scripts` dropped findings
+  **38 → 12**; the remainder live in `@lhci/cli`/`playwright`/`madge`
+  chains — still dev-only, still unforced.
 
 ## Next (P2)
 
@@ -124,24 +127,48 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Optional / Strategic
 
-### 12. CRA → Vite (or equivalent) toolchain migration
+### 12. CRA → Vite toolchain migration — ✅ SHIPPED
 
-- **Limitation today:** `react-scripts@5.0.1` is frozen upstream; it anchors
-  most of the 38 audit findings and the ejected-config debt never shrinks.
-- **Benefit:** retires most transitive vulns, faster builds, modern plugins.
-- **Cost:** moderate — config port, jest→vitest decision, `%PUBLIC_URL%`
-  handling, `scripts/*` and Lighthouse/E2E wiring re-verification.
-- **Risk:** low for a static SPA; biggest detail is preserving the
-  `PUBLIC_URL=/Software_Engineer_Portfolio` deploy behavior and the
-  `serve-e2e.js` prefix strip.
-- **Verdict:** schedule when convenient — current setup is functional and
-  all gates are green; this is not urgent.
+- `react-scripts` removed → `vite@8.3.0` + `@vitejs/plugin-react@6.1.1`,
+  `vitest@5.0.1` + `@vitest/coverage-v8@5.0.1` (jsdom@29, `globals: true`,
+  `vi.*` API). npm audit findings dropped **38 → 12**; build ~15s → ~0.7s;
+  unit suite ~61s → ~26s; Lighthouse perf 0.70 → 0.94, TBT ~1.4s → ~215ms.
+- Ports: `process.env.PUBLIC_URL` → `import.meta.env.BASE_URL`; `%PUBLIC_URL%`
+  → `./` relative paths in the root `index.html` (GitHub Pages base lives in
+  `vite.config.mjs` as `base: "/Software_Engineer_Portfolio/"`; output stays
+  `build/` so `serve-e2e.js` and `gh-pages -d build` are unchanged).
+- Jest → Vitest: `jest.*` → `vi.*`, `@testing-library/jest-dom` →
+  `/vitest` entry, coverage thresholds moved to `vite.config.mjs`,
+  `testTimeout: 30s` (LazyMotion's async feature bundle is slow under
+  v8 instrumentation). `.eslintrc.js`/`eslintConfig` → flat
+  `eslint.config.js`; react-app-only rules (`prop-types`, export-map
+  `import/*` rules that need a tsconfig) disabled; new react-hooks
+  compiler-era rules caught and fixed two real smells
+  (`directionRef`-read-in-render → state, `useMediaQuery` →
+  `useSyncExternalStore`). `cross-env` and `.npmrc` `legacy-peer-deps`
+  removed — the peer conflict died with react-scripts.
+- JSX-in-`.js`: rolldown rejects it — `vite.config.mjs` carries a
+  `transformWithOxc` pre-plugin scoped to `src/*.js` (Windows path
+  normalization required — ids arrive backslashed).
+- Bundle: 167.7 KB gzip single chunk (limit 250 KB). Rolldown warns that
+  `framer-motion` is statically + dynamically imported so the dynamic
+  `LazyMotion` features import can't split — accepted: LazyMotion semantics
+  are preserved and the budget is met.
 
-### 13. axe-core in tests
+### 13. axe-core in tests — ✅ SHIPPED
 
-- Add `@axe-core/playwright` to one E2E pass (or jest-axe to key components).
-  Lighthouse a11y = 1.0 already; this catches what Lighthouse misses
-  (focus order, live regions) as regression protection.
+- `@axe-core/playwright@4.13.0` added; `e2e/accessibility.spec.js` scans five
+  states: homepage light/dark, open project modal, scrolled-page + modal dark
+  (reaches the whileInView-mounted terminal), open mobile menu. Violations
+  fail the test; `wcag2a/2aa/21a/21aa` tags.
+- axe immediately caught what Lighthouse's static audit missed — three real
+  contrast bugs: white text on `--color-dark-primary` CTAs (3.48 → fixed via
+  new `--color-on-primary` token), `body` had no `background-color` (backdrop
+  was a `body::before` image axe can't resolve — now a solid fallback under
+  it), and terminal palette tokens under 4.5:1 (comment + variable, both
+  themes). All fixed; 15/15 axe runs green.
+- Convention recorded in `AGENTS.md`: scans must wait for finite animations
+  to finish first (mid-fade opacity sampling produces flaky contrast reads).
 
 ## Field findings (post-audit, during verification)
 
@@ -185,4 +212,7 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
    `prefers-reduced-motion` a11y fix remains worthwhile.
 5. ~~P3 batch (7–11)~~ ✅ DONE — item 10 resolved via `.gitattributes` +
    worktree refresh (index was already LF; no renormalize commit needed).
-6. Strategic items (12–13) — roadmap discussion, not now.
+6. ~~Strategic items (12–13)~~ ✅ DONE — axe-core scans shipped (item 13,
+   five states, zero violations) and the CRA → Vite + Vitest migration
+   shipped (item 12: audit 38 → 12, build ~15s → ~0.7s, tests ~61s → ~26s,
+   Lighthouse perf 0.70 → 0.94).

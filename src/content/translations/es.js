@@ -9,7 +9,7 @@ export const es = {
       "Hola, soy Dariusz Podczasik. Ingeniero de software especializado en aplicaciones web modernas y productos SaaS impulsados por IA.",
     viewMyWork: "Ver proyectos",
     viewCV: "Ver CV",
-    cvUrl: `${process.env.PUBLIC_URL}/cv.html`,
+    cvUrl: `${import.meta.env.BASE_URL}cv.html`,
     portraitAlt: "Retrato de Dariusz Podczasik",
     hearMeLabel: "Escúchame — reproducir un breve saludo en video",
     skillsetHeader: "Mi stack tecnológico",

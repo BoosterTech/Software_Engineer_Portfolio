@@ -1,6 +1,5 @@
 import { fadeInUp, slideInLeft, slideInRight, spin } from "common/animations";
-import styled from "styled-components";
-import { keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const imageBorderAnimation = keyframes`
    0%{
