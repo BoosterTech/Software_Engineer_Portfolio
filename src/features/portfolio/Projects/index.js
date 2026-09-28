@@ -30,6 +30,7 @@ const Projects = ({ id }) => {
   const expandedProject =
     expandedIndex !== null ? projects[expandedIndex] : null;
   const dragMoved = useRef(false);
+  const expandTriggerRef = useRef(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -100,7 +101,11 @@ const Projects = ({ id }) => {
         >
           <ProjectIcon src={gitHubIcon} alt="" />
         </a>
-        <Header $lang={language} aria-label={menuItems[language][2].name}>
+        <Header
+          $lang={language}
+          data-text={projectsContent.header}
+          aria-label={menuItems[language][2].name}
+        >
           {projectsContent.header}
         </Header>
       </TitleWrapper>
@@ -145,8 +150,11 @@ const Projects = ({ id }) => {
                   onClick={() => {
                     if (!dragMoved.current) handleSelect(index);
                   }}
-                  onExpand={() => {
-                    if (!dragMoved.current) setExpandedIndex(index);
+                  onExpand={(trigger) => {
+                    if (!dragMoved.current) {
+                      expandTriggerRef.current = trigger;
+                      setExpandedIndex(index);
+                    }
                   }}
                 />
               );
@@ -184,6 +192,7 @@ const Projects = ({ id }) => {
             }
             hasPrev={expandedIndex > 0}
             hasNext={expandedIndex < projects.length - 1}
+            returnFocusRef={expandTriggerRef}
           />
         )}
       </AnimatePresence>

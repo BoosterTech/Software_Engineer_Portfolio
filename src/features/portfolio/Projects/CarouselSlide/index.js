@@ -15,7 +15,7 @@ import {
   SlideImage,
 } from "./styled";
 
-/** @param {{ project: import("../../../../types").Project; isActive: boolean; position: "left" | "center" | "right"; onClick: () => void; onExpand: () => void }} props */
+/** @param {{ project: import("../../../../types").Project; isActive: boolean; position: "left" | "center" | "right"; onClick: () => void; onExpand: (trigger: HTMLElement) => void }} props */
 const CarouselSlide = ({ project, isActive, position, onClick, onExpand }) => {
   const { language } = useLanguage();
   const { projects: projectsContent } = useContent();
@@ -32,7 +32,7 @@ const CarouselSlide = ({ project, isActive, position, onClick, onExpand }) => {
       role="group"
       aria-roledescription="slide"
       aria-label={project.title[language]}
-      onClick={isActive ? onExpand : onClick}
+      onClick={isActive ? (e) => onExpand(e.currentTarget) : onClick}
       onMouseEnter={prefetchModalImage}
     >
       <SlideImage
@@ -50,7 +50,7 @@ const CarouselSlide = ({ project, isActive, position, onClick, onExpand }) => {
           onFocus={prefetchModalImage}
           onClick={(e) => {
             e.stopPropagation();
-            onExpand();
+            onExpand(e.currentTarget);
           }}
           aria-label={projectsContent.expandLabel.replace(
             "{title}",
