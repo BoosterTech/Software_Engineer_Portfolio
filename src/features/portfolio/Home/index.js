@@ -34,9 +34,6 @@ const Home = ({ id }) => {
   const { language } = useLanguage();
   const { isDark } = useThemeMode();
 
-  const headerWords = home.contentHeader.split(" ");
-  const titleFirst = headerWords.slice(0, -1).join(" ");
-  const titleLast = headerWords[headerWords.length - 1];
   const projectsItem = menuItems[language][2];
   const isMobile = useMediaQuery(`(max-width: ${themes.breakpoint.md})`);
   const projectsOffset =
@@ -53,7 +50,10 @@ const Home = ({ id }) => {
             {home.welcomeLabel}
           </WelcomeLabel>
           <HeroTitle>
-            {titleFirst} <GradientText>{titleLast}</GradientText>
+            {home.contentHeaderPlain}{" "}
+            <GradientText data-text={home.contentHeaderAccent}>
+              {home.contentHeaderAccent}
+            </GradientText>
           </HeroTitle>
           <TechStackText>{home.contentHeaderTechStack}</TechStackText>
 

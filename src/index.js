@@ -1,4 +1,4 @@
-import { LazyMotion } from "framer-motion";
+import { domMax, LazyMotion } from "framer-motion";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
@@ -16,9 +16,11 @@ root.render(
       <ThemeModeProvider>
         <ThemeProvider theme={themes}>
           <GlobalStyles />
-          <LazyMotion
-            features={() => import("framer-motion").then((mod) => mod.domMax)}
-          >
+          {/* Static domMax: the lib is statically imported app-wide anyway,
+              so an async features() thunk splits nothing (rolldown warns
+              INEFFECTIVE_DYNAMIC_IMPORT). `strict` turns the m.*-only
+              convention into a dev-time error instead of a silent regression. */}
+          <LazyMotion features={domMax} strict>
             <App />
           </LazyMotion>
         </ThemeProvider>

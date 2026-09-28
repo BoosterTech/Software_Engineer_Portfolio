@@ -10,7 +10,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 - **What:** `vite@8.3.0` + `@vitejs/plugin-react`, `vitest@5` (jsdom, v8 coverage), React 18.2.0, React-DOM client root in `src/index.js`. Root `index.html` is the Vite entry; `public/` is copied verbatim to `build/`.
 - **Why:** Supersedes CRA — `react-scripts@5.0.1` is frozen upstream and anchored most npm-audit findings (38 → 12 after the migration). Vite builds in ~0.7s vs ~15s and Vitest runs the suite in ~26s vs ~61s. Measured improvement on the same code: Lighthouse perf 0.70 → 0.94, TBT ~1.4s → ~215ms.
-- **Migration notes:** `process.env.PUBLIC_URL` → `import.meta.env.BASE_URL` (includes the trailing `/`, so `BASE_URL + "x"` not `BASE_URL + "/x"`). The GitHub Pages base is `base: "/Software_Engineer_Portfolio/"` in `vite.config.mjs`; `lighthouse:check` rebuilds with `--base=./` so lhci's root-served `build/` resolves assets. JSX lives in `.js` files — a `transformWithOxc` pre-plugin in `vite.config.mjs` handles it (rolldown's parser rejects JSX in `.js`); bare `src/` specifiers resolve via generated `resolve.alias` entries (needed for Vitest too, which doesn't consult `resolveId` plugins). `jest.*` → `vi.*` (globals: true).
+- **Migration notes:** `process.env.PUBLIC_URL` → `import.meta.env.BASE_URL` (includes the trailing `/`, so `BASE_URL + "x"` not `BASE_URL + "/x"`). The GitHub Pages base is `base: "/Software_Engineer_Portfolio/"` in `vite.config.mjs`; `lighthouse:check` rebuilds with `--base=./` so lhci's root-served `build/` resolves assets. JSX lives in `.js` files — a `transformWithOxc` pre-plugin in `vite.config.mjs` handles it (rolldown's parser rejects JSX in `.js`); bare `src/` specifiers resolve via generated `resolve.alias` entries (needed for Vitest too, which doesn't consult `resolveId` plugins). `jest.*` → `vi.*` (globals: true). Landmine: `index.html` links the manifest as `./manifest.json` (page lives at a trailing-slash URL, so it resolves correctly in dev and prod); under `--base=./` (the lighthouse build) Vite resolves that href as a build asset against **project root** — a stray root-level `manifest.json` (e.g. lhci's run-manifest, pre-`outputDir` config) gets bundled as the app manifest and fails parsing in-browser. Keep the repo root free of stray `manifest.json`/report files; lhci output goes to `.lighthouseci/`.
 - **Future guidance:** If SEO or SSG become priorities, evaluate Next.js. The remaining audit findings live in tooling deps (playwright/lhci/madge chains) — revisit when they publish fixes.
 
 ---
@@ -73,7 +73,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: Store multi-language content in JS modules rather than JSON or an i18n library
 
-- **What:** English, Polish, and Spanish copy lives in `src/content/translations.js` (including `home.toolsShowcase` for the technology section). Project data lives in `src/content/projects.js`; `jsconfig.json` sets `baseUrl: "src"` so image imports use `src`-relative `images/...` paths. Menu items remain in `src/common/Navigation/menuItems.js`. (`src/content/skillsets/` was deleted with the unmounted `SkillsetContainer` in `a42600b`.)
+- **What:** English, Polish, and Spanish copy lives in `src/content/translations/{en,pl,es}.js` (including `home.toolsShowcase` for the technology section). Project data lives in `src/content/projects.js`; `jsconfig.json` sets `baseUrl: "src"` so image imports use `src`-relative `images/...` paths. Menu items remain in `src/common/Navigation/menuItems.js`. (`src/content/skillsets/` was deleted with the unmounted `SkillsetContainer` in `a42600b`.)
 - **Why:** No extra i18n dependency is needed; content can contain HTML strings and be co-located with the consuming feature; imports are static and simple.
 - **Trade-offs:** No fallback language chain, no runtime language lazy-loading, and content is bundled into the JavaScript. Adding a language requires updating every content file.
 - **Future guidance:** If a CMS or more languages are added, migrate to a `src/locales/` JSON structure or introduce `react-i18next`. Until then, keep content objects isomorphic across all three languages.
@@ -114,7 +114,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: Split content files by language once they exceed the 300-line budget
 
-- **What:** `src/content/skillsets/{en,pl,es}.js` was deleted along with the dead `SkillsetContainer` (`a42600b`); its copy now lives in `translations.js` under `home.toolsShowcase`. `src/content/projects.js` (~390 lines) is kept as a single module and is the only file listed in `scripts/check-file-size.js` exclusions.
+- **What:** `src/content/skillsets/{en,pl,es}.js` was deleted along with the dead `SkillsetContainer` (`a42600b`); its copy now lives in `src/content/translations/` under `home.toolsShowcase`. `src/content/projects.js` (~390 lines) is kept as a single module and is the only file listed in `scripts/check-file-size.js` exclusions.
 - **Why:** `projects.js` is a list of objects with per-language fields, so a language split would force awkward re-composition; keeping it whole is acceptable while it stays under 450 lines.
 - **Trade-offs:** Splitting adds an aggregator and more files, but reduces the blast radius of content edits. Exclusions must be revisited as files grow.
 - **Future guidance:** Any content file that exceeds 300 lines and does not gain clarity from a language split should either be split or added to `check-file-size.js` exclusions with a documented trigger (e.g., "re-evaluate at 450 lines"). Content parity tests must always pass after a split.
@@ -125,7 +125,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: Centralize keyframes in `src/common/animations.js`
 
-- **What:** All keyframe animations (`gradientShift`, `waveHand`, `fadeInUp`, `float`, `spin`, etc.) are exported from `src/common/animations.js` and imported by `styled.js` files.
+- **What:** All keyframe animations (`gradientFade` (driven by the `gradientDrift` mixin — accent text crossfades a `::before` opacity clone, never `background-position`, so it stays composited), `waveHand`, `fadeInUp`, `float`, `spin`, etc.) are exported from `src/common/animations.js` and imported by `styled.js` files.
 - **Why:** Reduces duplication across components; a single file controls animation timing and naming; build passes without stale local keyframes.
 - **Trade-offs:** A shared animation file can grow into a generic grab-bag; importing from a long relative path is awkward for deeply nested components.
 - **Future guidance:** Only add an animation to `src/common/animations.js` when it is reused. Keep one-off keyframes local to the component.
@@ -134,7 +134,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 - **What:** `framer-motion` is used in `src/features/portfolio/Home/ToolsShowcase/` (`OrbitSection`, explore track, feature grid) and `src/features/portfolio/Projects/CarouselSlide/styled.js` (`Slide`, `Overlay`). It provides `whileInView`, `variants`, `staggerChildren`, `whileHover`, `spring` transitions, and `layout` animations.
 - **Why:** The orbit relies on per-card `whileInView` entry with staggered `spring` delays and responsive `whileHover` scaling. The explore track and feature grid use `whileInView`/`staggerChildren` triggered by viewport entry. `CarouselSlide` uses `layout` and `animate` for the active/hover overlay reveal. Replicating all of this with CSS keyframes would require a custom `IntersectionObserver` + JS state for scroll triggers, and the `layout` morphing cannot be done with CSS alone without significant manual math.
-- **Trade-offs:** `framer-motion` is one of the heavier dependencies. Current bundle is `185.33 KB` gzipped, well under the `350 KB` budget, so the cost is acceptable for now.
+- **Trade-offs:** `framer-motion` is one of the heavier dependencies. Current bundle is ~`173 KB` gzipped total (main chunk alone ~`173 KB`), well under the dual budget (250 KB total / 350 KB per-chunk), so the cost is acceptable for now.
 - **Future guidance:** If the bundle budget tightens, the first candidates for CSS-only replacement are the `CarouselSlide` hover overlay and the `ExploreChip` hover effect. Do not remove `framer-motion` until those pieces are replaced and the `OrbitSection` has a clear CSS/JS fallback that preserves the staggered reveal and spring feel.
 
 ---
@@ -163,16 +163,16 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ## 10. Accessibility, SEO, and Performance
 
-### Decision: Fix `public/index.html` metadata
+### Decision: Fix `index.html` metadata
 
-- **Current state:** The invalid `<meta name="Derek.dev" ...>` was replaced with `name="description"`, and Open Graph tags (`og:title`, `og:description`, `og:type`, `og:url`) were added in `public/index.html`. The `<html lang>` attribute is now updated dynamically by `LanguageProvider` via a `useEffect` that sets `document.documentElement.lang` to `en`, `pl`, or `es` based on the selected language.
+- **Current state:** The invalid `<meta name="Derek.dev" ...>` was replaced with `name="description"`, and Open Graph tags (`og:title`, `og:description`, `og:type`, `og:url`) were added in the root `index.html` (Vite entry — there is no `public/index.html`). The `<html lang>` attribute is now updated dynamically by `LanguageProvider` via a `useEffect` that sets `document.documentElement.lang` to `en`, `pl`, or `es` based on the selected language.
 - **Why it matters:** Search engines and social sharing rely on `name="description"` and Open Graph tags. The `lang` attribute is critical for screen readers to pronounce content correctly.
 - **Trade-offs:** The dynamic `lang` update is a side effect in `LanguageProvider`. This is acceptable because the app is client-side only with no SSR.
 - **Future guidance:** When adding a new language, update the `LANG_MAP` in `LanguageProvider/index.js` to include the new ISO 639-1 code.
 
 ### Decision: Centralize `dangerouslySetInnerHTML` through a `RichText` component
 
-- **Current state:** `src/common/RichText/index.js` is the single component that renders raw HTML via `dangerouslySetInnerHTML`. It is used by `src/features/portfolio/About/index.js` and `src/features/portfolio/Projects/ComingSoonProject/index.js`.
+- **Current state:** `src/common/RichText/index.js` is the shared wrapper for raw HTML (`dangerouslySetInnerHTML`), consumed as `JourneyParagraph` in `About/styled.js`. Two call sites bypass it and embed `dangerouslySetInnerHTML` directly: `About/CodeTerminal.js` (a hardcoded syntax-highlighted literal, `aria-hidden`) and `ProjectModal.js` (`project.description` from `content/projects.js`). All three sources are first-party static strings, so XSS exposure is theoretical — the convention exists so a sanitizer has few seam points if content ever becomes dynamic.
 - **Why it matters:** Raw HTML is an XSS risk if content ever becomes user-supplied or API-driven. Keeping the call in one place makes it easy to swap in a sanitizer or a markdown-to-JSX solution later.
 - **Trade-offs:** The author controls all content, so the current risk is low. Converting long About paragraphs and project descriptions to JSX or structured content is laborious.
 - **Future guidance:** If content comes from an API or CMS, replace `RichText` with `react-markdown` or a structured content model. For now, keep content in trusted JS modules.
@@ -196,10 +196,10 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Run `depcheck` in CI and document every flag
 
-- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck` after `npm ci`. A `.depcheckrc` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages and `typescript` is a `madge` runtime peer (`detective-typescript` `require()`s it).
+- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck@1.4.7` after `npm ci`. A `.depcheckrc.yml` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages and `typescript` is a `madge` runtime peer (`detective-typescript` `require()`s it).
 - **Why:** Unused dependencies are the fastest way for a small project to become heavy. `depcheck` turns dependency cleanup from a manual chore into a CI-enforced rule and forces a one-line justification for every package that is kept despite not being imported.
 - **Trade-offs:** `npx --yes depcheck` downloads the package on every CI run. Pinning `depcheck` to `devDependencies` could be added later if install time or reproducibility becomes an issue.
-- **Future guidance:** Do not add a dependency without importing it or documenting why it is kept. Remove anything `depcheck` flags unless the `.depcheckrc` comment is defensible.
+- **Future guidance:** Do not add a dependency without importing it or documenting why it is kept. Remove anything `depcheck` flags unless the `.depcheckrc.yml` comment is defensible.
 
 ### Decision: Block circular dependencies with `madge`
 
@@ -208,23 +208,23 @@ When adding or changing anything, prefer the following order:
 - **Trade-offs:** `madge` resolves `jsconfig` `baseUrl` aliases only with extra configuration, but relative-path cycles are still caught reliably. (The old `--legacy-peer-deps` requirement died with `react-scripts` — madge's `typescript` peer is now satisfied by the pinned `typescript@5.9.3`; `.npmrc` was removed.)
 - **Future guidance:** If `madge` misses cycles involving `common/` aliases, add a `webpackConfig` or `requireConfig` option to `scripts/check-circular.js`, or migrate to `dependency-cruiser` with a matching `.dependency-cruiser.js` config.
 
-### Decision: Tighten bundle-size budget to 350 KB
+### Decision: Tighten bundle-size budget (350 KB/chunk, 250 KB total)
 
-- **What:** `scripts/bundle-size.js` now defaults to `350 * 1024` bytes unless `BUNDLE_SIZE_LIMIT` is set. The main chunk is ~212 KB, so the new budget still provides headroom.
-- **Why:** A 600 KB budget lets the bundle triple before anyone notices. A 350 KB budget catches bloat early while leaving room for the current assets.
+- **What:** `scripts/bundle-size.js` enforces two limits: `BUNDLE_SIZE_LIMIT` defaults to `350 * 1024` per chunk and `BUNDLE_TOTAL_LIMIT` to `250 * 1024` for the whole gzipped bundle. The main chunk is ~`173 KB`, so the budget still provides headroom.
+- **Why:** A 600 KB budget lets the bundle triple before anyone notices. The per-chunk cap catches a single bloated asset while the tighter total cap tracks real download weight.
 - **Trade-offs:** Very large images or animations can hit this limit. Monitor the `bundle:check` output and split lazy-loaded chunks if the main bundle approaches the cap.
 - **Future guidance:** Before adding a new package or animation library, run `npm run build && npm run bundle:check` and confirm the budget is still respected.
 
 ### Decision: Bundle-impact gate for PRs
 
-- **What:** `.github/pull_request_template.md` includes a bundle-impact checklist: “Run `npm run build && npm run bundle:check`”, confirm no chunk exceeds the 350 KB gzipped budget, and confirm the bundle did not grow significantly. The CI already runs `npm run bundle:check` after every build, so the template is a human double-check against accidental bloat.
-- **Why:** PR templates make the 350 KB budget explicit before code is reviewed. It is the cheapest place to stop one-off libraries or oversized assets from entering the codebase.
+- **What:** `.github/pull_request_template.md` includes a bundle-impact checklist: “Run `npm run build && npm run bundle:check`”, confirm no chunk exceeds the 350 KB gzipped per-chunk budget and the total stays under 250 KB, and confirm the bundle did not grow significantly. The CI already runs `npm run bundle:check` after every build, so the template is a human double-check against accidental bloat.
+- **Why:** PR templates make the bundle budget explicit before code is reviewed. It is the cheapest place to stop one-off libraries or oversized assets from entering the codebase.
 - **Trade-offs:** A CI step that auto-posts bundle delta as a comment was considered but not added; the existing `bundle:check` job already fails the build on budget violations. The template can be converted to a bot comment later if manual checks slip.
 - **Future guidance:** If the budget is repeatedly challenged, add a `dependency-cruiser` or `bundlephobia` pre-merge check and a `GITHUB_STEP_SUMMARY` output showing delta per chunk.
 
-### Decision: Keep `framer-motion` because `ToolsShowcase` uses `motion.*` styled components
+### Decision: Keep `framer-motion` because `ToolsShowcase` uses `m.*` styled components
 
-- **What:** `framer-motion` is imported in `features/portfolio/Home/ToolsShowcase/{OrbitSection.styles,exploreLayout,showcaseLayout}.js` and used as `styled(motion.div)`, `styled(motion.section)`, etc.
+- **What:** `framer-motion` is imported in `features/portfolio/Home/ToolsShowcase/{OrbitSection.styles,exploreLayout,showcaseLayout}.js` and used as `styled(m.div)`, `styled(m.section)`, etc. The app wraps everything in `LazyMotion` with the static `domMax` set and `strict` — `motion.*` throws in dev, so `m.*` is enforced. An async `features()` thunk was tried and removed: framer-motion is statically imported app-wide, so it cannot split out of the main chunk (rolldown warns `INEFFECTIVE_DYNAMIC_IMPORT`).
 - **Why:** The orbit and explore-scroll animations rely on `framer-motion` for performant, declarative motion. Removing it would require re-implementing those animations.
 - **Trade-offs:** `framer-motion` adds bundle weight. If the orbit is simplified or removed in a future redesign, re-run `depcheck` and consider removing it.
 - **Future guidance:** Do not add `framer-motion` for trivial hover transitions; use CSS keyframes in `src/common/animations.js` instead. If `depcheck` ever flags `framer-motion`, confirm these four files still import it before keeping.
@@ -242,9 +242,9 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Add Lighthouse CI with performance budgets
 
-- **What:** `.lighthouserc.js` configures `@lhci/cli` to serve `build/` and assert five error-level budgets: `largest-contentful-paint <= 4000 ms`, `cumulative-layout-shift <= 0.1`, `total-blocking-time <= 2600 ms`, `total-byte-weight <= 400 KiB`, `categories:performance >= 0.5` — each over a median of `numberOfRuns: 3` (single-run metrics swing ±20%, so the median stops noise from flapping the gate). `npm run lighthouse:check` rebuilds with `vite build --base=./` so assets resolve from the build root, then runs `lhci autorun`. The CI step in `.github/workflows/ci.yml` is blocking (`continue-on-error` removed).
+- **What:** `.lighthouserc.js` configures `@lhci/cli` to serve `build/` and assert five error-level budgets: `largest-contentful-paint <= 3500 ms`, `cumulative-layout-shift <= 0.05`, `total-blocking-time <= 2000 ms`, `total-byte-weight <= 300 KiB`, `categories:performance >= 0.6` — each over a median of `numberOfRuns: 3` (single-run metrics swing ±20%, so the median stops noise from flapping the gate). `npm run lighthouse:check` rebuilds with `vite build --base=./` so assets resolve from the build root, then runs `lhci autorun`. The CI step in `.github/workflows/ci.yml` is blocking (`continue-on-error` removed).
 - **Why:** A portfolio is judged on speed and visual stability. A numeric, automated budget is cheaper than manual Lighthouse runs and catches regressions early — TBT and byte-weight assertions specifically guard against heavy JS/asset creep, which the LCP-only gate could not see. Making it blocking means PRs that violate the budget cannot merge.
-- **Trade-offs:** Headless CI runs vary run-to-run; the median-of-3 absorbs most of it, at ~3× the collect time. The sensor ceilings sit deliberately above measured baselines (~1.4s TBT, ~244 KiB) — they catch regressions, not noise. If the check still becomes flaky, re-enable `continue-on-error` temporarily rather than loosening thresholds.
+- **Trade-offs:** Headless CI runs vary run-to-run; the median-of-3 absorbs most of it, at ~3× the collect time. The sensor ceilings sit ~20–50% above measured medians (~1.3s TBT, ~235 KiB, LCP ~2.8s, perf ~0.68) — they catch regressions, not noise. If the check still becomes flaky, re-enable `continue-on-error` temporarily rather than loosening thresholds.
 - **Future guidance:** Do not raise the numeric thresholds to make the check pass. If a metric regresses, investigate the offending asset (likely a large image/video or heavier dependency) rather than relaxing the budget.
 
 ### Decision: Create a shared `Button` primitive in `src/common/Button/`
@@ -270,14 +270,14 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Run Playwright E2E tests in CI
 
-- **What:** `.github/workflows/ci.yml` installs Playwright Chromium browsers (`npx playwright install --with-deps chromium`) and runs `npm run test:e2e` after the build step. The Playwright config's `webServer` automatically serves the `build/` directory on port 3100 via `scripts/serve-e2e.js` — a zero-dep Node static server that strips the `/Front-End-Dev-Portfolio` GitHub Pages prefix so tests exercise the real prefixed production bundle.
+- **What:** `.github/workflows/ci.yml` installs Playwright Chromium + WebKit browsers (`npx playwright install --with-deps chromium webkit`) and runs `npm run test:e2e` after the build step. The Playwright config's `webServer` automatically serves the `build/` directory on port 3100 via `scripts/serve-e2e.js` — a zero-dep Node static server that strips the `/Software_Engineer_Portfolio` GitHub Pages prefix so tests exercise the real prefixed production bundle. Missing paths with a file extension get a real 404 (only extensionless SPA routes fall back to `index.html`), and `e2e/fixtures.js` wraps `page` with a console/`pageerror` watchdog — any console error fails the test.
 - **Why:** E2E tests existed but only ran locally. Without CI enforcement, regressions in scroll navigation, language switching, dark mode, and carousel behavior could merge undetected.
-- **Trade-offs:** E2E tests add ~30–60s to CI runtime. Only Chromium is tested (no Firefox/WebKit in CI). The `webServer` requires a production build first, which is already a CI step.
+- **Trade-offs:** E2E tests add ~30–60s to CI runtime per engine; WebKit roughly doubles that and its axe injection is ~2× slower (the accessibility describe runs with a 60s timeout). The `webServer` requires a production build first, which is already a CI step.
 - **Future guidance:** When adding new E2E tests, ensure they work with the `scripts/serve-e2e.js` setup (`npm run build` must run first). Use `baseURL` (`http://localhost:3100`) for navigation. Avoid hardcoded timeouts where possible — use Playwright auto-waiting.
 
 ### Decision: Accessibility — ARIA roles, keyboard navigation, dynamic `<html lang>`
 
-- **What:** `LanguageProvider` sets `document.documentElement.lang` via `useEffect`. Projects carousel responds to Arrow Left/Right keys. `DarkModeToggle` has `role="switch"` + `aria-checked` + keyboard support. `LanguageSwitch` flags have `role="button"` + `aria-pressed` + keyboard support. `ComingSoonProject` fullscreen has `role="dialog"` + `aria-modal` + Escape-to-close. Navigation has `aria-label="Main navigation"`; the mobile menu closes on Escape and returns focus to the hamburger toggle.
+- **What:** `LanguageProvider` sets `document.documentElement.lang` via `useEffect`. Projects carousel responds to Arrow Left/Right keys. `DarkModeToggle` has `role="switch"` + `aria-checked` + keyboard support. `LanguageSwitch` flags have `role="button"` + `aria-pressed` + keyboard support. `ProjectModal` fullscreen has `role="dialog"` + `aria-modal` + Escape-to-close (with explicit `returnFocusRef` trigger restore — WebKit doesn't focus buttons on click, so `document.activeElement` isn't reliable). Navigation has `aria-label="Main navigation"`; the mobile menu closes on Escape and returns focus to the hamburger toggle.
 - **Why:** Screen readers and keyboard users need semantic roles and keyboard equivalents for all interactive elements. A static `<html lang="en">` misreports the page language when the user switches to Polish or Spanish.
 - **Trade-offs:** Added ~354 B to the bundle from ARIA attributes. The global arrow-key listener on the Projects section could conflict with other keyboard handlers if the user is focused on an input, but the portfolio has no text inputs.
 - **Future guidance:** Always add `role`, `aria-label`, and keyboard handlers to any new interactive element that isn't a native `<button>` or `<a>`. Update `LANG_MAP` in `LanguageProvider` when adding new languages.

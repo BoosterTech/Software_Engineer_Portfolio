@@ -33,7 +33,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - **Animations**: framer-motion
 - **Deployment**: gh-pages
 - **Image Optimization**: WebP assets, `loading="lazy"` on below-the-fold images
-- **E2E Testing**: Playwright (17 tests: scroll nav, language switch, dark mode, carousel arrows/dots, modal focus trap + arrow nav, mobile menu open/close + Escape dismiss, backdrop dismiss, mobile share row, plus axe-core WCAG scans of key states in both themes)
+- **E2E Testing**: Playwright (34 tests — 17 specs × Chromium + WebKit: scroll nav, language switch, dark mode, carousel arrows/dots, modal focus trap + arrow nav, mobile menu open/close + Escape dismiss, backdrop dismiss, mobile share row, plus axe-core WCAG scans of key states in both themes, with a console/pageerror watchdog on every test)
 - **Quality & CI**: ESLint, Prettier, Vitest, Playwright, GitHub Actions
 - **Build-time Guardrails**: `size-check`, `format:check`, `lint`, `bundle:check`, `test:coverage`, `lighthouse:check`, `check:colors`, `check:circular`, `test:e2e`
 
@@ -42,7 +42,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 ## 🏗️ Architecture & Maintenance
 
 - Decisions are recorded in `plan/architecture-playbook.md`.
-- Active work is tracked in `plan/audit-remediation-plan.md` (completed plans live in `plan/` and `plan/archive/`); contributor/agent conventions live in `AGENTS.md`.
+- The latest remediation record is `plan/post-migration-audit-remediation.md` (all items shipped; completed plans live in `plan/` and `plan/archive/`); contributor/agent conventions live in `AGENTS.md`.
 - Recent boundary cleanup: `StarField` and `Main` are now standalone `src/common/` components, `src/themes.js` contains only breakpoints, and components read localized copy through `src/common/useContent.js`.
 - **State management**: language and theme mode (`isDark`) are handled by `LanguageProvider` and `ThemeModeProvider` in `src/common/`; `@reduxjs/toolkit` and `react-redux` were removed.
 - Shared primitives: `src/common/Card` provides `$glass`, `$bordered`, and `$hoverable` variants, used by `About` feature cards, `Contact` tiles, and `ToolsShowcase` feature cards; `src/common/Button` (`$variant`, `$size`) covers the Home CTAs and `Projects` actions.
@@ -51,8 +51,8 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - Circular-dependency guard: `npm run check:circular` (via `madge`) runs in CI and fails the build if any import cycles are introduced.
 - Bundle-impact gate: PR template requires `npm run build && npm run bundle:check` and confirmation that the total gzipped bundle stays under the 250 KB budget.
 - Fixed section slugs: `home`, `about`, `projects`, `contact` are used for `react-scroll` anchors in all languages.
-- Quality gates: `npm run test:coverage` enforces the 70% Vitest coverage thresholds in CI (80 tests across 13 suites), `npm run test:e2e` runs 17 Playwright E2E tests against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the budgets in `.lighthouserc.js` — median of 3 runs, asserting LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, total byte weight ≤ 400 KiB, and performance score ≥ 0.5.
-- Performance: Framer Motion loads via `LazyMotion` with an async `domMax` feature bundle (use `m.*`, never `motion.*`); the hero portrait is media-scoped preloaded in `index.html`; the talking-portrait video stays at `preload="metadata"` so its ~1.2 MB MP4 only downloads on tap; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
+- Quality gates: `npm run test:coverage` enforces the 70% Vitest coverage thresholds in CI (80 tests across 13 suites), `npm run test:e2e` runs 17 Playwright specs on Chromium + WebKit (34 tests) against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the budgets in `.lighthouserc.js` — median of 3 runs, asserting LCP ≤ 3.5s, CLS ≤ 0.05, TBT ≤ 2s, total byte weight ≤ 300 KiB, and performance score ≥ 0.6.
+- Performance: Framer Motion uses `LazyMotion` with the static `domMax` feature set in `strict` mode (`m.*` enforced — `motion.*` throws in dev); the hero portrait is media-scoped preloaded in `index.html`; the talking-portrait video stays at `preload="metadata"` so its ~1.2 MB MP4 only downloads on tap; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
 
 ---
 

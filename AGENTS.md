@@ -18,7 +18,11 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - `src/content/` — all user-facing copy (`translations/` per language, `projects.js`)
 - Styles live in a co-located `styled.js` (or `<Name>.styles.js`) per component folder
 - `plan/` — architecture and roadmap docs; `architecture-playbook.md` is the source of truth,
-  `audit-remediation-plan.md` tracks active work, `plan/archive/` holds superseded plans
+  `post-migration-audit-remediation.md` is the latest remediation record
+  (all items shipped), `plan/archive/` holds superseded plans
+- `scripts/` — production tooling (`serve-e2e.js`, checks, `remove-maps.js`);
+  `scripts/probes/` holds reusable one-off diagnostic probes — see its README
+  before running (needs a built site/server)
 
 ## Hard rules (CI-enforced)
 
@@ -27,6 +31,9 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
    Allowlist: `styles/tokens.js`, `contactIcons.js`, `common/animations.js`.
    Verified by `npm run check:colors`.
 2. **300-line cap per source file.** `projects.js` is exempt (data). `npm run size-check`.
+   `ProjectModal.js` sits exactly at the cap — the next functional addition
+   must extract a piece (e.g. the keydown/focus-trap effect) instead of
+   growing it.
 3. **No circular imports.** `npm run check:circular`.
 4. **Import order + absolute imports.** `baseUrl: src`; never `../` parent imports.
 5. **Tests must stay green.** `npm run test:coverage` — 70% floor on
@@ -40,17 +47,26 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - Breakpoints from `src/themes.js`: `lg` (768px) is THE mobile/desktop boundary for
   section layouts; `xl2` (1100px) is the nav compact boundary. Don't invent others.
 - Media queries go at the end of a styled block, mobile-first ordering
-- Accent text uses the shared animated gradient: `gradientShift 15s ease-in-out infinite`,
-  `background-size: 200% 200%` — see `features/portfolio/About/GradientHeading`
+- Accent text uses the shared animated gradient: `${gradientDrift}` mixin
+  (`common/animations.js`) + `background-size: 200% 200%` — it crossfades a
+  `::before` clone (`data-text` attr required on the element, non-static
+  position, opacity-only = composited). Do not animate `background-position`
+  on gradient text — it repaints every frame. See `About/styled.js`
+  `GradientHeadingPart`. `background-clip: text` only paints inside the
+  element's box: accent spans with descenders (g/j/y/ę) need
+  `padding-block-end` + equal negative `margin-block-end` so the descender
+  isn't cropped without shifting layout (see `heroStyles.js` `GradientText`)
 - Horizontal overflow rails use the mask-fade pattern (`overflow-x: auto` +
   `mask-image: linear-gradient(...)` edge fades) — copy an existing rail (marquee,
   explore track, badge row) rather than inventing a fourth variant
 - Respect `prefers-reduced-motion` for animation
-- Framer Motion: app is wrapped in `LazyMotion` with an async `domMax` feature
-  bundle (`src/index.js`). Always use `m.*` components — never `motion.*`, which
-  would re-pull the full feature set into the critical path. Drag/layout/in-view
-  features are all covered by `domMax`; don't switch to `domAnimation` (carousel
-  needs `drag`)
+- Framer Motion: app is wrapped in `LazyMotion` with the static `domMax`
+  feature set and `strict` (`src/index.js`) — `strict` makes using `motion.*`
+  a dev-time error, so `m.*` is enforced, not just convention. Don't add an
+  async `features()` thunk: framer-motion is statically imported app-wide,
+  so it can't split out of the main chunk. Drag/layout/in-view features are
+  all covered by `domMax`; don't switch to `domAnimation` (carousel needs
+  `drag`)
 - No `content-visibility: auto` on section roots — it caused verified anchor drift:
   react-scroll measured `getBoundingClientRect()` while below-fold sections were
   still intrinsic-size placeholders, so the first nav click after reload landed
@@ -123,6 +139,12 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - Scroll targets always use `menuItems` `slug`, never the translated `name`
   (names differ per language; slugs are fixed)
 - Components read copy via `useContent()`; no hardcoded user-facing text
+- Gradient-accented headings use explicit `*Plain`/`*Accent` key pairs
+  (`contentHeaderPlain`/`contentHeaderAccent`, `journeyHeaderPlain`/
+  `journeyHeaderAccent`, `titlePlain`/`titleAccent`, `headerPlain`/
+  `headerAccent`) — copy owns which words get the gradient. Never derive the
+  accent by word position (`split(" ")` / `slice(n)`); positions break silently
+  when a translation is reworded
 - `language` persists to `localStorage.language` (validated against `LANG_MAP`);
   tests rely on `localStorage.clear()` in `setupTests.js` `beforeEach`
 
@@ -144,16 +166,27 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - E2E: `npm run test:e2e` needs `npm run build` first. Playwright's `webServer`
   runs `scripts/serve-e2e.js` on port 3100 (dedicated — 3000 is the dev
   server); it serves `build/` and strips the `/Software_Engineer_Portfolio`
-  prefix. Do not substitute `serve -s build` — it has no prefix rewrite, so
-  asset requests fall back to `index.html` and the app never mounts
-- `npm start` binds localhost only. `npm run start:lan` adds `--host` so
-  phones/other devices on the same Wi-Fi can open the printed Network URL —
-  use it only on trusted networks, and never tunnel the dev server to the
-  public internet (deploy a preview instead)
+  prefix. The `index.html` fallback applies only to extensionless SPA routes —
+  paths with a file extension get a real 404, so missing assets fail tests
+  instead of silently serving HTML. Do not substitute `serve -s build` — it
+  has no prefix rewrite, so asset requests fall back to `index.html` and the
+  app never mounts
+- `npm start` binds localhost only (`server.host` in vite.config.mjs). Phone
+  previews go through ngrok (`ngrok http 3000`) — `allowedHosts` covers
+  `*.ngrok-free.dev`. Keep the server localhost-bound; don't use `--host`
 - E2E waits must be condition-based — `expect.poll`, `toHaveAttribute`,
   `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
   `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
   `aria-expanded`, focus)
+- E2E specs import `test`/`expect` from `e2e/fixtures.js`, never
+  `@playwright/test` directly — the fixture attaches a watchdog that fails
+  any test producing `console.error` or `pageerror` output (the app must be
+  silent; allowlist only proven third-party noise)
+- E2E runs on both `chromium` and `webkit` — engine differences are real
+  (WebKit caught a live bug: it never focuses `<button>` on click, so
+  `document.activeElement` at modal-open is `body`). For modal/dialog focus
+  restore, thread the trigger element explicitly (`returnFocusRef` in
+  `Projects/index.js` → `ProjectModal`); never rely on `document.activeElement`
 - `e2e/accessibility.spec.js` runs `@axe-core/playwright` scans (wcag2a/2aa/
   21a/21aa) on key app states — new violations fail the suite. Before
   `analyze()`, wait for finite animations to finish: axe samples rendered
@@ -187,6 +220,9 @@ barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
   workaround died with react-scripts; installs resolve strictly now.)
 - Quality-gate tools are pinned devDeps (`prettier`, `@lhci/cli`);
   `depcheck` stays CI-only via `npx --yes depcheck@<pinned>` in `ci.yml`.
+- Never run `npm audit fix --force` — the remaining advisories are dev-only
+  transitives of `@lhci/cli` (already latest); force downgrades it to 0.1.0
+  and the install dies on a missing `master` git ref anyway
 
 ## Commits
 

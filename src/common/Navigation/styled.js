@@ -1,4 +1,4 @@
-import { fadeIn, forcedColorsText, gradientShift } from "common/animations";
+import { fadeIn, forcedColorsText, gradientDrift } from "common/animations";
 import { m } from "framer-motion";
 import { Link } from "react-scroll";
 import styled from "styled-components";
@@ -132,11 +132,17 @@ export const DevWrapper = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
-  animation: ${gradientShift} 15s ease-in-out infinite;
+  ${gradientDrift}
   ${forcedColorsText}
   z-index: 10;
   display: flex;
   flex-wrap: nowrap;
+
+  &::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &:hover {
     filter: brightness(1.1);

@@ -31,7 +31,8 @@ import {
 
 /**
  * @param {{ project: import("../../../types").Project | null; onClose: () => void;
- *   onPrev: () => void; onNext: () => void; hasPrev: boolean; hasNext: boolean }} props
+ *   onPrev: () => void; onNext: () => void; hasPrev: boolean; hasNext: boolean;
+ *   returnFocusRef?: { current: HTMLElement | null } }} props
  */
 const ProjectModal = ({
   project,
@@ -40,6 +41,7 @@ const ProjectModal = ({
   onNext,
   hasPrev,
   hasNext,
+  returnFocusRef,
 }) => {
   const { language } = useLanguage();
   const { projects: projectsContent } = useContent();
@@ -63,7 +65,8 @@ const ProjectModal = ({
   useEffect(() => {
     if (!project) return;
 
-    const trigger = document.activeElement;
+    // WebKit never focuses <button> on click (activeElement is body) — caller passes the trigger via returnFocusRef
+    const trigger = returnFocusRef?.current ?? document.activeElement;
     const scrollY = window.scrollY;
 
     document.body.style.position = "fixed";

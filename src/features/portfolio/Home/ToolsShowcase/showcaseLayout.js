@@ -1,4 +1,4 @@
-import { gradientShift } from "common/animations";
+import { gradientDrift } from "common/animations";
 import Card from "common/Card";
 import { m } from "framer-motion";
 import styled from "styled-components";
@@ -68,6 +68,9 @@ export const PlainTitlePart = styled.span`
 
 export const GradientWord = styled.span`
   display: inline-block;
+  position: relative;
+  padding-block-end: 0.15em;
+  margin-block-end: -0.15em;
   background: linear-gradient(
     135deg,
     var(--color-primary) 0%,
@@ -77,7 +80,7 @@ export const GradientWord = styled.span`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: ${gradientShift} 15s ease-in-out infinite;
+  ${gradientDrift}
 `;
 
 export const SectionDescription = styled.p`

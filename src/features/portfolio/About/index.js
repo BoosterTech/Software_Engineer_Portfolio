@@ -51,11 +51,9 @@ const About = ({ id }) => {
           {about.journeyLabel}
         </JourneyLabel>
         <GradientHeading as="h2">
-          <PlainHeadingPart>
-            {about.journeyHeader.split(" ").slice(0, 2).join(" ")}
-          </PlainHeadingPart>{" "}
-          <GradientHeadingPart>
-            {about.journeyHeader.split(" ").slice(2).join(" ")}
+          <PlainHeadingPart>{about.journeyHeaderPlain}</PlainHeadingPart>{" "}
+          <GradientHeadingPart data-text={about.journeyHeaderAccent}>
+            {about.journeyHeaderAccent}
           </GradientHeadingPart>
         </GradientHeading>
         <JourneyParagraph html={about.journeyParagraph} />

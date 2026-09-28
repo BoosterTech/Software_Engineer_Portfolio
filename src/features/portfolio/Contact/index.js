@@ -24,7 +24,8 @@ const Contact = ({ id }) => {
     <Wrapper id={id}>
       <Eyebrow aria-hidden="true" />
       <Header>
-        {contact.headerPlain} <span>{contact.headerAccent}</span>
+        {contact.headerPlain}{" "}
+        <span data-text={contact.headerAccent}>{contact.headerAccent}</span>
       </Header>
       <Subtitle>{contact.contactParagraph}</Subtitle>
       <CardsGrid>

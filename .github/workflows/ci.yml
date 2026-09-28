@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm ci
 
@@ -41,7 +41,7 @@ jobs:
       - run: npm run lighthouse:check
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium webkit
 
       - name: Run E2E tests
         run: npm run test:e2e

@@ -1,7 +1,8 @@
 /** @type {import("../../types").TranslationSet} */
 export const en = {
   home: {
-    contentHeader: "Software Engineer",
+    contentHeaderPlain: "Software",
+    contentHeaderAccent: "Engineer",
     contentHeaderTechStack:
       "< AI-Directed Engineering | Next.js • React • TypeScript • Production SaaS />",
     welcomeLabel: "WELCOME TO MY PORTFOLIO",
@@ -51,7 +52,8 @@ A Software Engineer focused on building modern web applications and AI-powered S
   },
   about: {
     journeyLabel: "MY JOURNEY",
-    journeyHeader: "From Embedded to Full-Stack",
+    journeyHeaderPlain: "From Embedded",
+    journeyHeaderAccent: "to Full-Stack",
     journeyParagraph: `
 <p>My journey began with electronics, embedded systems, C++, and OpenGL before evolving into modern web development. Today I build production-ready applications using React, Next.js, TypeScript, and Supabase. I combine solid software engineering principles with AI-assisted workflows to create scalable, impactful solutions.</p>
       `,

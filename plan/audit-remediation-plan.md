@@ -41,7 +41,7 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 - **SHIPPED:** extracted the embedded 1984×1984 WebP from the SVG wrapper and
   re-encoded to a real `src/images/styledcomponents.webp` at 200×200 (2× the
   ~100 px max card render, per the repo rule). `ToolsShowcase/index.js` import
-  + `iconWidth`/`iconHeight` updated; fake SVG deleted.
+  - `iconWidth`/`iconHeight` updated; fake SVG deleted.
 - **MEASURED:** 194 KB source / ~142 KB transferred → **6.9 KB** (−95%).
 
 ### 4. Harden the Lighthouse gate ✅ DONE
@@ -64,9 +64,13 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   suspends compositor animation in hidden tabs, so `document.hidden`
   wiring would buy ~0. Perf-motivated pause: **rejected on evidence**.
 - **SIDE FINDING:** `UpdateLayoutTree` burns 2.0–2.8 s per 6 s idle window
-  in *every* state (stars frozen included) — something else continuously
-  dirties layout at idle (`gradientShift`/marquee/IO churn are candidates).
-  Separate investigation if TBT becomes a priority.
+  in _every_ state (stars frozen included) — something else continuously
+  dirties layout at idle (marquee/IO churn remain candidates;
+  `gradientShift` was a suspect but is **resolved** — replaced by the
+  `gradientDrift` mixin, which crossfades a `::before` opacity clone
+  instead of animating `background-position`, so accent text is now
+  composited and no longer repaints each frame). Separate investigation
+  if TBT becomes a priority.
 - **REMAINING → DONE (a11y, not perf):** `StarField` spans now honor
   `prefers-reduced-motion: reduce` (`animation: none` — stars render
   static). Verified in prod build via Playwright media emulation.
@@ -113,7 +117,7 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   Newly written files are LF — the tree is mixed.
 - **SHIPPED:** `.gitattributes` (`* text=auto eol=lf`) + one-time worktree
   refresh (`git rm -r --cached .` + `git reset --hard`). `git ls-files
-  --eol` showed the index was already all-LF (autocrlf converted on commit)
+--eol` showed the index was already all-LF (autocrlf converted on commit)
   — only the 100 on-disk copies were CRLF — so **no renormalize commit was
   needed at all**. `format:check` is now green on Windows (was 54 flags).
 
@@ -180,13 +184,13 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Quick wins (≤1 day total, low regression risk)
 
-| # | Change | Saving |
-|---|---|---|
-| 1 | `preload="metadata"` | ~1.2 MB initial payload |
-| 3 | WebP for styled-components icon | ~135 KB |
-| 6 | Recompress social preview | ~600 KB per fetch |
-| 4 | `numberOfRuns: 3` + TBT assert | real regression gate |
-| 10 | `.gitattributes` eol=lf | kills CRLF false-failures |
+| #   | Change                          | Saving                    |
+| --- | ------------------------------- | ------------------------- |
+| 1   | `preload="metadata"`            | ~1.2 MB initial payload   |
+| 3   | WebP for styled-components icon | ~135 KB                   |
+| 6   | Recompress social preview       | ~600 KB per fetch         |
+| 4   | `numberOfRuns: 3` + TBT assert  | real regression gate      |
+| 10  | `.gitattributes` eol=lf         | kills CRLF false-failures |
 
 ## Do not change (verified good — regression risk of "improvement")
 

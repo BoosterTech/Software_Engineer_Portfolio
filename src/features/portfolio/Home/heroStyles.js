@@ -1,4 +1,4 @@
-import { forcedColorsText, gradientShift } from "common/animations";
+import { forcedColorsText, gradientDrift } from "common/animations";
 import { ScrollButton, Button } from "common/Button";
 import styled from "styled-components";
 
@@ -44,7 +44,10 @@ export const HeroTitle = styled.h1`
 `;
 
 export const GradientText = styled.span`
-  display: inline;
+  display: inline-block;
+  position: relative;
+  padding-block-end: 0.15em;
+  margin-block-end: -0.15em;
   background: linear-gradient(
     135deg,
     var(--color-text-secondary) 0%,
@@ -55,7 +58,7 @@ export const GradientText = styled.span`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
-  animation: ${gradientShift} 15s ease-in-out infinite;
+  ${gradientDrift}
   ${forcedColorsText}
 `;
 

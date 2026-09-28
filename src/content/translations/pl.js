@@ -1,7 +1,8 @@
 /** @type {import("../../types").TranslationSet} */
 export const pl = {
   home: {
-    contentHeader: "Inżynier Oprogramowania",
+    contentHeaderPlain: "Inżynier",
+    contentHeaderAccent: "Oprogramowania",
     contentHeaderTechStack:
       "< AI-Directed Engineering | Next.js • React • TypeScript • Produkcyjny SaaS />",
     welcomeLabel: "WITAJ W MOIM PORTFOLIO",
@@ -59,7 +60,8 @@ export const pl = {
   },
   about: {
     journeyLabel: "MOJA DROGA",
-    journeyHeader: "Od embedded do full-stack",
+    journeyHeaderPlain: "Od embedded",
+    journeyHeaderAccent: "do full-stack",
     journeyParagraph: `
 <p>Moja droga zaczęła się od elektroniki, systemów wbudowanych, C++ i OpenGL, zanim przerodziła się w nowoczesny rozwój webowy. Dziś buduję aplikacje produkcyjne z React, Next.js, TypeScript i Supabase. Łączę solidne fundamenty inżynierii oprogramowania ze wsparciem AI, tworząc skalowalne, wartościowe rozwiązania.</p>
       `,

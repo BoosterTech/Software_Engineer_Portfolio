@@ -187,7 +187,7 @@ const Navigation = () => {
         key={1}
         onClick={handleClick}
       >
-        <DevWrapper>
+        <DevWrapper data-text="Derek.dev">
           <span>Derek.dev</span>
         </DevWrapper>
       </Link>

@@ -52,7 +52,11 @@ export default defineConfig({
   base: "/Software_Engineer_Portfolio/",
   plugins: [jsxInJs, react()],
   resolve: { alias: srcAliases },
-  server: { port: 3000 },
+  server: {
+    port: 3000,
+    host: "localhost",
+    allowedHosts: [".ngrok-free.dev"],
+  },
   build: { outDir: "build" },
   optimizeDeps: {
     // index.html is the only real entry — lhci dumps localhost--*.report.html

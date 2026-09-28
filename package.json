@@ -9,11 +9,10 @@
     "react-dom": "18.2.0",
     "react-icons": "5.0.1",
     "react-scroll": "1.9.0",
-    "styled-components": "6.1.8"
+    "styled-components": "6.5.3"
   },
   "scripts": {
     "start": "vite",
-    "start:lan": "vite --host",
     "build": "vite build",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -29,7 +28,6 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
-
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "^9.39.5",

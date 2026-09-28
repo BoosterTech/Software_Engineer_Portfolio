@@ -1,3 +1,4 @@
+import { forcedColorsText, gradientDrift } from "common/animations";
 import Card from "common/Card";
 import RichText from "common/RichText";
 import { m } from "framer-motion";
@@ -62,6 +63,21 @@ export const PlainHeadingPart = styled.span`
 
 export const GradientHeadingPart = styled.span`
   display: inline-block;
+  position: relative;
+  padding-block-end: 0.15em;
+  margin-block-end: -0.15em;
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-primary) 50%,
+    var(--color-accent) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  ${gradientDrift}
+  ${forcedColorsText}
 `;
 
 export const JourneyParagraph = styled(RichText)`
