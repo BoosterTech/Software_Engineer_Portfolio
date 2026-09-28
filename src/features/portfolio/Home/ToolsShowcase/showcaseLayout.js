@@ -81,6 +81,10 @@ export const GradientWord = styled.span`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   ${gradientDrift}
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
+    display: block;
+  }
 `;
 
 export const SectionDescription = styled.p`

@@ -78,6 +78,10 @@ export const GradientHeadingPart = styled.span`
   background-size: 200% 200%;
   ${gradientDrift}
   ${forcedColorsText}
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
+    display: block;
+  }
 `;
 
 export const JourneyParagraph = styled(RichText)`
