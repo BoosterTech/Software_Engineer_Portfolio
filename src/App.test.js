@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { LanguageProvider } from "common/LanguageProvider";
 import { ThemeModeProvider } from "common/ThemeModeProvider";
-import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import App from "./App";
@@ -11,15 +10,15 @@ import { themes } from "./themes";
 beforeEach(() => {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
-    value: jest.fn().mockImplementation((query) => ({
+    value: vi.fn().mockImplementation((query) => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 });

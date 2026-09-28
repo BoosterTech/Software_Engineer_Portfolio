@@ -11,8 +11,8 @@ const activeDotIndex = () =>
 
 describe("Projects", () => {
   beforeEach(() => {
-    window.scrollTo = jest.fn();
-    window.HTMLElement.prototype.scrollTo = jest.fn();
+    window.scrollTo = vi.fn();
+    window.HTMLElement.prototype.scrollTo = vi.fn();
   });
 
   it("renders the section header and every project slide", () => {

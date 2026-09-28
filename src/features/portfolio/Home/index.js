@@ -26,8 +26,8 @@ import {
 import TalkingPortrait from "./TalkingPortrait";
 import { ToolsShowcase } from "./ToolsShowcase";
 
-const profileImage = `${process.env.PUBLIC_URL}/profileImage.webp`;
-const lightProfileImage = `${process.env.PUBLIC_URL}/light_theme_profile.webp`;
+const profileImage = `${import.meta.env.BASE_URL}profileImage.webp`;
+const lightProfileImage = `${import.meta.env.BASE_URL}light_theme_profile.webp`;
 
 const Home = ({ id }) => {
   const { home } = useContent();

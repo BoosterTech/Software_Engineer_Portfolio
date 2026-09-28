@@ -21,6 +21,8 @@ module.exports = {
     },
     upload: {
       target: "filesystem",
+      // Default ./ dumps localhost--*.report.html into the project root.
+      outputDir: ".lighthouseci",
     },
   },
 };

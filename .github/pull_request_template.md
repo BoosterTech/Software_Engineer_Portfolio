@@ -11,7 +11,7 @@
 ## Quality checks
 
 - [ ] `npm run lint` passes
-- [ ] `npm run test` passes
+- [ ] `npm run test:coverage` passes
 - [ ] `npm run check:circular` passes
 - [ ] `npm run size-check` passes
 - [ ] `npm run check:colors` passes

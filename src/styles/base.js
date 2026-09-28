@@ -53,7 +53,7 @@ export const base = css`
     right: 0;
     height: 100vh;
     height: 100lvh;
-    background-image: url(${process.env.PUBLIC_URL}/backgroundLight.webp);
+    background-image: url(${import.meta.env.BASE_URL}backgroundLight.webp);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -61,16 +61,16 @@ export const base = css`
   }
 
   [data-theme="dark"] body::before {
-    background-image: url(${process.env.PUBLIC_URL}/backgroundDark.webp);
+    background-image: url(${import.meta.env.BASE_URL}backgroundDark.webp);
   }
 
   @media (max-width: ${themes.breakpoint.lg}) {
     body::before {
-      background-image: url(${process.env.PUBLIC_URL}/backgroundLightMobile.webp);
+      background-image: url(${import.meta.env.BASE_URL}backgroundLightMobile.webp);
     }
 
     [data-theme="dark"] body::before {
-      background-image: url(${process.env.PUBLIC_URL}/backgroundDarkMobile.webp);
+      background-image: url(${import.meta.env.BASE_URL}backgroundDarkMobile.webp);
     }
   }
 

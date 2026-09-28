@@ -10,7 +10,7 @@ Hi, I'm Dariusz Podczasik.
 A Software Engineer focused on building modern web applications and AI-powered SaaS products.`,
     viewMyWork: "View My Work",
     viewCV: "View CV",
-    cvUrl: `${process.env.PUBLIC_URL}/cv.html`,
+    cvUrl: `${import.meta.env.BASE_URL}cv.html`,
     portraitAlt: "Portrait of Dariusz Podczasik",
     hearMeLabel: "Hear me — play a short video greeting",
     skillsetHeader: "My Technology Stack",

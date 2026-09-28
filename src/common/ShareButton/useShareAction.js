@@ -1,7 +1,7 @@
 import useContent from "common/useContent";
 import { useEffect, useRef, useState } from "react";
 
-const SHARE_URL = `${window.location.origin}${process.env.PUBLIC_URL}/`;
+const SHARE_URL = `${window.location.origin}${import.meta.env.BASE_URL}`;
 const FEEDBACK_MS = 2000;
 
 /**
@@ -66,7 +66,7 @@ const useShareAction = () => {
         if (isMobile) {
           try {
             const res = await fetch(
-              `${process.env.PUBLIC_URL}/social_preview.jpg`
+              `${import.meta.env.BASE_URL}social_preview.jpg`
             );
             const file = new File([await res.blob()], "preview.jpg", {
               type: "image/jpeg",

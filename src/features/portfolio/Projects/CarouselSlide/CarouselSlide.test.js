@@ -91,7 +91,7 @@ describe("CarouselSlide", () => {
   });
 
   it("calls onExpand when active slide is clicked", () => {
-    const onExpand = jest.fn();
+    const onExpand = vi.fn();
     renderWithProviders(
       <CarouselSlide
         project={baseProject}
@@ -107,7 +107,7 @@ describe("CarouselSlide", () => {
   });
 
   it("calls onClick when inactive slide is clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     renderWithProviders(
       <CarouselSlide
         project={baseProject}
@@ -123,7 +123,7 @@ describe("CarouselSlide", () => {
   });
 
   it("calls onExpand when the details button is activated", () => {
-    const onExpand = jest.fn();
+    const onExpand = vi.fn();
     renderWithProviders(
       <CarouselSlide
         project={baseProject}

@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, feature/ui-refresh]
+    branches: [main]
   pull_request:
     branches: [main]
 

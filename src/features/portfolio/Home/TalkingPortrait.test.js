@@ -7,10 +7,10 @@ describe("TalkingPortrait", () => {
   let pauseSpy;
 
   beforeEach(() => {
-    playSpy = jest
+    playSpy = vi
       .spyOn(window.HTMLMediaElement.prototype, "play")
       .mockResolvedValue(undefined);
-    pauseSpy = jest
+    pauseSpy = vi
       .spyOn(window.HTMLMediaElement.prototype, "pause")
       .mockImplementation(() => {});
   });
