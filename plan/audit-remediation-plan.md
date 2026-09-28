@@ -30,6 +30,9 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
   real exposure is the CI/dev machines running the toolchain.
 - **FIX:** no forced fixes. Track as strategic debt (item 11). CI already
   pins via `npm ci`.
+- **POST-MIGRATION UPDATE:** removing `react-scripts` dropped findings
+  **38 → 12**; the remainder live in `@lhci/cli`/`playwright`/`madge`
+  chains — still dev-only, still unforced.
 
 ## Next (P2)
 
@@ -209,4 +212,7 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
    `prefers-reduced-motion` a11y fix remains worthwhile.
 5. ~~P3 batch (7–11)~~ ✅ DONE — item 10 resolved via `.gitattributes` +
    worktree refresh (index was already LF; no renormalize commit needed).
-6. Strategic items (12–13) — roadmap discussion, not now.
+6. ~~Strategic items (12–13)~~ ✅ DONE — axe-core scans shipped (item 13,
+   five states, zero violations) and the CRA → Vite + Vitest migration
+   shipped (item 12: audit 38 → 12, build ~15s → ~0.7s, tests ~61s → ~26s,
+   Lighthouse perf 0.70 → 0.94).

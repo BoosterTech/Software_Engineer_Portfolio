@@ -45,9 +45,9 @@ This document records the major architectural decisions in the `feature/ui-refre
 ### Decision: Add Playwright E2E tests for critical user paths
 
 - **What:** `playwright.config.js` runs Chromium against `http://localhost:3100` (dedicated e2e port — the dev server owns 3000 via `server.port`), with `e2e/portfolio.spec.js` covering the critical paths (scroll nav, language switch, theme toggle, carousel, modal focus trap, mobile menu) and `e2e/accessibility.spec.js` running axe-core WCAG scans. `npm run test:e2e` and `npm run test:e2e:ui` are available in `package.json`. CI installs Playwright browsers and runs `test:e2e` after the build step.
-- **Why:** These paths are the most likely to be silently broken by AI-led refactors: fixed slugs are tied to `react-scroll`, i18n is client-side, dark mode relies on `document.documentElement` manipulation, and the carousel depends on active-index state transitions. Playwright catches them faster than Jest alone.
+- **Why:** These paths are the most likely to be silently broken by AI-led refactors: fixed slugs are tied to `react-scroll`, i18n is client-side, dark mode relies on `document.documentElement` manipulation, and the carousel depends on active-index state transitions. Playwright catches them faster than unit tests alone.
 - **Trade-offs:** Playwright adds a dev dependency and a Chromium download; CI must build and serve the app before running tests. The `test:e2e` script assumes `build/` exists, so CI runs `npm run build` first. E2E adds ~30–60s to CI runtime.
-- **Future guidance:** Add more E2E scenarios only when they are cheaper to maintain in Playwright than in Jest. Keep the E2E suite under 60 seconds. Only Chromium is tested in CI (no Firefox/WebKit).
+- **Future guidance:** Add more E2E scenarios only when they are cheaper to maintain in Playwright than in the Vitest suite. Keep the E2E suite under 60 seconds. Only Chromium is tested in CI (no Firefox/WebKit).
 
 ### Decision: Reduce `src/themes.js` to breakpoints only
 

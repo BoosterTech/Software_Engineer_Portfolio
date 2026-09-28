@@ -29,7 +29,7 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 2. **300-line cap per source file.** `projects.js` is exempt (data). `npm run size-check`.
 3. **No circular imports.** `npm run check:circular`.
 4. **Import order + absolute imports.** `baseUrl: src`; never `../` parent imports.
-5. **Tests must stay green.** `npm run test:coverage` (CI=true) — 70% floor on
+5. **Tests must stay green.** `npm run test:coverage` — 70% floor on
    branches/functions/lines/statements, enforced in CI (`ci.yml`).
 
 ## Styling conventions
@@ -99,7 +99,7 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
   `src/common/ThemeModeProvider`. The provider owns `data-theme` on `<html>` and
   `localStorage.theme` — components must never read or write the DOM attr
   directly (the old `MutationObserver` in Home was removed for exactly this).
-  `public/index.html` carries an inline bootstrap that applies `data-theme`
+  The root `index.html` carries an inline bootstrap that applies `data-theme`
   before first paint — keep it in sync with the provider's init logic.
 
 ## Navigation
