@@ -69,7 +69,7 @@ export const Header = styled.h2`
   @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
     transform: ${({ $lang }) =>
       $lang === "English"
-        ? "translateX(3px)"
+        ? "translateX(0px)"
         : $lang === "Polish"
           ? "translateX(1px)"
           : "none"};
