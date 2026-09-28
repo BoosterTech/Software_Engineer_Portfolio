@@ -11,12 +11,41 @@ export const forcedColorsText = css`
   }
 `;
 
-export const gradientShift = keyframes`
+export const gradientFade = keyframes`
   0%, 100% {
-    background-position: 0% 50%;
+    opacity: 0;
   }
   50% {
+    opacity: 1;
+  }
+`;
+
+// Composited gradient-text drift: the element's own gradient stays pinned
+// at position 0%; the ::before clones the same text (data-text attr) and
+// gradient (background: inherit) at position 100%, and only its opacity
+// animates — GPU-composited, no per-frame text repaint. `content: / ""`
+// keeps the clone out of the a11y tree; forced-colors drops it entirely
+// since backgrounds are stripped there. Element needs non-static position
+// and a data-text attribute matching its rendered text.
+export const gradientDrift = css`
+  background-position: 0% 50%;
+
+  &::before {
+    content: attr(data-text) / "";
+    position: absolute;
+    inset: 0;
+    padding: inherit;
+    background: inherit;
     background-position: 100% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    opacity: 0;
+    animation: ${gradientFade} 15s ease-in-out infinite;
+    pointer-events: none;
+
+    @media (forced-colors: active) {
+      content: none;
+    }
   }
 `;
 

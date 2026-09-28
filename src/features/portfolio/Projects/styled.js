@@ -2,7 +2,7 @@ import {
   fadeInUp,
   float,
   forcedColorsText,
-  gradientShift,
+  gradientDrift,
 } from "common/animations";
 import { m } from "framer-motion";
 import styled from "styled-components";
@@ -59,7 +59,7 @@ export const Header = styled.h2`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
-  animation: ${gradientShift} 15s ease-in-out infinite;
+  ${gradientDrift}
   ${forcedColorsText}
 
   @media (max-width: ${({ theme }) => theme.breakpoint.xl}) {

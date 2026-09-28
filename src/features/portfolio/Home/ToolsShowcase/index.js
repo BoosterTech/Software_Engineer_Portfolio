@@ -79,8 +79,8 @@ const orbitTechnologies = [
     id: "styled",
     name: "Styled Components",
     icon: styledComponentsIcon,
-    iconWidth: 200,
-    iconHeight: 200,
+    iconWidth: 128,
+    iconHeight: 128,
   },
   {
     id: "supabase",
@@ -162,7 +162,9 @@ export const ToolsShowcase = () => {
           </SectionLabel>
           <SectionTitle>
             <PlainTitlePart>{showcase.titlePlain}</PlainTitlePart>{" "}
-            <GradientWord>{showcase.titleAccent}</GradientWord>
+            <GradientWord data-text={showcase.titleAccent}>
+              {showcase.titleAccent}
+            </GradientWord>
           </SectionTitle>
           <SectionDescription>{showcase.description}</SectionDescription>
 

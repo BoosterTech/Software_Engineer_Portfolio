@@ -1,4 +1,4 @@
-import { fadeInUp, forcedColorsText, gradientShift } from "common/animations";
+import { fadeInUp, forcedColorsText, gradientDrift } from "common/animations";
 import Card from "common/Card";
 import styled from "styled-components";
 
@@ -116,6 +116,8 @@ export const Header = styled.h2`
   z-index: 1;
 
   span {
+    display: inline-block;
+    position: relative;
     background: linear-gradient(
       135deg,
       var(--color-text-secondary) 0%,
@@ -126,7 +128,7 @@ export const Header = styled.h2`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
-    animation: ${gradientShift} 15s ease-in-out infinite;
+    ${gradientDrift}
     ${forcedColorsText}
   }
 
