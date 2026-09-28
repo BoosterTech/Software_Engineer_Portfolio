@@ -1,5 +1,5 @@
 // Scratch: identify the dark-theme contrast violators axe flagged.
-const { chromium } = require("playwright");
+const { chromium } = require("@playwright/test");
 const { AxeBuilder } = require("@axe-core/playwright");
 
 (async () => {

@@ -217,6 +217,9 @@ barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
   workaround died with react-scripts; installs resolve strictly now.)
 - Quality-gate tools are pinned devDeps (`prettier`, `@lhci/cli`);
   `depcheck` stays CI-only via `npx --yes depcheck@<pinned>` in `ci.yml`.
+- Never run `npm audit fix --force` — the remaining advisories are dev-only
+  transitives of `@lhci/cli` (already latest); force downgrades it to 0.1.0
+  and the install dies on a missing `master` git ref anyway
 
 ## Commits
 
