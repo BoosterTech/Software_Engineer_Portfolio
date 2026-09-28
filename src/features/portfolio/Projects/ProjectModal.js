@@ -65,8 +65,7 @@ const ProjectModal = ({
   useEffect(() => {
     if (!project) return;
 
-    // WebKit/Safari never focuses <button> on click, so activeElement here is
-    // body — the caller passes the real trigger element via returnFocusRef.
+    // WebKit never focuses <button> on click (activeElement is body) — caller passes the trigger via returnFocusRef
     const trigger = returnFocusRef?.current ?? document.activeElement;
     const scrollY = window.scrollY;
 

@@ -7,9 +7,18 @@ Findings are evidence-based; severities follow the audit scale
 
 **Verdict summary:** migration is complete and correct — zero CRA residue in
 source, deploy chain consistent (`outDir: build` ↔ `gh-pages -d build`), all
-gates green (80 unit tests, 17 E2E incl. 5 axe WCAG scans, lint/format/size/
-colors/circular/build/bundle, Lighthouse CI assertions). **No P0/P1 items.**
-Everything below is hygiene or hardening.
+gates green (80 unit tests, 34 E2E on Chromium + WebKit incl. 5 axe WCAG
+scans, lint/format/size/colors/circular/build/bundle, Lighthouse CI
+assertions). **No P0/P1 items.** Everything below is hygiene or hardening.
+
+**Post-ship CI findings** (caught after all nine items landed — both trivial):
+
+- `depcheck` flagged `require("playwright")` in `scripts/probes/
+axe-contrast.js` — bare `playwright` is not a declared dep; switched to
+  `@playwright/test` (re-exports `chromium`, same as the other probes).
+- `size-check` failed on `ProjectModal.js` at 301 lines — the `returnFocusRef`
+  fix tipped it over the 300 cap; reclaimed one comment line. The file sits
+  exactly at the limit — see AGENTS.md for the extract-don't-grow rule.
 
 ## Immediate (P0/P1)
 

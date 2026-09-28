@@ -31,6 +31,9 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
    Allowlist: `styles/tokens.js`, `contactIcons.js`, `common/animations.js`.
    Verified by `npm run check:colors`.
 2. **300-line cap per source file.** `projects.js` is exempt (data). `npm run size-check`.
+   `ProjectModal.js` sits exactly at the cap — the next functional addition
+   must extract a piece (e.g. the keydown/focus-trap effect) instead of
+   growing it.
 3. **No circular imports.** `npm run check:circular`.
 4. **Import order + absolute imports.** `baseUrl: src`; never `../` parent imports.
 5. **Tests must stay green.** `npm run test:coverage` — 70% floor on
