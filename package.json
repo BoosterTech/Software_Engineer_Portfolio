@@ -13,7 +13,6 @@
   },
   "scripts": {
     "start": "vite",
-    "start:lan": "vite --host",
     "build": "vite build",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
