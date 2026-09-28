@@ -25,6 +25,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 ## 🛠️ Technologies Used
 
 - **Front-End**: React 18, React DOM
+- **Tooling**: Vite 8 (rolldown), Vitest
 - **State Management**: React Context (`LanguageProvider`, `ThemeModeProvider`)
 - **Styling**: styled-components, CSS custom properties, CSS Grid, CSS Flexbox, keyframe animations
 - **Navigation**: react-scroll
@@ -33,7 +34,7 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - **Deployment**: gh-pages
 - **Image Optimization**: WebP assets, `loading="lazy"` on below-the-fold images
 - **E2E Testing**: Playwright (17 tests: scroll nav, language switch, dark mode, carousel arrows/dots, modal focus trap + arrow nav, mobile menu open/close + Escape dismiss, backdrop dismiss, mobile share row, plus axe-core WCAG scans of key states in both themes)
-- **Quality & CI**: ESLint, Prettier, Jest, Playwright, GitHub Actions
+- **Quality & CI**: ESLint, Prettier, Vitest, Playwright, GitHub Actions
 - **Build-time Guardrails**: `size-check`, `format:check`, `lint`, `bundle:check`, `test:coverage`, `lighthouse:check`, `check:colors`, `check:circular`, `test:e2e`
 
 ---
@@ -50,8 +51,8 @@ Check out my portfolio: [Derek.dev](https://boostertech.github.io/Software_Engin
 - Circular-dependency guard: `npm run check:circular` (via `madge`) runs in CI and fails the build if any import cycles are introduced.
 - Bundle-impact gate: PR template requires `npm run build && npm run bundle:check` and confirmation that the total gzipped bundle stays under the 250 KB budget.
 - Fixed section slugs: `home`, `about`, `projects`, `contact` are used for `react-scroll` anchors in all languages.
-- Quality gates: `npm run test:coverage` enforces the 70% Jest coverage thresholds in CI (80 tests across 13 suites), `npm run test:e2e` runs 17 Playwright E2E tests against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the budgets in `.lighthouserc.js` — median of 3 runs, asserting LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, total byte weight ≤ 400 KiB, and performance score ≥ 0.5.
-- Performance: Framer Motion loads via `LazyMotion` with an async `domMax` feature bundle (use `m.*`, never `motion.*`); the hero portrait is media-scoped preloaded in `public/index.html`; the talking-portrait video stays at `preload="metadata"` so its ~1.2 MB MP4 only downloads on tap; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
+- Quality gates: `npm run test:coverage` enforces the 70% Vitest coverage thresholds in CI (80 tests across 13 suites), `npm run test:e2e` runs 17 Playwright E2E tests against the production `build/` served on port 3100 by `scripts/serve-e2e.js` (requires `npm run build` first), and `npm run lighthouse:check` audits the production build against the budgets in `.lighthouserc.js` — median of 3 runs, asserting LCP ≤ 4s, CLS ≤ 0.1, TBT ≤ 2.6s, total byte weight ≤ 400 KiB, and performance score ≥ 0.5.
+- Performance: Framer Motion loads via `LazyMotion` with an async `domMax` feature bundle (use `m.*`, never `motion.*`); the hero portrait is media-scoped preloaded in `index.html`; the talking-portrait video stays at `preload="metadata"` so its ~1.2 MB MP4 only downloads on tap; all raster assets are WebP sized ~2x their max render size; sourcemaps are stripped at deploy time by `scripts/remove-maps.js`. (`content-visibility` on section roots was removed — it caused verified first-click anchor drift.) See `plan/performance-optimization-plan.md`.
 
 ---
 

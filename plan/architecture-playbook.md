@@ -6,12 +6,12 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ## 1. Build & Runtime Environment
 
-### Decision: Use Create React App (CRA) with React 18
+### Decision: Vite 8 (rolldown) + Vitest with React 18
 
-- **What:** `react-scripts@5.0.1`, React 18.2.0, React-DOM client root in `src/index.js`.
-- **Why:** The portfolio is a static, single-page site with no need for SSR or SSG. CRA provides a familiar, zero-config build pipeline and is easy to deploy to GitHub Pages.
-- **Trade-offs:** Larger bundle and slower startup than Vite; `react-router` was removed after the audit confirmed it was unused; no eject performed.
-- **Future guidance:** If SEO, SSG, or performance become priorities, evaluate Vite or Next.js before the next major rewrite.
+- **What:** `vite@8.3.0` + `@vitejs/plugin-react`, `vitest@5` (jsdom, v8 coverage), React 18.2.0, React-DOM client root in `src/index.js`. Root `index.html` is the Vite entry; `public/` is copied verbatim to `build/`.
+- **Why:** Supersedes CRA — `react-scripts@5.0.1` is frozen upstream and anchored most npm-audit findings (38 → 12 after the migration). Vite builds in ~0.7s vs ~15s and Vitest runs the suite in ~26s vs ~61s. Measured improvement on the same code: Lighthouse perf 0.70 → 0.94, TBT ~1.4s → ~215ms.
+- **Migration notes:** `process.env.PUBLIC_URL` → `import.meta.env.BASE_URL` (includes the trailing `/`, so `BASE_URL + "x"` not `BASE_URL + "/x"`). The GitHub Pages base is `base: "/Software_Engineer_Portfolio/"` in `vite.config.mjs`; `lighthouse:check` rebuilds with `--base=./` so lhci's root-served `build/` resolves assets. JSX lives in `.js` files — a `transformWithOxc` pre-plugin in `vite.config.mjs` handles it (rolldown's parser rejects JSX in `.js`); bare `src/` specifiers resolve via generated `resolve.alias` entries (needed for Vitest too, which doesn't consult `resolveId` plugins). `jest.*` → `vi.*` (globals: true).
+- **Future guidance:** If SEO or SSG become priorities, evaluate Next.js. The remaining audit findings live in tooling deps (playwright/lhci/madge chains) — revisit when they publish fixes.
 
 ---
 
@@ -44,7 +44,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: Add Playwright E2E tests for critical user paths
 
-- **What:** `playwright.config.js` runs Chromium against `http://localhost:3100` (dedicated e2e port — 3000 belongs to the dev server), with `e2e/portfolio.spec.js` covering 5 critical paths: `react-scroll` navigation to the About section, language switching to Polish, dark-mode toggling, carousel next-button navigation, and carousel dot-click navigation. `npm run test:e2e` and `npm run test:e2e:ui` are available in `package.json`. CI installs Playwright browsers and runs `test:e2e` after the build step.
+- **What:** `playwright.config.js` runs Chromium against `http://localhost:3100` (dedicated e2e port — the dev server owns 3000 via `server.port`), with `e2e/portfolio.spec.js` covering the critical paths (scroll nav, language switch, theme toggle, carousel, modal focus trap, mobile menu) and `e2e/accessibility.spec.js` running axe-core WCAG scans. `npm run test:e2e` and `npm run test:e2e:ui` are available in `package.json`. CI installs Playwright browsers and runs `test:e2e` after the build step.
 - **Why:** These paths are the most likely to be silently broken by AI-led refactors: fixed slugs are tied to `react-scroll`, i18n is client-side, dark mode relies on `document.documentElement` manipulation, and the carousel depends on active-index state transitions. Playwright catches them faster than Jest alone.
 - **Trade-offs:** Playwright adds a dev dependency and a Chromium download; CI must build and serve the app before running tests. The `test:e2e` script assumes `build/` exists, so CI runs `npm run build` first. E2E adds ~30–60s to CI runtime.
 - **Future guidance:** Add more E2E scenarios only when they are cheaper to maintain in Playwright than in Jest. Keep the E2E suite under 60 seconds. Only Chromium is tested in CI (no Firefox/WebKit).
@@ -94,7 +94,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 - **What:** Reusable controls such as `Navigation`, `DarkModeToggle`, `LanguageSwitch`, and shared `animations.js` live in `src/common/`. Page sections live in `src/features/portfolio/<Section>/` with `index.js` for logic and `styled.js` for styles.
 - **Why:** Styles are co-located with components; `App.js` becomes a flat composer of sections; the structure mirrors Feature-Sliced Design conventions.
 - **Trade-offs:** For a one-page portfolio, `features/portfolio` is one feature with nested sub-folders, creating deep relative imports such as `../../../common/animations`.
-- **Future guidance:** For a single-page site, `src/sections/` may be flatter. If more features are added, keep `features/` and consider path aliases (CRA requires eject or a custom Webpack setup for aliases).
+- **Future guidance:** For a single-page site, `src/sections/` may be flatter. If more features are added, keep `features/`; bare `src/` specifiers are already aliased via `resolve.alias` in `vite.config.mjs`.
 
 ### Decision: `App.js` as a section composer
 
@@ -156,7 +156,7 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 - **What:** `package.json` declares `"homepage": "https://boostertech.github.io/Front-End-Dev-Portfolio/"`. `npm run deploy` runs `gh-pages -d build` after `npm run build`.
 - **Why:** Free, version-controlled hosting with a single npm script deployment.
-- **Trade-offs:** Client-side routing is not supported; all assets must be referenced through `%PUBLIC_URL%` or relative paths; `public/index.html` metadata is static.
+- **Trade-offs:** Client-side routing is not supported; all assets must be referenced through `import.meta.env.BASE_URL` or `./` relative paths; `index.html` metadata is static.
 - **Future guidance:** Before each deploy, confirm the `homepage` value. If a custom domain is added, place a `CNAME` file in `public/`.
 
 ---
@@ -196,7 +196,7 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: Run `depcheck` in CI and document every flag
 
-- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck` after `npm ci`. A `.depcheckrc` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages, `eslint-config-react-app` and `@babel/plugin-proposal-private-property-in-object` are provided by `react-scripts`, and `@testing-library/user-event` is kept for future interaction tests.
+- **What:** `.github/workflows/ci.yml` runs `npx --yes depcheck` after `npm ci`. A `.depcheckrc` file records which flagged items are intentional: jsconfig `baseUrl` aliases are not npm packages and `typescript` is a `madge` runtime peer (`detective-typescript` `require()`s it).
 - **Why:** Unused dependencies are the fastest way for a small project to become heavy. `depcheck` turns dependency cleanup from a manual chore into a CI-enforced rule and forces a one-line justification for every package that is kept despite not being imported.
 - **Trade-offs:** `npx --yes depcheck` downloads the package on every CI run. Pinning `depcheck` to `devDependencies` could be added later if install time or reproducibility becomes an issue.
 - **Future guidance:** Do not add a dependency without importing it or documenting why it is kept. Remove anything `depcheck` flags unless the `.depcheckrc` comment is defensible.
@@ -205,7 +205,7 @@ When adding or changing anything, prefer the following order:
 
 - **What:** `madge` is a devDependency. `npm run check:circular` runs `scripts/check-circular.js`, which uses the `madge` API to scan `src/` for cycles and exits with code 1 if any are found. `.github/workflows/ci.yml` runs `npm run check:circular` immediately after `npx --yes depcheck`.
 - **Why:** Circular imports are the most common source of silent module-initialization bugs. A dedicated check catches them before they reach `npm run build`.
-- **Trade-offs:** `madge@8` has a `typescript` peer-dependency conflict with the `typescript@4.9.5` brought in by `react-scripts`, so it was installed with `--legacy-peer-deps`. `madge` resolves `jsconfig` `baseUrl` aliases only with extra configuration, but relative-path cycles are still caught reliably.
+- **Trade-offs:** `madge` resolves `jsconfig` `baseUrl` aliases only with extra configuration, but relative-path cycles are still caught reliably. (The old `--legacy-peer-deps` requirement died with `react-scripts` — madge's `typescript` peer is now satisfied by the pinned `typescript@5.9.3`; `.npmrc` was removed.)
 - **Future guidance:** If `madge` misses cycles involving `common/` aliases, add a `webpackConfig` or `requireConfig` option to `scripts/check-circular.js`, or migrate to `dependency-cruiser` with a matching `.dependency-cruiser.js` config.
 
 ### Decision: Tighten bundle-size budget to 350 KB
@@ -235,14 +235,14 @@ When adding or changing anything, prefer the following order:
 
 ### Decision: `test:coverage` with a 70% threshold
 
-- **What:** `package.json` has a `test:coverage` script (`react-scripts test --coverage --watchAll=false`) and a `jest.coverageThreshold` of 70% across branches, functions, lines, and statements. The project has 7 test suites with 22 tests covering Navigation, LanguageSwitch, Contact, RichText, CarouselSlide, translations parity, and the App smoke test.
+- **What:** `package.json` has a `test:coverage` script (`vitest run --coverage`) and v8 `coverage.thresholds` of 70% across branches, functions, lines, and statements in `vite.config.mjs`. The project has 13 suites with 80 tests covering providers, share action, scroll spy, carousel/modal, translations parity, and the App smoke test.
 - **Why:** A 70% floor forces test coverage growth alongside new code. The previous 50% threshold was too lenient to catch regressions.
 - **Trade-offs:** 70% is still not 100%; some branches in OrbitSection and Projects/index.js remain uncovered. Full coverage is not the goal for a static portfolio.
 - **Future guidance:** Re-run `npm run test:coverage` after any new component or test. Raise the threshold only when the new value is stable across several runs.
 
 ### Decision: Add Lighthouse CI with performance budgets
 
-- **What:** `.lighthouserc.js` configures `@lhci/cli` to serve `build/` and assert five error-level budgets: `largest-contentful-paint <= 4000 ms`, `cumulative-layout-shift <= 0.1`, `total-blocking-time <= 2600 ms`, `total-byte-weight <= 400 KiB`, `categories:performance >= 0.5` — each over a median of `numberOfRuns: 3` (single-run metrics swing ±20%, so the median stops noise from flapping the gate). `npm run lighthouse:check` rebuilds with `PUBLIC_URL=.` so assets resolve from the build root, then runs `lhci autorun`. The CI step in `.github/workflows/ci.yml` is blocking (`continue-on-error` removed).
+- **What:** `.lighthouserc.js` configures `@lhci/cli` to serve `build/` and assert five error-level budgets: `largest-contentful-paint <= 4000 ms`, `cumulative-layout-shift <= 0.1`, `total-blocking-time <= 2600 ms`, `total-byte-weight <= 400 KiB`, `categories:performance >= 0.5` — each over a median of `numberOfRuns: 3` (single-run metrics swing ±20%, so the median stops noise from flapping the gate). `npm run lighthouse:check` rebuilds with `vite build --base=./` so assets resolve from the build root, then runs `lhci autorun`. The CI step in `.github/workflows/ci.yml` is blocking (`continue-on-error` removed).
 - **Why:** A portfolio is judged on speed and visual stability. A numeric, automated budget is cheaper than manual Lighthouse runs and catches regressions early — TBT and byte-weight assertions specifically guard against heavy JS/asset creep, which the LCP-only gate could not see. Making it blocking means PRs that violate the budget cannot merge.
 - **Trade-offs:** Headless CI runs vary run-to-run; the median-of-3 absorbs most of it, at ~3× the collect time. The sensor ceilings sit deliberately above measured baselines (~1.4s TBT, ~244 KiB) — they catch regressions, not noise. If the check still becomes flaky, re-enable `continue-on-error` temporarily rather than loosening thresholds.
 - **Future guidance:** Do not raise the numeric thresholds to make the check pass. If a metric regresses, investigate the offending asset (likely a large image/video or heavier dependency) rather than relaxing the budget.

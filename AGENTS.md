@@ -5,9 +5,9 @@ Read this before generating code.
 
 ## What this is
 
-Personal portfolio SPA ("Derek.dev") — React 18, Create React App, styled-components,
-Framer Motion. Static site deployed to GitHub Pages. No backend, no API layer, no
-auth, no database, no state library. Keep it that way.
+Personal portfolio SPA ("Derek.dev") — React 18, Vite 8 (rolldown) + Vitest,
+styled-components, Framer Motion. Static site deployed to GitHub Pages. No
+backend, no API layer, no auth, no database, no state library. Keep it that way.
 
 ## Structure
 
@@ -59,12 +59,13 @@ auth, no database, no state library. Keep it that way.
 - Raster images: WebP only, sized ~2x their max render dimensions; keep
   `width`/`height` attrs in sync with intrinsic dims (CLS guard)
 - LCP-critical images are preloaded by the inline theme-bootstrap script in
-  `public/index.html` — media-scoped `<link rel="preload">`s can't see
+  the root `index.html` — media-scoped `<link rel="preload">`s can't see
   `localStorage.theme`, so the script injects the `<link>` for whichever
   portrait the resolved theme will render (prevents unused-preload fetches
   when the saved theme differs from `prefers-color-scheme`). The preload
-  `href` and the `<img>` `src` must resolve to the identical URL (both
-  `PUBLIC_URL`-based) or the browser fetches twice
+  `href` (`./`-relative in the bootstrap) and the `<img>` `src`
+  (`import.meta.env.BASE_URL`-based) must resolve to the identical URL or
+  the browser fetches twice
 - No webfonts via CSS `@import` inside `createGlobalStyle` — styled-components
   can't hoist it and browsers ignore it. (Measured: a real Inter `<link>` cost
   ~1s LCP under throttle → rejected; system stack is intentional)
@@ -127,8 +128,9 @@ auth, no database, no state library. Keep it that way.
 
 ## Testing
 
-- React Testing Library + `renderWithProviders` from `src/test-utils.js`
-  (options: `initialLanguage`, `initialIsDark`)
+- Vitest + React Testing Library + `renderWithProviders` from `src/test-utils.js`
+  (options: `initialLanguage`, `initialIsDark`). `globals: true` is on — `describe`/
+  `it`/`expect` are ambient; use `vi.*` for mocks/spies (never `jest.*`)
 - `setupTests.js` mocks `matchMedia` (default `matches: false`), `IntersectionObserver`,
   `ResizeObserver` — override per-test via `Object.defineProperty(window, "matchMedia", …)`
 - `testing-library/no-node-access` is enforced: no `.closest()`, `.parentElement`,
@@ -144,6 +146,10 @@ auth, no database, no state library. Keep it that way.
   server); it serves `build/` and strips the `/Software_Engineer_Portfolio`
   prefix. Do not substitute `serve -s build` — it has no prefix rewrite, so
   asset requests fall back to `index.html` and the app never mounts
+- `npm start` binds localhost only. `npm run start:lan` adds `--host` so
+  phones/other devices on the same Wi-Fi can open the printed Network URL —
+  use it only on trusted networks, and never tunnel the dev server to the
+  public internet (deploy a preview instead)
 - E2E waits must be condition-based — `expect.poll`, `toHaveAttribute`,
   `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
   `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
@@ -158,7 +164,7 @@ auth, no database, no state library. Keep it that way.
 ## Verify before committing
 
 ```
-npm run test:coverage  # CI=true, all green + 70% floors
+npm run test:coverage  # all green + 70% floors (vitest run --coverage)
 npm run lint
 npm run format:check
 npm run check:colors
@@ -176,11 +182,10 @@ barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
 
 ## Dependency installs
 
-- `.npmrc` sets `legacy-peer-deps=true` — required: react-scripts 5's
-  `peerOptional typescript@^4` conflicts with madge's `peerOptional ^5.4.4`
-  (no single version satisfies both). `typescript@5.9.3` is a pinned devDep —
-  keep it root-hoisted: madge's `detective-typescript` `require()`s it.
-- Quality-gate tools are pinned devDeps (`prettier`, `@lhci/cli`, `cross-env`);
+- `typescript@5.9.3` is a pinned devDep — keep it root-hoisted: madge's
+  `detective-typescript` `require()`s it. (The old `.npmrc` `legacy-peer-deps`
+  workaround died with react-scripts; installs resolve strictly now.)
+- Quality-gate tools are pinned devDeps (`prettier`, `@lhci/cli`);
   `depcheck` stays CI-only via `npx --yes depcheck@<pinned>` in `ci.yml`.
 
 ## Commits

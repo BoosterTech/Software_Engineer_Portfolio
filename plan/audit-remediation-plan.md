@@ -124,18 +124,33 @@ LCP 3.0 s, TBT 1,640 ms, CLS 0, total bytes ~1,593 KiB, bundle 157.3 KB gz.
 
 ## Optional / Strategic
 
-### 12. CRA → Vite (or equivalent) toolchain migration
+### 12. CRA → Vite toolchain migration — ✅ SHIPPED
 
-- **Limitation today:** `react-scripts@5.0.1` is frozen upstream; it anchors
-  most of the 38 audit findings and the ejected-config debt never shrinks.
-- **Benefit:** retires most transitive vulns, faster builds, modern plugins.
-- **Cost:** moderate — config port, jest→vitest decision, `%PUBLIC_URL%`
-  handling, `scripts/*` and Lighthouse/E2E wiring re-verification.
-- **Risk:** low for a static SPA; biggest detail is preserving the
-  `PUBLIC_URL=/Software_Engineer_Portfolio` deploy behavior and the
-  `serve-e2e.js` prefix strip.
-- **Verdict:** schedule when convenient — current setup is functional and
-  all gates are green; this is not urgent.
+- `react-scripts` removed → `vite@8.3.0` + `@vitejs/plugin-react@6.1.1`,
+  `vitest@5.0.1` + `@vitest/coverage-v8@5.0.1` (jsdom@29, `globals: true`,
+  `vi.*` API). npm audit findings dropped **38 → 12**; build ~15s → ~0.7s;
+  unit suite ~61s → ~26s; Lighthouse perf 0.70 → 0.94, TBT ~1.4s → ~215ms.
+- Ports: `process.env.PUBLIC_URL` → `import.meta.env.BASE_URL`; `%PUBLIC_URL%`
+  → `./` relative paths in the root `index.html` (GitHub Pages base lives in
+  `vite.config.mjs` as `base: "/Software_Engineer_Portfolio/"`; output stays
+  `build/` so `serve-e2e.js` and `gh-pages -d build` are unchanged).
+- Jest → Vitest: `jest.*` → `vi.*`, `@testing-library/jest-dom` →
+  `/vitest` entry, coverage thresholds moved to `vite.config.mjs`,
+  `testTimeout: 30s` (LazyMotion's async feature bundle is slow under
+  v8 instrumentation). `.eslintrc.js`/`eslintConfig` → flat
+  `eslint.config.js`; react-app-only rules (`prop-types`, export-map
+  `import/*` rules that need a tsconfig) disabled; new react-hooks
+  compiler-era rules caught and fixed two real smells
+  (`directionRef`-read-in-render → state, `useMediaQuery` →
+  `useSyncExternalStore`). `cross-env` and `.npmrc` `legacy-peer-deps`
+  removed — the peer conflict died with react-scripts.
+- JSX-in-`.js`: rolldown rejects it — `vite.config.mjs` carries a
+  `transformWithOxc` pre-plugin scoped to `src/*.js` (Windows path
+  normalization required — ids arrive backslashed).
+- Bundle: 167.7 KB gzip single chunk (limit 250 KB). Rolldown warns that
+  `framer-motion` is statically + dynamically imported so the dynamic
+  `LazyMotion` features import can't split — accepted: LazyMotion semantics
+  are preserved and the budget is met.
 
 ### 13. axe-core in tests — ✅ SHIPPED
 
