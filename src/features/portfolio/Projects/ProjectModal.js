@@ -48,15 +48,15 @@ const ProjectModal = ({
   const modalRef = useRef(null);
   const scrollRef = useRef(null);
   const closeButtonRef = useRef(null);
-  const directionRef = useRef(0);
+  const [direction, setDirection] = useState(0);
   const [loadedSrc, setLoadedSrc] = useState(null);
 
   const goPrev = useCallback(() => {
-    directionRef.current = -1;
+    setDirection(-1);
     onPrev();
   }, [onPrev]);
   const goNext = useCallback(() => {
-    directionRef.current = 1;
+    setDirection(1);
     onNext();
   }, [onNext]);
 
@@ -208,13 +208,13 @@ const ProjectModal = ({
                 key={project.title.English}
                 initial={{
                   opacity: 0,
-                  x: `${swapX * directionRef.current}%`,
+                  x: `${swapX * direction}%`,
                 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{
                   opacity: 0,
                   scale: shouldReduceMotion ? 1 : 0.95,
-                  x: `${-swapX * directionRef.current}%`,
+                  x: `${-swapX * direction}%`,
                 }}
                 transition={swapTransition}
               >

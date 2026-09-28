@@ -106,18 +106,18 @@ const orbitTechnologies = [
 ];
 
 const exploreIcons = [
-  <FaBrain />,
-  <SiStripe aria-hidden="true" />,
-  <FaRobot />,
-  <SiFramer aria-hidden="true" />,
-  <FaSitemap />,
+  <FaBrain key="brain" />,
+  <SiStripe key="stripe" aria-hidden="true" />,
+  <FaRobot key="robot" />,
+  <SiFramer key="framer" aria-hidden="true" />,
+  <FaSitemap key="sitemap" />,
 ];
 
 const featureIcons = [
-  <FaBolt />,
-  <FaExpandArrowsAlt />,
-  <FaLaptopCode />,
-  <FaPaintBrush />,
+  <FaBolt key="bolt" />,
+  <FaExpandArrowsAlt key="expand" />,
+  <FaLaptopCode key="laptop" />,
+  <FaPaintBrush key="brush" />,
 ];
 
 const container = {
