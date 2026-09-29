@@ -90,7 +90,6 @@ A Software Engineer focused on building modern web applications and AI-powered S
   footer: {
     tagline: "Engineering excellence through code and design.",
     rightsReserved: "All rights reserved.",
-    viewSourceLabel: "View source on GitHub",
   },
   nav: {
     mainAriaLabel: "Main navigation",

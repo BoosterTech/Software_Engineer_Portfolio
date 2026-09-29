@@ -125,9 +125,13 @@ now fetches in parallel with the JS.
 
 **Still red:** the 2,500ms assertion in `.lighthouserc.js`. Remaining cost is
 structural — the LCP element can't paint until the bundle parses and React
-mounts. Real fixes are prerendering (react-snap-style post-build step) or
-cutting main-thread JS — both deferred per user decision rather than
-re-baselining the budget or adding build complexity.
+mounts. ~~Real fixes are prerendering (react-snap-style post-build step) or
+cutting main-thread JS~~ — **update 2026-09:** prerendering was implemented
+and measured (see `performance-audit-2026-09.md` §H1): hydration repaints
+re-stamp the LCP element, so it's LCP-neutral, and even zero-JS static HTML
+floors at ~1.5 s because the hero entrance animation gates the paint.
+Remaining real lever: entrance-animation opacity on the hero containers
+(design decision).
 
 ### 10. LOW sweep — hygiene ✅ DONE
 

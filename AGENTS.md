@@ -125,7 +125,13 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
   `PortraitCaption` speech bubble below the circle (`aria-live="polite"`).
   The final cue must extend past the clip's audio end (VTT times are clamped
   to duration); its caption is kept visible ~3.5 s after `ended` via a timer
-  as a scroll nudge.
+  as a scroll nudge. No `poster` attr on the video — it eagerly downloads a
+  ~14 KB still that never paints (the element is opacity-0 until `playing`,
+  and `ProfileImage` underneath is already the idle face)
+- Tree-wide state changes go through `startTransition`: `toggleTheme`
+  (~0.7 s) and `setLanguage` (~1.5 s) re-render/re-style the whole document —
+  measured under 4× CPU throttle. Wrap any future provider setter with the
+  same blast radius so input stays responsive during the repaint
 
 ## Navigation
 
@@ -186,7 +192,10 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 - E2E waits must be condition-based — `expect.poll`, `toHaveAttribute`,
   `toBeFocused`. Never `waitForTimeout` sleeps, and never assert on
   `getComputedStyle` — assert user-facing state (`aria-current` on `NavDot`,
-  `aria-expanded`, focus)
+  `aria-expanded`, focus). This is mandatory for provider state: `toggleTheme`/
+  `setLanguage` commit through `startTransition`, so `data-theme`/`lang`
+  assertions read stale attributes if you check them synchronously after
+  the click
 - E2E specs import `test`/`expect` from `e2e/fixtures.js`, never
   `@playwright/test` directly — the fixture attaches a watchdog that fails
   any test producing `console.error` or `pageerror` output (the app must be
@@ -237,6 +246,8 @@ barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
 ## Commits
 
 - Conventional Commits, atomic scope (`feat(nav):`, `test:`, `chore:`, `style(theme):`)
+- **Never stage or commit unless the user explicitly asks** — leave changes in
+  the working tree for review
 - No `Co-Authored-By` trailers or tool-attribution lines — GitHub counts
   co-authors as repo contributors; the owner wants a solo contributor list
 - Never commit build output, `.env*`, or editor files

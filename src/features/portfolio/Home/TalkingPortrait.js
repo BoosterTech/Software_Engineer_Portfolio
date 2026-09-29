@@ -23,10 +23,11 @@ const CAPTION_FADE_MS = 500;
  * While playing, a `portrait-playing` class on <html> freezes every CSS
  * animation mid-pose — the cumulative animation load starves the media
  * pipeline into a waiting-state stall on low-end Android (verified on-device).
- *
- * @param {{ poster: string }} props - still shown before the first frame decodes
+ * No `poster` — the still underneath is the idle face, and the element only
+ * turns opaque on 'playing' (frames decoded), so a poster would download
+ * 14 KB eagerly for a placeholder that never paints.
  */
-const TalkingPortrait = ({ poster }) => {
+const TalkingPortrait = () => {
   const { home } = useContent();
   const videoRef = useRef(null);
   const captionTimerRef = useRef(null);
@@ -95,7 +96,6 @@ const TalkingPortrait = ({ poster }) => {
         ref={videoRef}
         data-testid="talking-portrait-video"
         src={TALKING_PORTRAIT_SRC}
-        poster={poster}
         playsInline
         preload="metadata"
         $active={status === "playing"}

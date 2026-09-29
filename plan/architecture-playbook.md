@@ -19,9 +19,9 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: React Context for language and general UI state
 
-- **What:** `src/common/LanguageProvider` and `src/common/ContactVisibilityProvider` wrap the app in `src/index.js`. `useLanguage` returns `{ language, setLanguage }`; `useContactVisibility` returns `{ isContactVisible, setContactVisibility }`.
-- **Why:** `language` (a string) and `isContactVisible` (a boolean) are the only global states. Context removes the `@reduxjs/toolkit` and `react-redux` dependencies and the `Provider`/store boilerplate while still giving any component a stable, single source of truth.
-- **Trade-offs:** Context does not provide automatic memoization like `createSelector`; context consumers re-render whenever the provider value changes. With only these two small states and infrequent updates, this is acceptable. If API or complex state is added later, re-evaluate Redux Toolkit, Zustand, or Jotai.
+- **What:** `src/common/LanguageProvider` and `src/common/ThemeModeProvider` wrap the app in `src/index.js` (`useLanguage` returns `{ language, setLanguage }`; `useThemeMode` returns `{ isDark, toggleTheme }`). Active-nav highlighting is **not** context — `Navigation` derives it locally via `useScrollSpy` (IntersectionObserver over section ids).
+- **Why:** `language` (a string) and `isDark` (a boolean) are the only global states. Context removes the `@reduxjs/toolkit` and `react-redux` dependencies and the `Provider`/store boilerplate while still giving any component a stable, single source of truth.
+- **Trade-offs:** Context does not provide automatic memoization like `createSelector`; context consumers re-render whenever the provider value changes. With only these two small states and infrequent updates, this is acceptable. Both setters are wrapped in `startTransition` since a change repaints every consumer. If API or complex state is added later, re-evaluate Redux Toolkit, Zustand, or Jotai.
 - **Future guidance:** Keep global UI flags in dedicated providers under `src/common/*Provider/`. Avoid mixing data fetching with UI state. If more than three providers are needed, compose them in a single `AppProviders` component.
 
 ---
@@ -80,9 +80,9 @@ This document records the major architectural decisions in the `feature/ui-refre
 
 ### Decision: `LanguageSwitch` calls `setLanguage` from context; components read `useLanguage`
 
-- **What:** `src/common/LanguageSwitch/index.js` uses `setLanguage` from `useLanguage()`. `App.js` and section components use `useLanguage()` to choose localized content via `src/common/useContent.js`. `Navigation` also reads `isContactVisible` from `useContactVisibility()` to highlight the contact menu item.
+- **What:** `src/common/LanguageSwitch/index.js` uses `setLanguage` from `useLanguage()`. `App.js` and section components use `useLanguage()` to choose localized content via `src/common/useContent.js`. `Navigation` highlights the active menu item from `useScrollSpy`'s `activeId`, not context.
 - **Why:** Two small pieces of global UI state do not justify the bundle and boilerplate of Redux. `useContent` centralizes the `translations[language]` lookup so components do not call `useTheme()` for copy.
-- **Trade-offs:** Context does not memoize selectors; consumers re-render when the provider value changes. With only language and contact visibility, this is acceptable.
+- **Trade-offs:** Context does not memoize selectors; consumers re-render when the provider value changes. With only language and theme mode, this is acceptable.
 - **Future guidance:** If adding a new language, add a test or CI step that validates all language objects have the same keys and that `menuItems` includes the new language. If a third global UI state appears, evaluate Zustand or Redux Toolkit before creating another provider.
 
 ---
