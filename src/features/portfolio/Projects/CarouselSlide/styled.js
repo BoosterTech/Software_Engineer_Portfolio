@@ -161,7 +161,7 @@ export const ExpandButton = styled.button`
   height: 32px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  background: rgb(var(--color-surface-rgb) / 0.85);
+  background: rgba(var(--color-surface-rgb), 0.85);
   color: var(--color-text-primary);
   cursor: pointer;
   display: flex;
