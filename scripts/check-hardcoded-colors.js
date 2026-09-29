@@ -8,10 +8,17 @@ const HEX_PATTERN = /#[0-9a-fA-F]{3,8}\b/g;
 
 // Matches rgb/rgba() with numeric values, e.g. rgba(0, 163, 255, 0.6).
 // It intentionally does not match rgb/rgba() that uses CSS variables.
-const RGBA_PATTERN = /\brgba?\(\s*(?:\d{1,3}\s*,\s*){2,3}\d{1,3}(?:\s*,\s*(?:0?\.\d+|1|0))?\s*\)/g;
+const RGBA_PATTERN =
+  /\brgba?\(\s*(?:\d{1,3}\s*,\s*){2,3}\d{1,3}(?:\s*,\s*(?:0?\.\d+|1|0))?\s*\)/g;
 
 // Matches the bare word "white" or "black" as a color value (not inside a var()).
 const BARE_COLOR_PATTERN = /(?<![\w-])white(?![\w-])|(?<![\w-])black(?![\w-])/g;
+
+// rgb(var(--x-rgb) / a) is INVALID CSS: our rgb tokens are comma-separated
+// ("248,250,252"), so this produces "rgb(248, 250, 252 / 0.85)" — comma syntax
+// can't mix with slash-alpha, the browser drops the declaration silently, and
+// the element ends up transparent. Use rgba(var(--x-rgb), a) instead.
+const INVALID_RGB_SLASH_PATTERN = /\brgb\(var\(--[\w-]+\)\s*\/\s*[0-9.]+\)/g;
 
 // Files that legitimately contain hardcoded color values.
 const ALLOWLIST = [
@@ -60,6 +67,9 @@ function main() {
     while ((match = BARE_COLOR_PATTERN.exec(content)) !== null) {
       matches.push(match[0]);
     }
+    while ((match = INVALID_RGB_SLASH_PATTERN.exec(content)) !== null) {
+      matches.push(`${match[0]} (invalid syntax — use rgba(var(--x), a))`);
+    }
 
     const unique = [...new Set(matches)];
     if (unique.length) {
@@ -75,9 +85,7 @@ function main() {
     return;
   }
 
-  console.error(
-    "[check:colors] Hardcoded colors found in JS files:"
-  );
+  console.error("[check:colors] Hardcoded colors found in JS files:");
   for (const { file, matches } of offenders) {
     console.error(`  - ${file}: ${matches.join(", ")}`);
   }

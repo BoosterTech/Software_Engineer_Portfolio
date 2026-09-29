@@ -24,7 +24,9 @@ const testGlobals = Object.fromEntries(
 );
 
 module.exports = [
-  { ignores: ["build/**", "coverage/**", ".lighthouseci/**", "node_modules/**"] },
+  {
+    ignores: ["build/**", "coverage/**", ".lighthouseci/**", "node_modules/**"],
+  },
   js.configs.recommended,
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
@@ -81,17 +83,54 @@ module.exports = [
     languageOptions: { globals: { ...testGlobals } },
   },
   {
-    // Playwright specs use page.getByRole, not RTL queries
-    files: ["e2e/**/*.js"],
+    // Node/CommonJS tooling: scripts, probes, and root config files
+    files: [
+      "scripts/**/*.js",
+      ".lighthouserc.js",
+      "eslint.config.js",
+      "playwright.config.js",
+    ],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "commonjs",
       globals: { ...globals.node },
     },
+  },
+  {
+    // ESM Node config (vite/vitest)
+    files: ["vite.config.mjs"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: { ...globals.node },
+    },
+    rules: {
+      // Same resolver limitation as src/ — the node resolver can't see
+      // node_modules from a .mjs context here
+      "import/no-unresolved": "off",
+    },
+  },
+  {
+    // Probes run browser code inside page.evaluate — both envs are legit
+    files: ["scripts/probes/**/*.js"],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.browser },
+    },
+  },
+  {
+    // Playwright specs use page.getByRole, not RTL queries
+    files: ["e2e/**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "commonjs",
+      globals: { ...globals.node, ...globals.browser },
+    },
     rules: {
       "testing-library/prefer-screen-queries": "off",
       "testing-library/no-await-sync-queries": "off",
       "testing-library/no-node-access": "off",
+      // Playwright's fixture `use()` callback trips the React hook rule
+      "react-hooks/rules-of-hooks": "off",
     },
   },
 ];
