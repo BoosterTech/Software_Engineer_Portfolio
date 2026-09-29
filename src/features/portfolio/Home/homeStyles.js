@@ -179,6 +179,52 @@ export const PortraitVideo = styled.video`
   }
 `;
 
+export const PortraitCaption = styled.p`
+  position: absolute;
+  top: calc(100% + var(--spacing-md));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: max-content;
+  max-width: 320px;
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: rgba(var(--color-surface-rgb), 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-text-primary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+
+  ${(p) => p.$fading && `opacity: 0; transform: translateX(-50%) translateY(6px);`}
+
+  /* Speech-bubble tail pointing up at the portrait */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: rgba(var(--color-surface-rgb), 0.85);
+    border-left: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`;
+
 export const PortraitPlayButton = styled.button`
   position: absolute;
   right: var(--spacing-sm);
@@ -188,7 +234,7 @@ export const PortraitPlayButton = styled.button`
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  background: rgb(var(--color-surface-rgb) / 0.85);
+  background: rgba(var(--color-surface-rgb), 0.85);
   color: var(--color-white);
   cursor: pointer;
   display: flex;
