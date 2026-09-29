@@ -98,7 +98,6 @@ export const pl = {
   footer: {
     tagline: "Doskonałość inżynieryjna w kodzie i designie.",
     rightsReserved: "Wszelkie prawa zastrzeżone.",
-    viewSourceLabel: "Zobacz kod na GitHub",
   },
   nav: {
     mainAriaLabel: "Nawigacja główna",

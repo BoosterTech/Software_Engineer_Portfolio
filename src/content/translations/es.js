@@ -92,7 +92,6 @@ export const es = {
   footer: {
     tagline: "Excelencia en ingeniería a través del código y el diseño.",
     rightsReserved: "Todos los derechos reservados.",
-    viewSourceLabel: "Ver código en GitHub",
   },
   nav: {
     mainAriaLabel: "Navegación principal",
