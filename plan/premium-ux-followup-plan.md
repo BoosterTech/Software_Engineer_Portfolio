@@ -45,9 +45,9 @@
 | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | 11  | `console.log` in `src/index.js`                                                                                                                                      | ✅ resolved — was only a CRA boilerplate comment, no actual logging |
 | 12  | Consolidate `plan/` — 5 superseded docs moved to `plan/archive/`                                                                                                     | ✅ `1223a4e`                                                        |
-| 13  | Co-locate single-consumer `common/` components — GradientHeading→About; RichText kept (2nd consumer restored via styled(RichText)); StarField/Main stay as app-shell | ✅ `2e1f0bd`, `405af3f`                                            |
+| 13  | Co-locate single-consumer `common/` components — GradientHeading→About; RichText kept (2nd consumer restored via styled(RichText)); StarField/Main stay as app-shell | ✅ `2e1f0bd`, `405af3f`                                             |
 | 14  | Verify `Tile/` vs `CarouselSlide/` coexistence — Tile was dead, deleted                                                                                              | ✅ `ab669d1`                                                        |
-| 15  | CLS audit: intrinsic `width`/`height` on all lazy imgs; deleted dead `ComingSoonProject/` + `StyledComponentsIcon.js` (its light-theme svg 404'd)                      | ✅ pending commit                                                   |
+| 15  | CLS audit: intrinsic `width`/`height` on all lazy imgs; deleted dead `ComingSoonProject/` + `StyledComponentsIcon.js` (its light-theme svg 404'd)                    | ✅ pending commit                                                   |
 
 ## Explicitly deferred (premature)
 

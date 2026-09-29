@@ -28,7 +28,7 @@ Verified on prod build (iPhone 12 profile): first Contact click landed
 **Implemented:** removed `content-visibility` + `contain-intrinsic-size` from
 **all four** section roots (About, Projects, Contact, Footer). The plan's partial
 fix (Contact/Footer only + re-measured About/Projects estimates) was tried first —
-first-click error actually *worsened* to a consistent ~300px, because
+first-click error actually _worsened_ to a consistent ~300px, because
 About/Projects still re-rendered mid-scroll and reflowed the document under the
 running scroll animation. Full removal was required.
 
@@ -48,7 +48,7 @@ benefit.
 - Selectors fixed: `a[href="#…"]` → `[data-testid="nav-link-…"]` (desktop-only
   hook — avoids strict-mode violations from the duplicated mobile menu), and
   `img[alt="Polish"]` → open `Select language` then `getByRole("option", { name:
-  "Polish" })`.
+"Polish" })`.
 - **5/5 pass.** The `navigates to About` failure resolved with HIGH-003; a later
   flake (click landing before react-scroll's handler attached → slow native
   `href` scroll under CSS `scroll-behavior: smooth`) was fixed by removing that
