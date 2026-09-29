@@ -188,13 +188,13 @@ Error generating stack: `+e.message+`
   }
 `,Hp=(0,g.createContext)({isDark:!1,toggleTheme:()=>{}}),Up=({children:e,initialIsDark:t})=>{let[n,r]=(0,g.useState)(()=>{if(typeof t==`boolean`)return t;let e=localStorage.getItem(`theme`);return e?e===`dark`:window.matchMedia(`(prefers-color-scheme: dark)`).matches});(0,g.useEffect)(()=>{n?(document.documentElement.setAttribute(`data-theme`,`dark`),localStorage.setItem(`theme`,`dark`)):(document.documentElement.removeAttribute(`data-theme`),localStorage.setItem(`theme`,`light`));let e=Bp[n?`dark`:`light`];document.querySelectorAll(`meta[name="theme-color"]`).forEach(t=>t.setAttribute(`content`,e))},[n]);let i=(0,g.useCallback)(()=>r(e=>!e),[]);return(0,U.jsx)(Hp.Provider,{value:{isDark:n,toggleTheme:i},children:e})},Wp=()=>(0,g.useContext)(Hp),Gp={English:{home:{contentHeaderPlain:`Software`,contentHeaderAccent:`Engineer`,contentHeaderTechStack:`< AI-Directed Engineering | Next.js • React • TypeScript • Production SaaS />`,welcomeLabel:`WELCOME TO MY PORTFOLIO`,headerParagraph:`
 Hi, I'm Dariusz Podczasik.
-A Software Engineer focused on building modern web applications and AI-powered SaaS products.`,viewMyWork:`View My Work`,viewCV:`View CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,portraitAlt:`Portrait of Dariusz Podczasik`,hearMeLabel:`Hear me — play a short video greeting`,skillsetHeader:`My Technology Stack`,learnNextHeader:`Currently Exploring`,toolsShowcase:{titlePlain:`Built with the`,titleAccent:`Best Tools`,description:`I craft fast, scalable, and modern web applications using a powerful ecosystem of cutting-edge technologies.`,features:[{title:`Performance Optimized`,subtitle:`Fast loads`},{title:`Scalable Architecture`,subtitle:`Grows cleanly`},{title:`Developer Experience`,subtitle:`Clean APIs`},{title:`Modern UI/UX`,subtitle:`Polished interfaces`}],exploreParagraph:`Leveling up my skills and building the future, one line at a time.`,exploreAriaLabel:`Technologies I'm currently exploring`,exploreItems:[{name:`Artificial Intelligence`,description:`Building AI-powered features`},{name:`Stripe`,description:`Payment infrastructure`},{name:`AI-Directed Engineering`,description:`AI-assisted development`},{name:`Framer Motion`,description:`Production-ready animations`},{name:`SaaS Architecture`,description:`Scalable SaaS patterns`}],moreTitle:`And More`,moreSubtitle:`Always learning.`}},about:{journeyLabel:`MY JOURNEY`,journeyHeaderPlain:`From Embedded`,journeyHeaderAccent:`to Full-Stack`,journeyParagraph:`
+A Software Engineer focused on building modern web applications and AI-powered SaaS products.`,viewMyWork:`View My Work`,viewCV:`View CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,cvPdfUrl:`/Software_Engineer_Portfolio/Dariusz_Podczasik_Software_Engineer_CV.pdf`,portraitAlt:`Portrait of Dariusz Podczasik`,hearMeLabel:`Hear me — play a short video greeting`,captionsLabel:`English captions`,skillsetHeader:`My Technology Stack`,learnNextHeader:`Currently Exploring`,toolsShowcase:{titlePlain:`Built with the`,titleAccent:`Best Tools`,description:`I craft fast, scalable, and modern web applications using a powerful ecosystem of cutting-edge technologies.`,features:[{title:`Performance Optimized`,subtitle:`Fast loads`},{title:`Scalable Architecture`,subtitle:`Grows cleanly`},{title:`Developer Experience`,subtitle:`Clean APIs`},{title:`Modern UI/UX`,subtitle:`Polished interfaces`}],exploreParagraph:`Leveling up my skills and building the future, one line at a time.`,exploreAriaLabel:`Technologies I'm currently exploring`,exploreItems:[{name:`Artificial Intelligence`,description:`Building AI-powered features`},{name:`Stripe`,description:`Payment infrastructure`},{name:`AI-Directed Engineering`,description:`AI-assisted development`},{name:`Framer Motion`,description:`Production-ready animations`},{name:`SaaS Architecture`,description:`Scalable SaaS patterns`}],moreTitle:`And More`,moreSubtitle:`Always learning.`}},about:{journeyLabel:`MY JOURNEY`,journeyHeaderPlain:`From Embedded`,journeyHeaderAccent:`to Full-Stack`,journeyParagraph:`
 <p>My journey began with electronics, embedded systems, C++, and OpenGL before evolving into modern web development. Today I build production-ready applications using React, Next.js, TypeScript, and Supabase. I combine solid software engineering principles with AI-assisted workflows to create scalable, impactful solutions.</p>
-      `,journeyFeatures:[{title:`Full-Stack Systems`,description:`I design complete software systems—from authentication and databases to APIs, deployment, and security. Understanding how every part works together is essential.`},{title:`AI-Assisted Engineering`,description:`I use AI as an engineering partner to accelerate implementation while maintaining code quality, scalability, and long-term maintainability.`},{title:`Problem Solving`,description:`I'm passionate about building software that solves real problems and delivers outstanding user experiences.`},{title:`Continuous Learning`,description:`I stay current with software architecture, system design, AI, and cloud technologies—essential to my growth as an engineer.`}]},contact:{headerPlain:`Let's`,headerAccent:`Connect`,contactParagraph:`Let's build something great together.`},footer:{tagline:`Engineering excellence through code and design.`,rightsReserved:`All rights reserved.`},nav:{mainAriaLabel:`Main navigation`,menuToggleLabel:`Toggle navigation menu`,themeToggleLabel:`Toggle dark mode`,languageGroupLabel:`Language selector`,languageSelectLabel:`Select language`,shareLabel:`Share this portfolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Check out Dariusz's portfolio — AI-directed engineering and modern web applications.`,shareCopied:`Link copied`,shareError:`Couldn't copy link`},projects:{header:`Proȷects`,regionLabel:`Projects carousel`,previousLabel:`Previous project`,nextLabel:`Next project`,goToLabel:`Go to project`,githubProfileLabel:`Visit my GitHub profile`,closeLabel:`Close`,comingSoonLabel:`Coming soon`,expandLabel:`Expand {title}`,liveDemoLabel:`Live Demo`,repoLabel:`GitHub`,screenshotAlt:`{title} — project screenshot`}},Polish:{home:{contentHeaderPlain:`Inżynier`,contentHeaderAccent:`Oprogramowania`,contentHeaderTechStack:`< AI-Directed Engineering | Next.js • React • TypeScript • Produkcyjny SaaS />`,welcomeLabel:`WITAJ W MOIM PORTFOLIO`,headerParagraph:`Cześć, jestem Dariusz Podczasik. Inżynier oprogramowania specjalizujący się w tworzeniu nowoczesnych aplikacji internetowych i produktów AI SaaS.`,viewMyWork:`Zobacz projekty`,viewCV:`Zobacz CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,portraitAlt:`Portret Dariusza Podczasika`,hearMeLabel:`Posłuchaj mnie — odtwórz krótkie wideo powitalne`,skillsetHeader:`Mój stack technologiczny`,learnNextHeader:`Aktualnie rozwijam`,toolsShowcase:{titlePlain:`Tworzę z`,titleAccent:`najlepszymi narzędziami`,description:`Buduję szybkie, skalowalne i nowoczesne aplikacje internetowe, oparte na ekosystemie najnowocześniejszych technologii.`,features:[{title:`Zoptymalizowana wydajność`,subtitle:`Szybkie ładowanie`},{title:`Skalowalna architektura`,subtitle:`Rośnie bez problemów`},{title:`Developer Experience`,subtitle:`Czyste API`},{title:`Nowoczesny UI/UX`,subtitle:`Dopracowane interfejsy`}],exploreParagraph:`Rozwijam umiejętności i buduję przyszłość — linijka po linijce.`,exploreAriaLabel:`Technologie, które aktualnie rozwijam`,exploreItems:[{name:`Sztuczna inteligencja`,description:`Buduję funkcje oparte na AI`},{name:`Stripe`,description:`Infrastruktura płatności`},{name:`AI-Directed Engineering`,description:`Development wspomagany przez AI`},{name:`Framer Motion`,description:`Animacje klasy produkcyjnej`},{name:`Architektura SaaS`,description:`Skalowalne wzorce SaaS`}],moreTitle:`I więcej`,moreSubtitle:`Ciągle się uczę.`}},about:{journeyLabel:`MOJA DROGA`,journeyHeaderPlain:`Od embedded`,journeyHeaderAccent:`do full-stack`,journeyParagraph:`
+      `,journeyFeatures:[{title:`Full-Stack Systems`,description:`I design complete software systems—from authentication and databases to APIs, deployment, and security. Understanding how every part works together is essential.`},{title:`AI-Assisted Engineering`,description:`I use AI as an engineering partner to accelerate implementation while maintaining code quality, scalability, and long-term maintainability.`},{title:`Problem Solving`,description:`I'm passionate about building software that solves real problems and delivers outstanding user experiences.`},{title:`Continuous Learning`,description:`I stay current with software architecture, system design, AI, and cloud technologies—essential to my growth as an engineer.`}]},contact:{headerPlain:`Let's`,headerAccent:`Connect`,contactParagraph:`Let's build something great together.`},footer:{tagline:`Engineering excellence through code and design.`,rightsReserved:`All rights reserved.`,viewSourceLabel:`View source on GitHub`},nav:{mainAriaLabel:`Main navigation`,menuToggleLabel:`Toggle navigation menu`,themeToggleLabel:`Toggle dark mode`,languageGroupLabel:`Language selector`,languageSelectLabel:`Select language`,shareLabel:`Share this portfolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Check out Dariusz's portfolio — AI-directed engineering and modern web applications.`,shareCopied:`Link copied`,shareError:`Couldn't copy link`},projects:{header:`Proȷects`,regionLabel:`Projects carousel`,previousLabel:`Previous project`,nextLabel:`Next project`,goToLabel:`Go to project`,githubProfileLabel:`Visit my GitHub profile`,closeLabel:`Close`,comingSoonLabel:`Coming soon`,expandLabel:`Expand {title}`,liveDemoLabel:`Live Demo`,repoLabel:`GitHub`,screenshotAlt:`{title} — project screenshot`}},Polish:{home:{contentHeaderPlain:`Inżynier`,contentHeaderAccent:`Oprogramowania`,contentHeaderTechStack:`< AI-Directed Engineering | Next.js • React • TypeScript • Produkcyjny SaaS />`,welcomeLabel:`WITAJ W MOIM PORTFOLIO`,headerParagraph:`Cześć, jestem Dariusz Podczasik. Inżynier oprogramowania specjalizujący się w tworzeniu nowoczesnych aplikacji internetowych i produktów AI SaaS.`,viewMyWork:`Zobacz projekty`,viewCV:`Zobacz CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,cvPdfUrl:`/Software_Engineer_Portfolio/Dariusz_Podczasik_Software_Engineer_CV.pdf`,portraitAlt:`Portret Dariusza Podczasika`,hearMeLabel:`Posłuchaj mnie — odtwórz krótkie wideo powitalne`,captionsLabel:`Napisy angielskie`,skillsetHeader:`Mój stack technologiczny`,learnNextHeader:`Aktualnie rozwijam`,toolsShowcase:{titlePlain:`Tworzę z`,titleAccent:`najlepszymi narzędziami`,description:`Buduję szybkie, skalowalne i nowoczesne aplikacje internetowe, oparte na ekosystemie najnowocześniejszych technologii.`,features:[{title:`Zoptymalizowana wydajność`,subtitle:`Szybkie ładowanie`},{title:`Skalowalna architektura`,subtitle:`Rośnie bez problemów`},{title:`Developer Experience`,subtitle:`Czyste API`},{title:`Nowoczesny UI/UX`,subtitle:`Dopracowane interfejsy`}],exploreParagraph:`Rozwijam umiejętności i buduję przyszłość — linijka po linijce.`,exploreAriaLabel:`Technologie, które aktualnie rozwijam`,exploreItems:[{name:`Sztuczna inteligencja`,description:`Buduję funkcje oparte na AI`},{name:`Stripe`,description:`Infrastruktura płatności`},{name:`AI-Directed Engineering`,description:`Development wspomagany przez AI`},{name:`Framer Motion`,description:`Animacje klasy produkcyjnej`},{name:`Architektura SaaS`,description:`Skalowalne wzorce SaaS`}],moreTitle:`I więcej`,moreSubtitle:`Ciągle się uczę.`}},about:{journeyLabel:`MOJA DROGA`,journeyHeaderPlain:`Od embedded`,journeyHeaderAccent:`do full-stack`,journeyParagraph:`
 <p>Moja droga zaczęła się od elektroniki, systemów wbudowanych, C++ i OpenGL, zanim przerodziła się w nowoczesny rozwój webowy. Dziś buduję aplikacje produkcyjne z React, Next.js, TypeScript i Supabase. Łączę solidne fundamenty inżynierii oprogramowania ze wsparciem AI, tworząc skalowalne, wartościowe rozwiązania.</p>
-      `,journeyFeatures:[{title:`Systemy full-stack`,description:`Projektuję kompletne systemy informatyczne — od uwierzytelniania i baz danych po API, wdrożenia i bezpieczeństwo. Rozumienie całości jest kluczowe.`},{title:`Inżynieria wspomagana przez AI`,description:`Wykorzystuję AI jako partnera inżynierskiego, aby przyspieszać implementację przy zachowaniu jakości, skalowalności i łatwości utrzymania.`},{title:`Rozwiązywanie problemów`,description:`Tworzę oprogramowanie, które rozwiązuje realne problemy i dostarcza wyjątkowych doświadczeń użytkownikom.`},{title:`Ciągły rozwój`,description:`Stale rozwijam wiedzę w zakresie architektury oprogramowania, projektowania systemów, AI i chmury — to fundament mojego rozwoju jako inżyniera.`}]},contact:{headerPlain:`Napisz`,headerAccent:`do mnie`,contactParagraph:`Stwórzmy razem coś wyjątkowego.`},footer:{tagline:`Doskonałość inżynieryjna w kodzie i designie.`,rightsReserved:`Wszelkie prawa zastrzeżone.`},nav:{mainAriaLabel:`Nawigacja główna`,menuToggleLabel:`Przełącz menu nawigacji`,themeToggleLabel:`Przełącz tryb ciemny`,languageGroupLabel:`Selektor języka`,languageSelectLabel:`Wybierz język`,shareLabel:`Udostępnij to portfolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Zobacz portfolio Dariusza — projektowanie wspomagane AI i nowoczesne aplikacje webowe.`,shareCopied:`Link skopiowany`,shareError:`Nie udało się skopiować linku`},projects:{header:`Proȷekty`,regionLabel:`Karuzela projektów`,previousLabel:`Poprzedni projekt`,nextLabel:`Następny projekt`,goToLabel:`Przejdź do projektu`,githubProfileLabel:`Odwiedź mój profil GitHub`,closeLabel:`Zamknij`,comingSoonLabel:`Wkrótce`,expandLabel:`Rozwiń {title}`,liveDemoLabel:`Demo na żywo`,repoLabel:`GitHub`,screenshotAlt:`{title} — zrzut ekranu projektu`}},Spanish:{home:{contentHeaderPlain:`Ingeniero de`,contentHeaderAccent:`Software`,contentHeaderTechStack:`< AI-Directed Engineering | Next.js • React • TypeScript • SaaS de producción />`,welcomeLabel:`BIENVENIDO A MI PORTAFOLIO`,headerParagraph:`Hola, soy Dariusz Podczasik. Ingeniero de software especializado en aplicaciones web modernas y productos SaaS impulsados por IA.`,viewMyWork:`Ver proyectos`,viewCV:`Ver CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,portraitAlt:`Retrato de Dariusz Podczasik`,hearMeLabel:`Escúchame — reproducir un breve saludo en video`,skillsetHeader:`Mi stack tecnológico`,learnNextHeader:`Actualmente aprendiendo`,toolsShowcase:{titlePlain:`Construyo con`,titleAccent:`las mejores herramientas`,description:`Creo aplicaciones web rápidas, escalables y modernas usando un potente ecosistema de tecnologías de vanguardia.`,features:[{title:`Rendimiento optimizado`,subtitle:`Cargas rápidas`},{title:`Arquitectura escalable`,subtitle:`Crece sin problemas`},{title:`Experiencia de desarrollador`,subtitle:`APIs limpias`},{title:`UI/UX moderno`,subtitle:`Interfaces pulidas`}],exploreParagraph:`Subiendo de nivel y construyendo el futuro, una línea a la vez.`,exploreAriaLabel:`Tecnologías que estoy explorando`,exploreItems:[{name:`Inteligencia artificial`,description:`Funciones impulsadas por IA`},{name:`Stripe`,description:`Infraestructura de pagos`},{name:`AI-Directed Engineering`,description:`Desarrollo asistido por IA`},{name:`Framer Motion`,description:`Animaciones listas para producción`},{name:`Arquitectura SaaS`,description:`Patrones SaaS escalables`}],moreTitle:`Y más`,moreSubtitle:`Siempre aprendiendo.`}},about:{journeyLabel:`MI VIAJE`,journeyHeaderPlain:`De embedded`,journeyHeaderAccent:`a full-stack`,journeyParagraph:`
+      `,journeyFeatures:[{title:`Systemy full-stack`,description:`Projektuję kompletne systemy informatyczne — od uwierzytelniania i baz danych po API, wdrożenia i bezpieczeństwo. Rozumienie całości jest kluczowe.`},{title:`Inżynieria wspomagana przez AI`,description:`Wykorzystuję AI jako partnera inżynierskiego, aby przyspieszać implementację przy zachowaniu jakości, skalowalności i łatwości utrzymania.`},{title:`Rozwiązywanie problemów`,description:`Tworzę oprogramowanie, które rozwiązuje realne problemy i dostarcza wyjątkowych doświadczeń użytkownikom.`},{title:`Ciągły rozwój`,description:`Stale rozwijam wiedzę w zakresie architektury oprogramowania, projektowania systemów, AI i chmury — to fundament mojego rozwoju jako inżyniera.`}]},contact:{headerPlain:`Napisz`,headerAccent:`do mnie`,contactParagraph:`Stwórzmy razem coś wyjątkowego.`},footer:{tagline:`Doskonałość inżynieryjna w kodzie i designie.`,rightsReserved:`Wszelkie prawa zastrzeżone.`,viewSourceLabel:`Zobacz kod na GitHub`},nav:{mainAriaLabel:`Nawigacja główna`,menuToggleLabel:`Przełącz menu nawigacji`,themeToggleLabel:`Przełącz tryb ciemny`,languageGroupLabel:`Selektor języka`,languageSelectLabel:`Wybierz język`,shareLabel:`Udostępnij to portfolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Zobacz portfolio Dariusza — projektowanie wspomagane AI i nowoczesne aplikacje webowe.`,shareCopied:`Link skopiowany`,shareError:`Nie udało się skopiować linku`},projects:{header:`Proȷekty`,regionLabel:`Karuzela projektów`,previousLabel:`Poprzedni projekt`,nextLabel:`Następny projekt`,goToLabel:`Przejdź do projektu`,githubProfileLabel:`Odwiedź mój profil GitHub`,closeLabel:`Zamknij`,comingSoonLabel:`Wkrótce`,expandLabel:`Rozwiń {title}`,liveDemoLabel:`Demo na żywo`,repoLabel:`GitHub`,screenshotAlt:`{title} — zrzut ekranu projektu`}},Spanish:{home:{contentHeaderPlain:`Ingeniero de`,contentHeaderAccent:`Software`,contentHeaderTechStack:`< AI-Directed Engineering | Next.js • React • TypeScript • SaaS de producción />`,welcomeLabel:`BIENVENIDO A MI PORTAFOLIO`,headerParagraph:`Hola, soy Dariusz Podczasik. Ingeniero de software especializado en aplicaciones web modernas y productos SaaS impulsados por IA.`,viewMyWork:`Ver proyectos`,viewCV:`Ver CV`,cvUrl:`/Software_Engineer_Portfolio/cv.html`,cvPdfUrl:`/Software_Engineer_Portfolio/Dariusz_Podczasik_Software_Engineer_CV.pdf`,portraitAlt:`Retrato de Dariusz Podczasik`,hearMeLabel:`Escúchame — reproducir un breve saludo en video`,captionsLabel:`Subtítulos en inglés`,skillsetHeader:`Mi stack tecnológico`,learnNextHeader:`Actualmente aprendiendo`,toolsShowcase:{titlePlain:`Construyo con`,titleAccent:`las mejores herramientas`,description:`Creo aplicaciones web rápidas, escalables y modernas usando un potente ecosistema de tecnologías de vanguardia.`,features:[{title:`Rendimiento optimizado`,subtitle:`Cargas rápidas`},{title:`Arquitectura escalable`,subtitle:`Crece sin problemas`},{title:`Experiencia de desarrollador`,subtitle:`APIs limpias`},{title:`UI/UX moderno`,subtitle:`Interfaces pulidas`}],exploreParagraph:`Subiendo de nivel y construyendo el futuro, una línea a la vez.`,exploreAriaLabel:`Tecnologías que estoy explorando`,exploreItems:[{name:`Inteligencia artificial`,description:`Funciones impulsadas por IA`},{name:`Stripe`,description:`Infraestructura de pagos`},{name:`AI-Directed Engineering`,description:`Desarrollo asistido por IA`},{name:`Framer Motion`,description:`Animaciones listas para producción`},{name:`Arquitectura SaaS`,description:`Patrones SaaS escalables`}],moreTitle:`Y más`,moreSubtitle:`Siempre aprendiendo.`}},about:{journeyLabel:`MI VIAJE`,journeyHeaderPlain:`De embedded`,journeyHeaderAccent:`a full-stack`,journeyParagraph:`
 <p>Mi viaje comenzó con electrónica, sistemas embebidos, C++ y OpenGL, antes de evolucionar hacia el desarrollo web moderno. Hoy construyo aplicaciones listas para producción con React, Next.js, TypeScript y Supabase. Combino principios sólidos de ingeniería de software con flujos asistidos por IA para crear soluciones escalables e impactantes.</p>
-      `,journeyFeatures:[{title:`Sistemas full-stack`,description:`Diseño sistemas completos: desde autenticación y bases de datos hasta APIs, despliegue y seguridad. Entender cómo encaja cada parte es esencial.`},{title:`Ingeniería asistida por IA`,description:`Uso la IA como aliada de ingeniería para acelerar la implementación manteniendo calidad de código, escalabilidad y mantenibilidad a largo plazo.`},{title:`Resolución de problemas`,description:`Me apasiona crear software que resuelva problemas reales y ofrezca experiencias de usuario sobresalientes.`},{title:`Aprendizaje continuo`,description:`Me mantengo al día en arquitectura de software, diseño de sistemas, IA y tecnologías en la nube — esencial para mi crecimiento como ingeniero.`}]},contact:{headerPlain:`Ponte en`,headerAccent:`contacto`,contactParagraph:`Construyamos algo increíble juntos.`},footer:{tagline:`Excelencia en ingeniería a través del código y el diseño.`,rightsReserved:`Todos los derechos reservados.`},nav:{mainAriaLabel:`Navegación principal`,menuToggleLabel:`Alternar menú de navegación`,themeToggleLabel:`Cambiar modo oscuro`,languageGroupLabel:`Selector de idioma`,languageSelectLabel:`Seleccionar idioma`,shareLabel:`Compartir este portafolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Mira el portafolio de Dariusz — ingeniería dirigida por IA y aplicaciones web modernas.`,shareCopied:`Enlace copiado`,shareError:`No se pudo copiar el enlace`},projects:{header:`Proyectos`,regionLabel:`Carrusel de proyectos`,previousLabel:`Proyecto anterior`,nextLabel:`Proyecto siguiente`,goToLabel:`Ir al proyecto`,githubProfileLabel:`Visita mi perfil de GitHub`,closeLabel:`Cerrar`,comingSoonLabel:`Próximamente`,expandLabel:`Expandir {title}`,liveDemoLabel:`Demo en vivo`,repoLabel:`GitHub`,screenshotAlt:`{title} — captura de pantalla del proyecto`}}},Kp=()=>{let{language:e}=Rp();return Gp[e]||Gp.English},qp=Q.button`
+      `,journeyFeatures:[{title:`Sistemas full-stack`,description:`Diseño sistemas completos: desde autenticación y bases de datos hasta APIs, despliegue y seguridad. Entender cómo encaja cada parte es esencial.`},{title:`Ingeniería asistida por IA`,description:`Uso la IA como aliada de ingeniería para acelerar la implementación manteniendo calidad de código, escalabilidad y mantenibilidad a largo plazo.`},{title:`Resolución de problemas`,description:`Me apasiona crear software que resuelva problemas reales y ofrezca experiencias de usuario sobresalientes.`},{title:`Aprendizaje continuo`,description:`Me mantengo al día en arquitectura de software, diseño de sistemas, IA y tecnologías en la nube — esencial para mi crecimiento como ingeniero.`}]},contact:{headerPlain:`Ponte en`,headerAccent:`contacto`,contactParagraph:`Construyamos algo increíble juntos.`},footer:{tagline:`Excelencia en ingeniería a través del código y el diseño.`,rightsReserved:`Todos los derechos reservados.`,viewSourceLabel:`Ver código en GitHub`},nav:{mainAriaLabel:`Navegación principal`,menuToggleLabel:`Alternar menú de navegación`,themeToggleLabel:`Cambiar modo oscuro`,languageGroupLabel:`Selector de idioma`,languageSelectLabel:`Seleccionar idioma`,shareLabel:`Compartir este portafolio`,shareTitle:`Dariusz Podczasik — Software Engineer`,shareText:`Mira el portafolio de Dariusz — ingeniería dirigida por IA y aplicaciones web modernas.`,shareCopied:`Enlace copiado`,shareError:`No se pudo copiar el enlace`},projects:{header:`Proyectos`,regionLabel:`Carrusel de proyectos`,previousLabel:`Proyecto anterior`,nextLabel:`Proyecto siguiente`,goToLabel:`Ir al proyecto`,githubProfileLabel:`Visita mi perfil de GitHub`,closeLabel:`Cerrar`,comingSoonLabel:`Próximamente`,expandLabel:`Expandir {title}`,liveDemoLabel:`Demo en vivo`,repoLabel:`GitHub`,screenshotAlt:`{title} — captura de pantalla del proyecto`}}},Kp=()=>{let{language:e}=Rp();return Gp[e]||Gp.English},qp=Q.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1495,7 +1495,34 @@ A Software Engineer focused on building modern web applications and AI-powered S
   margin: var(--spacing-xs) 0 0 0;
   padding-top: var(--spacing-xs);
   border-top: 1px solid var(--color-footer-border);
-`,r_=Q.div`
+`,r_=Q.a`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+  width: fit-content;
+  margin: var(--spacing-xs) auto 0;
+  padding: var(--spacing-xxs) var(--spacing-sm);
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--color-slate);
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--color-footer-border);
+  border-radius: var(--radius-xl);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    color: var(--color-cyan-light);
+    border-color: var(--color-cyan);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+`,i_=Q.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -1521,7 +1548,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     rgba(var(--color-black-rgb), 0.5) 0%,
     transparent 100%
   );
-`,i_=Q.div`
+`,a_=Q.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -1545,7 +1572,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     rgba(var(--color-black-rgb), 0.4) 0%,
     transparent 100%
   );
-`,a_=()=>{let{footer:e}=Kp(),t=new Date().getFullYear();return(0,U.jsxs)(Zg,{id:`footer`,children:[(0,U.jsx)(r_,{"aria-hidden":`true`}),(0,U.jsx)(i_,{"aria-hidden":`true`}),(0,U.jsxs)(Qg,{children:[(0,U.jsxs)($g,{children:[(0,U.jsx)(e_,{children:`Derek.dev`}),(0,U.jsx)(t_,{children:e.tagline})]}),(0,U.jsxs)(n_,{children:[`© `,t,` Derek.dev · `,e.rightsReserved]})]})]})},o_=Z`
+`,o_=`https://github.com/BoosterTech/Software_Engineer_Portfolio`,s_=()=>{let{footer:e}=Kp(),t=new Date().getFullYear();return(0,U.jsxs)(Zg,{id:`footer`,children:[(0,U.jsx)(i_,{"aria-hidden":`true`}),(0,U.jsx)(a_,{"aria-hidden":`true`}),(0,U.jsxs)(Qg,{children:[(0,U.jsxs)($g,{children:[(0,U.jsx)(e_,{children:`Derek.dev`}),(0,U.jsx)(t_,{children:e.tagline}),(0,U.jsxs)(r_,{href:o_,target:`_blank`,rel:`noopener noreferrer`,children:[(0,U.jsx)(hm,{"aria-hidden":`true`}),` `,e.viewSourceLabel]})]}),(0,U.jsxs)(n_,{children:[`© `,t,` Derek.dev · `,e.rightsReserved]})]})]})},c_=Z`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1570,7 +1597,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
-`,s_=Z`
+`,l_=Z`
   color: var(--color-white);
   background: linear-gradient(
     135deg,
@@ -1585,7 +1612,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     color: var(--color-white);
     border-color: var(--color-white);
   }
-`,c_=Z`
+`,u_=Z`
   color: var(--color-text-primary);
   background: transparent;
   border: 1px solid var(--color-border);
@@ -1595,7 +1622,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     color: var(--color-primary);
     background: rgba(var(--color-primary-rgb, var(--color-primary)), 0.08);
   }
-`,l_=Z`
+`,d_=Z`
   color: var(--color-white);
   background: linear-gradient(
     135deg,
@@ -1611,12 +1638,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
     background: transparent;
     box-shadow: none;
   }
-`,u_=Z`
-  ${o_}
+`,f_=Z`
+  ${c_}
   padding: var(--spacing-sm) var(--spacing-lg);
   font-size: 0.95rem;
 
-  ${({$variant:e})=>e===`primary`?s_:e===`outline`?c_:l_}
+  ${({$variant:e})=>e===`primary`?l_:e===`outline`?u_:d_}
 
   ${({$size:e})=>e===`sm`&&Z`
       min-height: 36px;
@@ -1635,11 +1662,11 @@ A Software Engineer focused on building modern web applications and AI-powered S
     justify-content: center;
     width: 100%;
   }
-`,d_=Q.a`
-  ${u_}
-`,f_=Q(Sh.Link)`
-  ${u_}
-`,p_=Q.span`
+`,p_=Q.a`
+  ${f_}
+`,m_=Q(Sh.Link)`
+  ${f_}
+`,h_=Q.span`
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -1668,13 +1695,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
     height: 0.75rem;
     flex-shrink: 0;
   }
-`,m_=Q.h1`
+`,g_=Q.h1`
   font-size: clamp(1.5rem, 8vw, 4.5rem);
   font-weight: 800;
   line-height: 1.05;
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-sm) 0;
-`,h_=Q.span`
+`,__=Q.span`
   display: inline-block;
   position: relative;
   padding-block-end: 0.15em;
@@ -1691,12 +1718,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   background-size: 200% 200%;
   ${Ph}
   ${Nh}
-`,g_=Q.p`
+`,v_=Q.p`
   font-size: 1.1rem;
   font-weight: 500;
   color: var(--color-primary);
   margin: 0 0 var(--spacing-md) 0;
-`,__=Q.p`
+`,y_=Q.p`
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 400;
   color: var(--color-text-secondary);
@@ -1710,7 +1737,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
 `;Q.span`
   color: var(--color-primary);
   font-weight: 600;
-`;var v_=Q.div`
+`;var b_=Q.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);
@@ -1724,7 +1751,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     flex-direction: column;
     align-items: stretch;
   }
-`,y_=Pp`
+`,x_=Pp`
    0%{
   border-radius: 65% 35% 67% 33% / 65% 36% 64% 35%  ;
 }
@@ -1734,7 +1761,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
 100%{
     border-radius: 65% 35% 67% 33% / 65% 36% 64% 35%  ;
 }
-`,b_=Q.section`
+`,S_=Q.section`
   padding: var(--nav-height-actual, var(--nav-height)) 0 var(--spacing-3xl) 0;
 
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
@@ -1743,7 +1770,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   }
   width: 100%;
   animation: ${Ih} 0.8s ease-out;
-`,x_=Q.div`
+`,C_=Q.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--spacing-3xl);
@@ -1765,7 +1792,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-height: 500px) {
     min-height: auto;
   }
-`,S_=Q.div`
+`,w_=Q.div`
   min-width: 0;
   animation: ${Lh} 0.8s ease-out 0.2s both;
 
@@ -1773,7 +1800,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     order: 2;
     animation: ${Ih} 0.8s ease-out 0.4s both;
   }
-`,C_=Q.div`
+`,T_=Q.div`
   width: 300px;
   height: 300px;
   position: relative;
@@ -1782,7 +1809,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     0 2px 8px rgba(var(--color-black-rgb), 0.08);
   animation:
     ${Rh} 0.8s ease-out 0.3s both,
-    ${y_} 12s ease-in-out infinite 1s;
+    ${x_} 12s ease-in-out infinite 1s;
 
   &::before {
     content: "";
@@ -1821,7 +1848,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     margin: 0 auto var(--spacing-xl) auto;
     animation:
       ${Ih} 0.8s ease-out 0.2s both,
-      ${y_} 12s ease-in-out infinite 1s;
+      ${x_} 12s ease-in-out infinite 1s;
   }
 
   @media (max-width: ${({theme:e})=>e.breakpoint.sm}) {
@@ -1833,7 +1860,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     width: 190px;
     height: 190px;
   }
-`,w_=Q.img`
+`,E_=Q.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -1850,7 +1877,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   transition:
     opacity 0.4s ease,
     transform var(--transition-normal);
-`,T_=Pp`
+`,D_=Pp`
   0% {
     transform: scale(1);
     opacity: 0.7;
@@ -1860,7 +1887,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     transform: scale(1.6);
     opacity: 0;
   }
-`,E_=Q.video`
+`,O_=Q.video`
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -1886,7 +1913,51 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
-`,D_=Q.button`
+`,k_=Q.p`
+  position: absolute;
+  top: calc(100% + var(--spacing-md));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: max-content;
+  max-width: 320px;
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: rgba(var(--color-surface-rgb), 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-text-primary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+
+  ${e=>e.$fading&&`opacity: 0; transform: translateX(-50%) translateY(6px);`}
+
+  /* Speech-bubble tail pointing up at the portrait */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: rgba(var(--color-surface-rgb), 0.85);
+    border-left: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`,A_=Q.button`
   position: absolute;
   right: var(--spacing-sm);
   bottom: var(--spacing-sm);
@@ -1895,7 +1966,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  background: rgb(var(--color-surface-rgb) / 0.85);
+  background: rgba(var(--color-surface-rgb), 0.85);
   color: var(--color-white);
   cursor: pointer;
   display: flex;
@@ -1913,7 +1984,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     inset: -4px;
     border-radius: 50%;
     border: 2px solid rgba(var(--color-primary-rgb), 0.6);
-    animation: ${T_} 6s ease-out infinite;
+    animation: ${D_} 6s ease-out infinite;
     pointer-events: none;
   }
 
@@ -1956,7 +2027,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
       animation-duration: 1.6s;
     }
   }
-`,O_=`/Software_Engineer_Portfolio/talking-portrait/profile-dark-en.mp4`,k_=({poster:e})=>{let{home:t}=Kp(),n=(0,g.useRef)(null),[r,i]=(0,g.useState)(`idle`),a=r===`loading`;(0,g.useEffect)(()=>(document.documentElement.classList.toggle(`portrait-playing`,r===`playing`),()=>document.documentElement.classList.remove(`portrait-playing`)),[r]);let o=()=>{i(`loading`);try{n.current?.play()?.catch(()=>i(`idle`))}catch{i(`idle`)}},s=()=>{let e=n.current;e&&(e.pause(),e.currentTime=0),i(`idle`)};return(0,U.jsxs)(U.Fragment,{children:[(0,U.jsx)(E_,{ref:n,"data-testid":`talking-portrait-video`,src:O_,poster:e,playsInline:!0,preload:`metadata`,$active:r===`playing`,"aria-label":t.hearMeLabel,"aria-hidden":r!==`playing`,onPlaying:()=>i(`playing`),onEnded:s,onError:()=>i(`idle`),onClick:s}),r!==`playing`&&(0,U.jsx)(D_,{onClick:o,"aria-label":t.hearMeLabel,"aria-busy":a,disabled:a,children:a?(0,U.jsx)(`span`,{className:`spinner`}):(0,U.jsx)(Mm,{"aria-hidden":!0})})]})},A_=`data:image/webp;base64,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`,j_=`/Software_Engineer_Portfolio/assets/React_wordmark_light-BoUAt6oJ.svg`,M_=`data:image/webp;base64,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`,N_=`data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%20-6%20256%20256'%20xmlns='http://www.w3.org/2000/svg'%20preserveAspectRatio='xMidYMid'%3e%3cpath%20d='M177.381%20169.733c9.447-.978%2016.614-9.122%2016.288-18.896-.325-9.773-8.47-17.592-18.243-17.592h-.651c-10.1.326-17.918%208.796-17.592%2018.895.326%204.887%202.28%209.122%205.212%2012.054-11.076%2021.828-28.016%2037.791-53.426%2051.148-17.266%209.122-35.183%2012.38-53.1%2010.1-14.66-1.955-26.062-8.47-33.23-19.222-10.424-15.963-11.401-33.23-2.605-50.496%206.19-12.38%2015.962-21.502%2022.152-26.063-1.303-4.235-3.258-11.402-4.235-16.614-47.237%2034.207-42.35%2080.468-28.016%20102.295%2010.75%2016.29%2032.577%2026.389%2056.684%2026.389%206.515%200%2013.03-.652%2019.546-2.28%2041.699-8.145%2073.299-32.905%2091.216-69.718zm57.336-40.397c-24.759-28.995-61.245-44.958-102.944-44.958h-5.212c-2.932-5.864-9.122-9.774-15.963-9.774h-.652C99.848%2074.93%2092.03%2083.4%2092.355%2093.5c.326%209.773%208.47%2017.592%2018.243%2017.592h.651c7.167-.326%2013.357-4.887%2015.963-11.077h5.864c24.759%200%2048.214%207.167%2069.39%2021.176%2016.288%2010.751%2028.016%2024.76%2034.531%2041.7%205.538%2013.683%205.212%2027.04-.652%2038.443-9.121%2017.266-24.432%2026.714-44.63%2026.714-13.031%200-25.41-3.91-31.926-6.842-3.583%203.258-10.099%208.47-14.66%2011.729%2014.009%206.515%2028.343%2010.099%2042.025%2010.099%2031.274%200%2054.404-17.267%2063.2-34.533%209.447-18.896%208.795-51.474-15.637-79.165zM69.225%20175.27c.326%209.774%208.47%2017.592%2018.243%2017.592h.652c10.099-.325%2017.917-8.796%2017.591-18.895-.325-9.774-8.47-17.592-18.243-17.592h-.651c-.652%200-1.63%200-2.28.325-13.357-22.153-18.895-46.26-16.94-72.323%201.302-19.547%207.818-36.488%2019.22-50.497%209.447-12.054%2027.69-17.918%2040.07-18.243%2034.531-.652%2049.19%2042.351%2050.168%2059.618%204.235.977%2011.402%203.258%2016.289%204.887C189.434%2027.366%20156.857%200%20125.584%200c-29.32%200-56.359%2021.176-67.11%2052.451-14.985%2041.7-5.212%2081.771%2013.031%20113.372-1.628%202.28-2.606%205.864-2.28%209.448z'%20fill='%23764ABC'/%3e%3c/svg%3e`,P_=`/Software_Engineer_Portfolio/assets/styledcomponents-C4nijiMQ.webp`,F_=`/Software_Engineer_Portfolio/assets/Supabase_wordmark_light-BslC5xdF.svg`,I_=`data:image/webp;base64,UklGRsYFAABXRUJQVlA4ILoFAAAwIgCdASqgAKAAPmEwlUekIyIhJJW4SIAMCWVu4XVJ3HkvVdtHhgOyvIP6gOWZ/VX3AfsP6gP2e9Cv9IPcB/hPUA/YXrAP0z9gD+Af3f//+t37FP7jfsh7VX//zR38IPAn+49EB6IPifzfkB/a/BPaw/yO8Ecf/a3jK+pfmh/63jYe9vYA/O/n3Z4/or/rf4v4Df1V/4/YL9Gn9mRQCJCaTvIdMEeRITSd5DpgjyJCXNSwOzt0nX9K963OKMQfxB4hJHXfeR1FR5vNJzoHB/pJBiPbT6BuYHQ3/glfcZzCfXLlhmMICWI796fEI/m1GA1sJQtB63I2aFZuqlkYeMbqR7WkJFQwippRNJ3kOmCPIkJpO8h0wR5EcgAA/v+/QAAxSICv/et6E5C3G/H3CoZ3ZCadNQ3qm+36an+8NHvySJPqf53DTeTryuT1aHK13+qlKeOSfHXmUpd9LQU1V6YlF9nx9HiF1pTPBTUj7FyR0WBs807PixgBj5sB5B14/U5sLzwPOwQST8hKdXLR+Lt35tO1lFCz/EvvGlP2V+MJOQRhB1HhsodIJqTPiRAFjQHud2K3Vsbu6HqnpAXp4dhzWe4p8R5IQiFsfR/eXZ5o2EyuJi5cLcW6D5Oz5ACLw15Y1FKoa1blmPtCPYwI/zrGi8sUoMNKerAxAa1uhao7iPAGT0+HuplegilmEMxM7WrzZYYYZMfGpzdHl3siUc81Odz/maAzbTNOhdyY58Mjjs+hxCjnC7s5AMn1V5Gd8U0Fr6mKOf/DiJ3qe2N8Tw5WP8OrTGOaYk4uTUbdzpKbv/UqrY28tJztlDSh/W1KelfPrLTmbeXhP+Mxylhs+wJRMyfSJ0S3fDdpcN/tHYwBv6+kl25uTRu2O7yjNYQoqS4usWLcqNpypnITIxKZ6PXvMgGy92i18gpjotRqOQJaiq/SsoAHy57A4gsRM7QOcuQDCwHCp0UzdCoNnDujmmM7Vm83FQ5yyjMeO43se1hq016DnWKt2dX8WzDW77iaz3EGYnwCsH+MFZk2BNwfQTuQrqbleLa45zvsohpk1wNMc/reeVZj0K6giAlpSD1Hn7/F4ZzKSYf9YXjhnH1vyDYrheClenfDPNV/OfYdta18rkFw/Fc/hr/8stXC3iXVtGO7kFWlWjyBCsp5tm1o8l2nUzGruz/+O36B6NE/badTQ1Utq4MYsRyJbsZqHhQYU+Uf+u17LbixzPbvCbAP8VEc8sQCnddtpj9GYrd18FKenrDCMwGDbFPwND9PO9C39U4/Zn0m/dsTF9q0uSwDZ1/Psv0PXmVgJ5O9PNAbrH9zBOxsARGqMMZrv9rZz2nOu1AzPc9X57PN0exohQY3Tlr/WOmZN05eAvtkDUuCi/4ZLZe6d5/kMh0BeEyiP7H+kvPqPf0m/3ocwOXsqqO34uimRxihcMKD/yJ+HVx0pIbA/fLgBR/Ei4FufmeA9lv5vDih4+5wu+LZIAJyd/zC3bXrrkp/ogUx12aVsEU7JU+yO9f5Oao8OodV+3wsKDFFlpdKO6/WLRtYoo731ofvFUCk/Do3j/sFm6Q/fa6taYHRq+prY1HfKoYSt7X4S1fN5JBSmEfdV37SwtY3bp6vBbeltqAHGhctSLV/QxGjd/9LSsvYoPkhX5r8gWVx7gUA3s6zL/7kGwETASTku5OrP4AJrLgX8zuXdsFaA4XmEPsJGTfRrs0S2Y5LRmXI0PK2CMfRtggtJ6EZOC6V4wXIHNFjtDbMhGShNikxXwpAuR/wsOPzzCgXUfJIR9/gj/v3aFt1Bz8qIMWPxKSI3r8AxDDjE4A1orHJZq24wQIPWcd6t9HXdL1a5iyZK0Dik40u1ATwHDkq/2EBfJyI0q6pdzW2e/bcTI7cS99s8VoNhXb0MGtZsVc3V0Y2Emzh7JHManKbsrvYWS+rkyQqC+VjsCmtrErG8gAAAAAAAA==`,L_=`data:image/webp;base64,UklGRkIFAABXRUJQVlA4IDYFAAAwHQCdASqgAFkAPmEuk0ckIqGhJFQKwIAMCWkAFeUdgf+T8LfA95G9g9Aj59Povyg/Kr4r/wHgDtU/4P8suCvAB9RP91/WuQDvN/1L/g8ZhH36qX8b/2v8/+Wntc+jf+n/iPgF/ln9c/6X909qr1r/sr7Hn7FFB6JD0SHcwZqoWPbFkKFl1iF82dstrJGd7FnIQyoXsABbBADYK+XxpIjl4eKsGdffnGzWy1PRn35FAxsDW+UkKtMFKkmNm/+1hbIYQ04Bt/yv8MLrBJetXoUzib+zq2VkQQMOMP21+nozHqPkmzwMM6WTYiyhr1N3qbvSgAD+/PQACDFOGtQJsKP5t9Lc6PcnvQQRrdeIC0ehgPi7u+0f4UEj/gyr2fK9x/n2egrzUp5JtUW9Ct3nDRMgjvWc5154mJEi53ptNdyyai1piiLElDHhCSOraiHJhfHD/kKyJK10JKdn0QuSV3fdUnpPkR2szJaMw2cJr6QJDhl/Tk9NjObWJvUuzWEHPYJEEt+5eyQeG9TWueUuYR+mnlaS4ZPUIbxPbYsxDJsz6ME0u0zDPMf3FxrXNflHGKCdMvAwahx7coL+EaGn5OrEGevrRcN9wS6pB/kgmUZR6duSWVSV6mv+TNngnFcXHrGyaPc8KkbKYibMay4DAah9rFJUYrCBZmiKL35f34nnXZkvQUUQlsgFd08be3wvkTk1rFIR97tgekUygAds9JWzBmAe6VN9UFujdHUWmmTITRI+J5WsnlxcXD88OL/fEfePN/4Y5FaqMCZo5lnGtr5KGeenEMyrMRshMf3L+icK/WTa3+lmYAyfTTCjDh+tXwTjOyLKKoMaE/6sjSMFvwV7vlbdbGB/YdJadNes6XZxcc/OFQ8cqb9h8waug3rQoeLkeLjHXb7HTjlRPDT/3rNHnCdJSj2s34BOeVf2gLvDMX84ffmQU20xCcxvlf8NUfi56Znvte4NZflCJkX1fTh2qleslZlGb3+NyrqwaB/11kgl+skab+1lWtxRcZ3JUhxFopL+bZyBjsaK9HPdl7Hxqe5nUrk363Qz9mxh18KAUVD+pKP9L0qSMrdZwhFca+q/Ue1nFBiMYIPy+4f78CO4w/hk1XXB7v4WfJLcK5rfS0H0MDnhg+JMPRtFxXT05yQ8C6hvr18sKCCupQf6xEZxOHvgzXrSFkARtDv7iOXIxL0CCzxlS0lTNOska49QLDb+Tge5G2CFJTPtINzQTAGEvLM9Gv4rbMA6AYnFgsTzgIp9ANDZzSOV2darZBq88gXPTkjN9LT8Ba2ILa2WCyX++F4Ob5KZUqiXrjw4CjOvcsPzwJUXI4XgCNRi449X4xhsyAVIDP/J64gOxok8aPIAGO0Hm35asfCYSwlf8yG980U6dfgYx/odbVGtkQMD92tlroedWb/U78qqPxw8S8hiRV2PSX0jA//EfHrT/0uSVJS+O2LITozmiMCKPtGNWY7KiIsPPALNgpq20PMx67J1kWnZWkRqVHacF/oeX5w6LJx2V1PN7CCkDtslKMymS7VpLzCCA6DJvaI2ukTc/1DLbWoCPQK2nMtdKFMr22vrJkL8z+XOtswm67y01GJI+2WGiqLy+E9EoXQZo6tQOFuvfPlk8IUwYgWeivP0TqFNU1zw+IS4UiRxlUTwkaZyw252nn/toBUhxz27qklqOz9eIHRH+T8nCpw+pMhPjLBxEF1iuReoRYA0fvQnJ9PR1jxhCLNKuNkvK31lNPuY7WnvJFL3QF9Q67D/odaSz7jcYwAAAAAAAA==`;function R_(e){return $({tag:`svg`,attr:{role:`img`,viewBox:`0 0 24 24`},child:[{tag:`path`,attr:{d:`M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z`},child:[]}]})(e)}function z_(e){return $({tag:`svg`,attr:{role:`img`,viewBox:`0 0 24 24`},child:[{tag:`path`,attr:{d:`M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z`},child:[]}]})(e)}var B_=Q(K.div).attrs(({$variants:e})=>({variants:e}))`
+`,j_=`/Software_Engineer_Portfolio/talking-portrait/profile-dark-en.mp4`,M_=`/Software_Engineer_Portfolio/talking-portrait/profile-dark-en.vtt`,N_=3500,P_=500,F_=({poster:e})=>{let{home:t}=Kp(),n=(0,g.useRef)(null),r=(0,g.useRef)(null),[i,a]=(0,g.useState)(`idle`),[o,s]=(0,g.useState)(``),[c,l]=(0,g.useState)(!1),u=i===`loading`;(0,g.useEffect)(()=>()=>clearTimeout(r.current),[]),(0,g.useEffect)(()=>(document.documentElement.classList.toggle(`portrait-playing`,i===`playing`),()=>document.documentElement.classList.remove(`portrait-playing`)),[i]),(0,g.useEffect)(()=>{if(i!==`playing`)return;let e=n.current?.textTracks?.[0];if(!e)return;e.mode=`hidden`;let t=()=>s(e.activeCues?.[0]?.text??``);return t(),e.addEventListener(`cuechange`,t),()=>e.removeEventListener(`cuechange`,t)},[i]);let d=()=>{clearTimeout(r.current),s(``),l(!1),a(`loading`);try{n.current?.play()?.catch(()=>a(`idle`))}catch{a(`idle`)}},f=()=>{let e=n.current;e&&(e.pause(),e.currentTime=0),r.current=setTimeout(()=>{l(!0),r.current=setTimeout(()=>{s(``),l(!1)},P_)},N_),a(`idle`)};return(0,U.jsxs)(U.Fragment,{children:[(0,U.jsx)(O_,{ref:n,"data-testid":`talking-portrait-video`,src:j_,poster:e,playsInline:!0,preload:`metadata`,$active:i===`playing`,"aria-label":t.hearMeLabel,"aria-hidden":i!==`playing`,onPlaying:()=>a(`playing`),onEnded:f,onError:()=>a(`idle`),onClick:f,children:(0,U.jsx)(`track`,{kind:`captions`,srcLang:`en`,label:t.captionsLabel,src:M_})}),(0,U.jsx)(k_,{"aria-live":`polite`,"aria-atomic":`true`,hidden:!o,$fading:c,children:o}),i!==`playing`&&(0,U.jsx)(A_,{onClick:d,"aria-label":t.hearMeLabel,"aria-busy":u,disabled:u,children:u?(0,U.jsx)(`span`,{className:`spinner`}):(0,U.jsx)(Mm,{"aria-hidden":!0})})]})},I_=`data:image/webp;base64,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`,L_=`/Software_Engineer_Portfolio/assets/React_wordmark_light-BoUAt6oJ.svg`,R_=`data:image/webp;base64,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`,z_=`data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%20-6%20256%20256'%20xmlns='http://www.w3.org/2000/svg'%20preserveAspectRatio='xMidYMid'%3e%3cpath%20d='M177.381%20169.733c9.447-.978%2016.614-9.122%2016.288-18.896-.325-9.773-8.47-17.592-18.243-17.592h-.651c-10.1.326-17.918%208.796-17.592%2018.895.326%204.887%202.28%209.122%205.212%2012.054-11.076%2021.828-28.016%2037.791-53.426%2051.148-17.266%209.122-35.183%2012.38-53.1%2010.1-14.66-1.955-26.062-8.47-33.23-19.222-10.424-15.963-11.401-33.23-2.605-50.496%206.19-12.38%2015.962-21.502%2022.152-26.063-1.303-4.235-3.258-11.402-4.235-16.614-47.237%2034.207-42.35%2080.468-28.016%20102.295%2010.75%2016.29%2032.577%2026.389%2056.684%2026.389%206.515%200%2013.03-.652%2019.546-2.28%2041.699-8.145%2073.299-32.905%2091.216-69.718zm57.336-40.397c-24.759-28.995-61.245-44.958-102.944-44.958h-5.212c-2.932-5.864-9.122-9.774-15.963-9.774h-.652C99.848%2074.93%2092.03%2083.4%2092.355%2093.5c.326%209.773%208.47%2017.592%2018.243%2017.592h.651c7.167-.326%2013.357-4.887%2015.963-11.077h5.864c24.759%200%2048.214%207.167%2069.39%2021.176%2016.288%2010.751%2028.016%2024.76%2034.531%2041.7%205.538%2013.683%205.212%2027.04-.652%2038.443-9.121%2017.266-24.432%2026.714-44.63%2026.714-13.031%200-25.41-3.91-31.926-6.842-3.583%203.258-10.099%208.47-14.66%2011.729%2014.009%206.515%2028.343%2010.099%2042.025%2010.099%2031.274%200%2054.404-17.267%2063.2-34.533%209.447-18.896%208.795-51.474-15.637-79.165zM69.225%20175.27c.326%209.774%208.47%2017.592%2018.243%2017.592h.652c10.099-.325%2017.917-8.796%2017.591-18.895-.325-9.774-8.47-17.592-18.243-17.592h-.651c-.652%200-1.63%200-2.28.325-13.357-22.153-18.895-46.26-16.94-72.323%201.302-19.547%207.818-36.488%2019.22-50.497%209.447-12.054%2027.69-17.918%2040.07-18.243%2034.531-.652%2049.19%2042.351%2050.168%2059.618%204.235.977%2011.402%203.258%2016.289%204.887C189.434%2027.366%20156.857%200%20125.584%200c-29.32%200-56.359%2021.176-67.11%2052.451-14.985%2041.7-5.212%2081.771%2013.031%20113.372-1.628%202.28-2.606%205.864-2.28%209.448z'%20fill='%23764ABC'/%3e%3c/svg%3e`,B_=`/Software_Engineer_Portfolio/assets/styledcomponents-C4nijiMQ.webp`,V_=`/Software_Engineer_Portfolio/assets/Supabase_wordmark_light-BslC5xdF.svg`,H_=`data:image/webp;base64,UklGRsYFAABXRUJQVlA4ILoFAAAwIgCdASqgAKAAPmEwlUekIyIhJJW4SIAMCWVu4XVJ3HkvVdtHhgOyvIP6gOWZ/VX3AfsP6gP2e9Cv9IPcB/hPUA/YXrAP0z9gD+Af3f//+t37FP7jfsh7VX//zR38IPAn+49EB6IPifzfkB/a/BPaw/yO8Ecf/a3jK+pfmh/63jYe9vYA/O/n3Z4/or/rf4v4Df1V/4/YL9Gn9mRQCJCaTvIdMEeRITSd5DpgjyJCXNSwOzt0nX9K963OKMQfxB4hJHXfeR1FR5vNJzoHB/pJBiPbT6BuYHQ3/glfcZzCfXLlhmMICWI796fEI/m1GA1sJQtB63I2aFZuqlkYeMbqR7WkJFQwippRNJ3kOmCPIkJpO8h0wR5EcgAA/v+/QAAxSICv/et6E5C3G/H3CoZ3ZCadNQ3qm+36an+8NHvySJPqf53DTeTryuT1aHK13+qlKeOSfHXmUpd9LQU1V6YlF9nx9HiF1pTPBTUj7FyR0WBs807PixgBj5sB5B14/U5sLzwPOwQST8hKdXLR+Lt35tO1lFCz/EvvGlP2V+MJOQRhB1HhsodIJqTPiRAFjQHud2K3Vsbu6HqnpAXp4dhzWe4p8R5IQiFsfR/eXZ5o2EyuJi5cLcW6D5Oz5ACLw15Y1FKoa1blmPtCPYwI/zrGi8sUoMNKerAxAa1uhao7iPAGT0+HuplegilmEMxM7WrzZYYYZMfGpzdHl3siUc81Odz/maAzbTNOhdyY58Mjjs+hxCjnC7s5AMn1V5Gd8U0Fr6mKOf/DiJ3qe2N8Tw5WP8OrTGOaYk4uTUbdzpKbv/UqrY28tJztlDSh/W1KelfPrLTmbeXhP+Mxylhs+wJRMyfSJ0S3fDdpcN/tHYwBv6+kl25uTRu2O7yjNYQoqS4usWLcqNpypnITIxKZ6PXvMgGy92i18gpjotRqOQJaiq/SsoAHy57A4gsRM7QOcuQDCwHCp0UzdCoNnDujmmM7Vm83FQ5yyjMeO43se1hq016DnWKt2dX8WzDW77iaz3EGYnwCsH+MFZk2BNwfQTuQrqbleLa45zvsohpk1wNMc/reeVZj0K6giAlpSD1Hn7/F4ZzKSYf9YXjhnH1vyDYrheClenfDPNV/OfYdta18rkFw/Fc/hr/8stXC3iXVtGO7kFWlWjyBCsp5tm1o8l2nUzGruz/+O36B6NE/badTQ1Utq4MYsRyJbsZqHhQYU+Uf+u17LbixzPbvCbAP8VEc8sQCnddtpj9GYrd18FKenrDCMwGDbFPwND9PO9C39U4/Zn0m/dsTF9q0uSwDZ1/Psv0PXmVgJ5O9PNAbrH9zBOxsARGqMMZrv9rZz2nOu1AzPc9X57PN0exohQY3Tlr/WOmZN05eAvtkDUuCi/4ZLZe6d5/kMh0BeEyiP7H+kvPqPf0m/3ocwOXsqqO34uimRxihcMKD/yJ+HVx0pIbA/fLgBR/Ei4FufmeA9lv5vDih4+5wu+LZIAJyd/zC3bXrrkp/ogUx12aVsEU7JU+yO9f5Oao8OodV+3wsKDFFlpdKO6/WLRtYoo731ofvFUCk/Do3j/sFm6Q/fa6taYHRq+prY1HfKoYSt7X4S1fN5JBSmEfdV37SwtY3bp6vBbeltqAHGhctSLV/QxGjd/9LSsvYoPkhX5r8gWVx7gUA3s6zL/7kGwETASTku5OrP4AJrLgX8zuXdsFaA4XmEPsJGTfRrs0S2Y5LRmXI0PK2CMfRtggtJ6EZOC6V4wXIHNFjtDbMhGShNikxXwpAuR/wsOPzzCgXUfJIR9/gj/v3aFt1Bz8qIMWPxKSI3r8AxDDjE4A1orHJZq24wQIPWcd6t9HXdL1a5iyZK0Dik40u1ATwHDkq/2EBfJyI0q6pdzW2e/bcTI7cS99s8VoNhXb0MGtZsVc3V0Y2Emzh7JHManKbsrvYWS+rkyQqC+VjsCmtrErG8gAAAAAAAA==`,U_=`data:image/webp;base64,UklGRkIFAABXRUJQVlA4IDYFAAAwHQCdASqgAFkAPmEuk0ckIqGhJFQKwIAMCWkAFeUdgf+T8LfA95G9g9Aj59Povyg/Kr4r/wHgDtU/4P8suCvAB9RP91/WuQDvN/1L/g8ZhH36qX8b/2v8/+Wntc+jf+n/iPgF/ln9c/6X909qr1r/sr7Hn7FFB6JD0SHcwZqoWPbFkKFl1iF82dstrJGd7FnIQyoXsABbBADYK+XxpIjl4eKsGdffnGzWy1PRn35FAxsDW+UkKtMFKkmNm/+1hbIYQ04Bt/yv8MLrBJetXoUzib+zq2VkQQMOMP21+nozHqPkmzwMM6WTYiyhr1N3qbvSgAD+/PQACDFOGtQJsKP5t9Lc6PcnvQQRrdeIC0ehgPi7u+0f4UEj/gyr2fK9x/n2egrzUp5JtUW9Ct3nDRMgjvWc5154mJEi53ptNdyyai1piiLElDHhCSOraiHJhfHD/kKyJK10JKdn0QuSV3fdUnpPkR2szJaMw2cJr6QJDhl/Tk9NjObWJvUuzWEHPYJEEt+5eyQeG9TWueUuYR+mnlaS4ZPUIbxPbYsxDJsz6ME0u0zDPMf3FxrXNflHGKCdMvAwahx7coL+EaGn5OrEGevrRcN9wS6pB/kgmUZR6duSWVSV6mv+TNngnFcXHrGyaPc8KkbKYibMay4DAah9rFJUYrCBZmiKL35f34nnXZkvQUUQlsgFd08be3wvkTk1rFIR97tgekUygAds9JWzBmAe6VN9UFujdHUWmmTITRI+J5WsnlxcXD88OL/fEfePN/4Y5FaqMCZo5lnGtr5KGeenEMyrMRshMf3L+icK/WTa3+lmYAyfTTCjDh+tXwTjOyLKKoMaE/6sjSMFvwV7vlbdbGB/YdJadNes6XZxcc/OFQ8cqb9h8waug3rQoeLkeLjHXb7HTjlRPDT/3rNHnCdJSj2s34BOeVf2gLvDMX84ffmQU20xCcxvlf8NUfi56Znvte4NZflCJkX1fTh2qleslZlGb3+NyrqwaB/11kgl+skab+1lWtxRcZ3JUhxFopL+bZyBjsaK9HPdl7Hxqe5nUrk363Qz9mxh18KAUVD+pKP9L0qSMrdZwhFca+q/Ue1nFBiMYIPy+4f78CO4w/hk1XXB7v4WfJLcK5rfS0H0MDnhg+JMPRtFxXT05yQ8C6hvr18sKCCupQf6xEZxOHvgzXrSFkARtDv7iOXIxL0CCzxlS0lTNOska49QLDb+Tge5G2CFJTPtINzQTAGEvLM9Gv4rbMA6AYnFgsTzgIp9ANDZzSOV2darZBq88gXPTkjN9LT8Ba2ILa2WCyX++F4Ob5KZUqiXrjw4CjOvcsPzwJUXI4XgCNRi449X4xhsyAVIDP/J64gOxok8aPIAGO0Hm35asfCYSwlf8yG980U6dfgYx/odbVGtkQMD92tlroedWb/U78qqPxw8S8hiRV2PSX0jA//EfHrT/0uSVJS+O2LITozmiMCKPtGNWY7KiIsPPALNgpq20PMx67J1kWnZWkRqVHacF/oeX5w6LJx2V1PN7CCkDtslKMymS7VpLzCCA6DJvaI2ukTc/1DLbWoCPQK2nMtdKFMr22vrJkL8z+XOtswm67y01GJI+2WGiqLy+E9EoXQZo6tQOFuvfPlk8IUwYgWeivP0TqFNU1zw+IS4UiRxlUTwkaZyw252nn/toBUhxz27qklqOz9eIHRH+T8nCpw+pMhPjLBxEF1iuReoRYA0fvQnJ9PR1jxhCLNKuNkvK31lNPuY7WnvJFL3QF9Q67D/odaSz7jcYwAAAAAAAA==`;function W_(e){return $({tag:`svg`,attr:{role:`img`,viewBox:`0 0 24 24`},child:[{tag:`path`,attr:{d:`M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z`},child:[]}]})(e)}function G_(e){return $({tag:`svg`,attr:{role:`img`,viewBox:`0 0 24 24`},child:[{tag:`path`,attr:{d:`M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z`},child:[]}]})(e)}var K_=Q(K.div).attrs(({$variants:e})=>({variants:e}))`
   margin-top: var(--spacing-3xl);
   width: 100%;
   max-width: var(--container-max-width);
@@ -1975,11 +2046,11 @@ A Software Engineer focused on building modern web applications and AI-powered S
     grid-template-columns: 1fr;
     padding: var(--spacing-lg);
   }
-`,V_=Q.div`
+`,q_=Q.div`
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-`,H_=Q.span`
+`,J_=Q.span`
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -1992,12 +2063,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   svg {
     transform: translateY(3px);
   }
-`,U_=Q.p`
+`,Y_=Q.p`
   font-size: 0.95rem;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
-`,W_=Q(K.div)`
+`,X_=Q(K.div)`
   display: flex;
   gap: var(--spacing-md);
   overflow-x: auto;
@@ -2035,7 +2106,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     -webkit-mask-image: none;
     mask-image: none;
   }
-`,G_=Q(K.div)`
+`,Z_=Q(K.div)`
   flex: 0 0 auto;
   scroll-snap-align: start;
   width: clamp(120px, 38vw, 150px);
@@ -2063,7 +2134,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (min-width: ${({theme:e})=>e.breakpoint.lg}) {
     width: 100%;
   }
-`,K_=Q.div`
+`,Q_=Q.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2077,7 +2148,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     font-size: 1.4rem;
     flex-shrink: 0;
   }
-`,q_=Q.span`
+`,$_=Q.span`
   font-size: 0.7rem;
   color: var(--color-text-secondary);
   line-height: 1.4;
@@ -2085,7 +2156,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     display: none;
   }
-`,J_=Q(K.div)`
+`,ev=Q(K.div)`
   flex: 0 0 auto;
   scroll-snap-align: start;
   width: clamp(120px, 38vw, 150px);
@@ -2109,7 +2180,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (min-width: ${({theme:e})=>e.breakpoint.lg}) {
     width: 100%;
   }
-`,Y_=Q.div`
+`,tv=Q.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2123,7 +2194,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     flex-shrink: 0;
     transform: translateY(3px);
   }
-`,X_=Q.span`
+`,nv=Q.span`
   font-size: 0.7rem;
   color: var(--color-text-secondary);
   line-height: 1.4;
@@ -2131,16 +2202,16 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     display: none;
   }
-`,Z_=parseInt(Ch.breakpoint.xl,10),Q_=e=>e<Z_?{radius:150,cardWidth:88,cardHeight:74,iconSize:28,fontSize:11,centerSize:92}:{radius:190,cardWidth:100,cardHeight:84,iconSize:34,fontSize:12,centerSize:108},$_=Pp`
+`,rv=parseInt(Ch.breakpoint.xl,10),iv=e=>e<rv?{radius:150,cardWidth:88,cardHeight:74,iconSize:28,fontSize:11,centerSize:92}:{radius:190,cardWidth:100,cardHeight:84,iconSize:34,fontSize:12,centerSize:108},av=Pp`
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
-`,ev=Pp`
+`,ov=Pp`
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-`,tv=Q.div`
+`,sv=Q.div`
   position: relative;
   margin: 0 auto;
-`,nv=Q.svg`
+`,cv=Q.svg`
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2152,7 +2223,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   line {
     stroke-linecap: round;
   }
-`,rv=Q.div`
+`,lv=Q.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2161,7 +2232,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   transform: translate(-50%, -50%);
   z-index: 2;
   pointer-events: none;
-`,iv=Q(K.div)`
+`,uv=Q(K.div)`
   position: relative;
   z-index: 1;
   width: 100%;
@@ -2190,7 +2261,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     height: ${({$size:e})=>e*.42}px;
     object-fit: contain;
   }
-`,av=Q.div`
+`,dv=Q.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2198,13 +2269,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
   height: ${({$height:e})=>e}px;
   z-index: 2;
   pointer-events: none;
-`,ov=Q.div`
+`,fv=Q.div`
   width: 100%;
   height: 100%;
   will-change: transform;
-  animation: ${$_} 4s ease-in-out infinite;
+  animation: ${av} 4s ease-in-out infinite;
   animation-delay: ${({$delay:e})=>e}s;
-`,sv=Q(K.div)`
+`,pv=Q(K.div)`
   width: 100%;
   height: 100%;
   border-radius: 18px;
@@ -2244,13 +2315,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
           }
         `}
     `}
-`,cv=Q.span`
+`,mv=Q.span`
   font-size: ${({$fontSize:e})=>e}px;
   font-weight: 700;
   color: ${({$onLight:e})=>e?`var(--color-black)`:`var(--color-text-primary)`};
   text-align: center;
   line-height: 1.2;
-`,lv=Q.div`
+`,hv=Q.div`
   display: none;
   overflow: hidden;
   width: 100%;
@@ -2280,11 +2351,11 @@ A Software Engineer focused on building modern web applications and AI-powered S
     -webkit-mask-image: none;
     mask-image: none;
   }
-`,uv=Q.div`
+`,gv=Q.div`
   display: flex;
   gap: var(--spacing-md);
   width: max-content;
-  animation: ${ev} 28s linear infinite;
+  animation: ${ov} 28s linear infinite;
   animation-play-state: ${({$paused:e})=>e?`paused`:`running`};
 
   @media (hover: hover) {
@@ -2296,7 +2367,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`,dv=Q(K.div)`
+`,_v=Q(K.div)`
   flex: 0 0 auto;
   width: 76px;
   height: 76px;
@@ -2338,13 +2409,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
           }
         `}
     `}
-`,fv=()=>{let[e,t]=(0,g.useState)(window.innerWidth);return(0,g.useEffect)(()=>{let e=null,n=()=>{e&&cancelAnimationFrame(e),e=requestAnimationFrame(()=>t(window.innerWidth))};return window.addEventListener(`resize`,n),()=>{window.removeEventListener(`resize`,n),e&&cancelAnimationFrame(e)}},[]),e},pv=parseInt(Ch.breakpoint.lg,10),mv=({technologies:e,centerIcon:t,centerIconWidth:n,centerIconHeight:r,centerLabel:i=`Next.js`})=>{let a=fv(),o=th(`(hover: hover)`),s=a<=pv,c=[`redux`,`typescript`,`react`,`vercel`,`supabase`,`react-query`,`styled`],l=[`react`,`vercel`,`supabase`,`styled`,`react-query`],u=(0,g.useRef)(null),[d,f]=(0,g.useState)(2**53-1),[p,m]=(0,g.useState)(!1),h=(0,g.useRef)(null),_=(0,g.useRef)(null),v=()=>{if(clearTimeout(h.current),p)return m(!1);m(!0),h.current=setTimeout(()=>m(!1),4e3)};(0,g.useEffect)(()=>()=>clearTimeout(h.current),[]),(0,g.useEffect)(()=>{if(!p)return;let e=e=>{_.current?.contains(e.target)||m(!1)};return window.addEventListener(`pointerdown`,e),()=>window.removeEventListener(`pointerdown`,e)},[p]);let{radius:y,cardWidth:b,cardHeight:x,centerSize:S}=(0,g.useMemo)(()=>Q_(a),[a]),C=y*2+b+40,w=b+80,T=Math.min(C,Math.max(d,w)),ee=(T-b-40)/2,E=T/2;(0,g.useEffect)(()=>{let e=u.current?.parentElement;if(!e)return;let t=()=>{let t=e.getBoundingClientRect();f(Math.min(t.width,t.height))};t();let n=new ResizeObserver(t);return n.observe(e),()=>n.disconnect()},[s]);let te=(0,g.useMemo)(()=>{let t=e.length,n=Math.PI*2/t;return e.map((e,t)=>{let r=t*n-Math.PI/2;return{x:Math.cos(r)*ee,y:Math.sin(r)*ee}})},[e,ee]),ne=[{id:`__center`,name:i,icon:t,iconWidth:n,iconHeight:r,isCenter:!0},...e];return(0,U.jsxs)(U.Fragment,{children:[!s&&(0,U.jsxs)(tv,{ref:u,className:`orbit-desktop`,style:{width:T,height:T},children:[(0,U.jsxs)(nv,{viewBox:`0 0 ${T} ${T}`,children:[(0,U.jsx)(`g`,{id:`line-glow`,children:te.map((e,t)=>{let n=E+e.x,r=E+e.y;return(0,U.jsx)(`line`,{x1:E,y1:E,x2:n,y2:r,stroke:`var(--color-cyan)`,strokeWidth:`5`,strokeOpacity:`0.15`,strokeLinecap:`round`},`glow-${t}`)})}),(0,U.jsx)(`g`,{id:`line-core`,children:te.map((e,t)=>{let n=E+e.x,r=E+e.y;return(0,U.jsx)(`line`,{x1:E,y1:E,x2:n,y2:r,stroke:`var(--color-cyan-light)`,strokeWidth:`1.5`,strokeOpacity:`0.5`,strokeLinecap:`round`},`core-${t}`)})})]}),(0,U.jsx)(rv,{$size:S,children:(0,U.jsx)(iv,{$size:S,initial:{scale:.7,opacity:0},whileInView:{scale:1,opacity:1},viewport:{once:!0},transition:{duration:.6,ease:`easeOut`},whileHover:{scale:1.05},children:(0,U.jsx)(`img`,{src:t,alt:i,width:n,height:r})})}),e.map((e,t)=>{let{x:n,y:r}=te[t];return(0,U.jsx)(av,{$width:c.includes(e.id)?Math.min(b,x):b,$height:c.includes(e.id)?Math.min(b,x):x,style:{left:`50%`,top:`50%`,transform:`translate(-50%, -50%) translate(${n}px, ${r}px)`},children:(0,U.jsx)(ov,{$delay:t*.4,children:(0,U.jsxs)(sv,{$isCircleCard:c.includes(e.id),$isPadded:l.includes(e.id),$hasLabel:e.showLabel,initial:{opacity:0,scale:0},whileInView:{opacity:1,scale:1},viewport:{once:!0},whileHover:{scale:1.35},transition:{duration:.5,delay:.3+t*.06,type:`spring`,stiffness:200},children:[typeof e.icon==`string`?(0,U.jsx)(`img`,{src:e.icon,alt:e.name,width:e.iconWidth,height:e.iconHeight}):e.icon,e.showLabel&&(0,U.jsx)(cv,{$fontSize:13,$onLight:!0,children:e.name})]})})},e.id||e.name)})]}),s&&(0,U.jsx)(lv,{ref:_,children:(0,U.jsx)(uv,{$paused:p,onClick:v,children:[0,1].map(e=>ne.map(t=>(0,U.jsxs)(dv,{"aria-hidden":e===1||void 0,$isCircleCard:t.isCenter||c.includes(t.id),$isPadded:t.isCenter||l.includes(t.id),$hasLabel:t.showLabel,whileHover:o?{scale:1.15}:void 0,children:[typeof t.icon==`string`?(0,U.jsx)(`img`,{src:t.icon,alt:t.isCenter||t.showLabel?``:t.name,width:t.iconWidth,height:t.iconHeight}):t.icon,t.showLabel&&(0,U.jsx)(cv,{$fontSize:12,$onLight:!0,children:t.name})]},`${e}-${t.id||t.name}`)))})})]})},hv=Q(K.section).attrs(({$variants:e})=>({variants:e}))`
+`,vv=()=>{let[e,t]=(0,g.useState)(window.innerWidth);return(0,g.useEffect)(()=>{let e=null,n=()=>{e&&cancelAnimationFrame(e),e=requestAnimationFrame(()=>t(window.innerWidth))};return window.addEventListener(`resize`,n),()=>{window.removeEventListener(`resize`,n),e&&cancelAnimationFrame(e)}},[]),e},yv=parseInt(Ch.breakpoint.lg,10),bv=({technologies:e,centerIcon:t,centerIconWidth:n,centerIconHeight:r,centerLabel:i=`Next.js`})=>{let a=vv(),o=th(`(hover: hover)`),s=a<=yv,c=[`redux`,`typescript`,`react`,`vercel`,`supabase`,`react-query`,`styled`],l=[`react`,`vercel`,`supabase`,`styled`,`react-query`],u=(0,g.useRef)(null),[d,f]=(0,g.useState)(2**53-1),[p,m]=(0,g.useState)(!1),h=(0,g.useRef)(null),_=(0,g.useRef)(null),v=()=>{if(clearTimeout(h.current),p)return m(!1);m(!0),h.current=setTimeout(()=>m(!1),4e3)};(0,g.useEffect)(()=>()=>clearTimeout(h.current),[]),(0,g.useEffect)(()=>{if(!p)return;let e=e=>{_.current?.contains(e.target)||m(!1)};return window.addEventListener(`pointerdown`,e),()=>window.removeEventListener(`pointerdown`,e)},[p]);let{radius:y,cardWidth:b,cardHeight:x,centerSize:S}=(0,g.useMemo)(()=>iv(a),[a]),C=y*2+b+40,w=b+80,T=Math.min(C,Math.max(d,w)),ee=(T-b-40)/2,E=T/2;(0,g.useEffect)(()=>{let e=u.current?.parentElement;if(!e)return;let t=()=>{let t=e.getBoundingClientRect();f(Math.min(t.width,t.height))};t();let n=new ResizeObserver(t);return n.observe(e),()=>n.disconnect()},[s]);let te=(0,g.useMemo)(()=>{let t=e.length,n=Math.PI*2/t;return e.map((e,t)=>{let r=t*n-Math.PI/2;return{x:Math.cos(r)*ee,y:Math.sin(r)*ee}})},[e,ee]),ne=[{id:`__center`,name:i,icon:t,iconWidth:n,iconHeight:r,isCenter:!0},...e];return(0,U.jsxs)(U.Fragment,{children:[!s&&(0,U.jsxs)(sv,{ref:u,className:`orbit-desktop`,style:{width:T,height:T},children:[(0,U.jsxs)(cv,{viewBox:`0 0 ${T} ${T}`,children:[(0,U.jsx)(`g`,{id:`line-glow`,children:te.map((e,t)=>{let n=E+e.x,r=E+e.y;return(0,U.jsx)(`line`,{x1:E,y1:E,x2:n,y2:r,stroke:`var(--color-cyan)`,strokeWidth:`5`,strokeOpacity:`0.15`,strokeLinecap:`round`},`glow-${t}`)})}),(0,U.jsx)(`g`,{id:`line-core`,children:te.map((e,t)=>{let n=E+e.x,r=E+e.y;return(0,U.jsx)(`line`,{x1:E,y1:E,x2:n,y2:r,stroke:`var(--color-cyan-light)`,strokeWidth:`1.5`,strokeOpacity:`0.5`,strokeLinecap:`round`},`core-${t}`)})})]}),(0,U.jsx)(lv,{$size:S,children:(0,U.jsx)(uv,{$size:S,initial:{scale:.7,opacity:0},whileInView:{scale:1,opacity:1},viewport:{once:!0},transition:{duration:.6,ease:`easeOut`},whileHover:{scale:1.05},children:(0,U.jsx)(`img`,{src:t,alt:i,width:n,height:r})})}),e.map((e,t)=>{let{x:n,y:r}=te[t];return(0,U.jsx)(dv,{$width:c.includes(e.id)?Math.min(b,x):b,$height:c.includes(e.id)?Math.min(b,x):x,style:{left:`50%`,top:`50%`,transform:`translate(-50%, -50%) translate(${n}px, ${r}px)`},children:(0,U.jsx)(fv,{$delay:t*.4,children:(0,U.jsxs)(pv,{$isCircleCard:c.includes(e.id),$isPadded:l.includes(e.id),$hasLabel:e.showLabel,initial:{opacity:0,scale:0},whileInView:{opacity:1,scale:1},viewport:{once:!0},whileHover:{scale:1.35},transition:{duration:.5,delay:.3+t*.06,type:`spring`,stiffness:200},children:[typeof e.icon==`string`?(0,U.jsx)(`img`,{src:e.icon,alt:e.name,width:e.iconWidth,height:e.iconHeight}):e.icon,e.showLabel&&(0,U.jsx)(mv,{$fontSize:13,$onLight:!0,children:e.name})]})})},e.id||e.name)})]}),s&&(0,U.jsx)(hv,{ref:_,children:(0,U.jsx)(gv,{$paused:p,onClick:v,children:[0,1].map(e=>ne.map(t=>(0,U.jsxs)(_v,{"aria-hidden":e===1||void 0,$isCircleCard:t.isCenter||c.includes(t.id),$isPadded:t.isCenter||l.includes(t.id),$hasLabel:t.showLabel,whileHover:o?{scale:1.15}:void 0,children:[typeof t.icon==`string`?(0,U.jsx)(`img`,{src:t.icon,alt:t.isCenter||t.showLabel?``:t.name,width:t.iconWidth,height:t.iconHeight}):t.icon,t.showLabel&&(0,U.jsx)(mv,{$fontSize:12,$onLight:!0,children:t.name})]},`${e}-${t.id||t.name}`)))})})]})},xv=Q(K.section).attrs(({$variants:e})=>({variants:e}))`
   width: 100%;
   padding: var(--spacing-3xl) 0;
   background: transparent;
   overflow: hidden;
   position: relative;
-`,gv=Q.div`
+`,Sv=Q.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: var(--spacing-3xl);
@@ -2356,12 +2427,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
     grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-2xl);
   }
-`,_v=Q.div`
+`,Cv=Q.div`
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
   min-width: 0;
-`,vv=Q.span`
+`,wv=Q.span`
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -2380,15 +2451,15 @@ A Software Engineer focused on building modern web applications and AI-powered S
     height: 0.75rem;
     flex-shrink: 0;
   }
-`,yv=Q.h2`
+`,Tv=Q.h2`
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
   line-height: 1.1;
   color: var(--color-text-primary);
   margin: 0;
-`,bv=Q.span`
+`,Ev=Q.span`
   display: inline-block;
-`,xv=Q.span`
+`,Dv=Q.span`
   display: inline-block;
   position: relative;
   padding-block-end: 0.15em;
@@ -2407,13 +2478,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     display: block;
   }
-`,Sv=Q.p`
+`,Ov=Q.p`
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   color: var(--color-text-secondary);
   line-height: 1.6;
   max-width: min(500px, 100%);
   margin: 0;
-`,Cv=Q.div`
+`,kv=Q.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
@@ -2423,7 +2494,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     grid-template-columns: 1fr;
     gap: 0;
   }
-`,wv=Q(lg).attrs(({$variants:e})=>({variants:e,$glass:!0,$hoverable:!0,as:K.div}))`
+`,Av=Q(lg).attrs(({$variants:e})=>({variants:e,$glass:!0,$hoverable:!0,as:K.div}))`
   align-items: center;
   min-width: 0;
 
@@ -2442,7 +2513,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
       border-bottom: none;
     }
   }
-`,Tv=Q.div`
+`,jv=Q.div`
   width: 24px;
   height: 24px;
   display: flex;
@@ -2456,18 +2527,18 @@ A Software Engineer focused on building modern web applications and AI-powered S
     width: 24px;
     height: 24px;
   }
-`,Ev=Q.div`
+`,Mv=Q.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-`,Dv=Q.span`
+`,Nv=Q.span`
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text-primary);
-`,Ov=Q.span`
+`,Pv=Q.span`
   font-size: 0.75rem;
   color: var(--color-text-secondary);
-`,kv=Q.div`
+`,Fv=Q.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2478,7 +2549,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     min-height: auto;
     order: 2;
   }
-`,Av=[{id:`react`,name:`React`,icon:j_,iconWidth:600,iconHeight:180},{id:`typescript`,name:`TypeScript`,icon:I_,iconWidth:160,iconHeight:160},{id:`redux`,name:`Redux`,icon:N_,iconWidth:800,iconHeight:800,showLabel:!0},{id:`styled`,name:`Styled Components`,icon:P_,iconWidth:128,iconHeight:128},{id:`supabase`,name:`Supabase`,icon:F_,iconWidth:581,iconHeight:113},{id:`react-query`,name:`React Query`,icon:M_,iconWidth:160,iconHeight:102},{id:`vercel`,name:`Vercel`,icon:L_,iconWidth:160,iconHeight:89}],jv=[(0,U.jsx)(ym,{},`brain`),(0,U.jsx)(z_,{"aria-hidden":`true`},`stripe`),(0,U.jsx)(Pm,{},`robot`),(0,U.jsx)(R_,{"aria-hidden":`true`},`framer`),(0,U.jsx)(Fm,{},`sitemap`)],Mv=[(0,U.jsx)(_m,{},`bolt`),(0,U.jsx)(Cm,{},`expand`),(0,U.jsx)(Om,{},`laptop`),(0,U.jsx)(jm,{},`brush`)],Nv={hidden:{opacity:0,y:40},visible:{opacity:1,y:0,transition:{duration:.6,ease:`easeOut`,staggerChildren:.08}}},Pv={hidden:{opacity:0,y:20},visible:{opacity:1,y:0,transition:{duration:.5}}},Fv=()=>{let{home:e}=Kp(),t=e.toolsShowcase;return(0,U.jsxs)(hv,{initial:`hidden`,whileInView:`visible`,viewport:{once:!0,amount:.2},$variants:Nv,children:[(0,U.jsxs)(gv,{children:[(0,U.jsx)(kv,{children:(0,U.jsx)(mv,{technologies:Av,centerIcon:A_,centerIconWidth:160,centerIconHeight:97,centerLabel:`Next.js`})}),(0,U.jsxs)(_v,{children:[(0,U.jsxs)(vv,{children:[(0,U.jsx)(Im,{}),e.skillsetHeader]}),(0,U.jsxs)(yv,{children:[(0,U.jsx)(bv,{children:t.titlePlain}),` `,(0,U.jsx)(xv,{"data-text":t.titleAccent,children:t.titleAccent})]}),(0,U.jsx)(Sv,{children:t.description}),(0,U.jsx)(Cv,{children:t.features.map((e,t)=>(0,U.jsxs)(wv,{$variants:Pv,transition:{type:`spring`,stiffness:300},children:[(0,U.jsx)(Tv,{children:Mv[t]}),(0,U.jsxs)(Ev,{children:[(0,U.jsx)(Dv,{children:e.title}),(0,U.jsx)(Ov,{children:e.subtitle})]})]},t))})]})]}),(0,U.jsxs)(B_,{$variants:Pv,children:[(0,U.jsxs)(V_,{children:[(0,U.jsxs)(H_,{children:[(0,U.jsx)(xm,{}),e.learnNextHeader]}),(0,U.jsx)(U_,{children:t.exploreParagraph})]}),(0,U.jsxs)(W_,{role:`region`,"aria-label":t.exploreAriaLabel,tabIndex:0,children:[t.exploreItems.map((e,t)=>(0,U.jsxs)(G_,{initial:{opacity:0,y:10},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{delay:.1+t*.05},whileHover:{scale:1.02},children:[(0,U.jsxs)(K_,{children:[jv[t],e.name]}),(0,U.jsx)(q_,{children:e.description})]},e.name)),(0,U.jsxs)(J_,{initial:{opacity:0,y:10},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{delay:.1+t.exploreItems.length*.05},children:[(0,U.jsxs)(Y_,{children:[(0,U.jsx)(xm,{}),t.moreTitle]}),(0,U.jsx)(X_,{children:t.moreSubtitle})]})]})]})]})},Iv=`/Software_Engineer_Portfolio/profileImage.webp`,Lv=`/Software_Engineer_Portfolio/light_theme_profile.webp`,Rv=({id:e})=>{let{home:t}=Kp(),{language:n}=Rp(),{isDark:r}=Wp(),i=Mh[n][2],a=th(`(max-width: ${Ch.breakpoint.md})`)&&i.offsetMobile!=null?i.offsetMobile:i.offset;return(0,U.jsxs)(b_,{id:e,children:[(0,U.jsxs)(x_,{children:[(0,U.jsxs)(S_,{children:[(0,U.jsxs)(p_,{children:[(0,U.jsx)(Im,{}),t.welcomeLabel]}),(0,U.jsxs)(m_,{children:[t.contentHeaderPlain,` `,(0,U.jsx)(h_,{"data-text":t.contentHeaderAccent,children:t.contentHeaderAccent})]}),(0,U.jsx)(g_,{children:t.contentHeaderTechStack}),(0,U.jsx)(__,{children:t.headerParagraph}),(0,U.jsxs)(v_,{children:[(0,U.jsxs)(f_,{to:i.slug,href:`#${i.slug}`,smooth:!0,offset:a,duration:700,children:[t.viewMyWork,(0,U.jsx)(gm,{})]}),(0,U.jsxs)(d_,{$variant:`outline`,href:t.cvUrl,target:`_blank`,rel:`noopener noreferrer`,children:[t.viewCV,(0,U.jsx)(Tm,{})]})]})]}),(0,U.jsxs)(C_,{children:[(0,U.jsx)(w_,{ref:e=>e?.setAttribute(`fetchpriority`,`high`),src:r?Iv:Lv,alt:t.portraitAlt,width:640,height:640}),(0,U.jsx)(k_,{poster:Iv})]})]}),(0,U.jsx)(Fv,{})]})},zv=`/Software_Engineer_Portfolio/assets/CurrencycalculatorProject-CC8FueQ4.webp`,Bv=`/Software_Engineer_Portfolio/assets/EatNSplitProject-BTopAJ3o.webp`,Vv=`/Software_Engineer_Portfolio/assets/FastPizzaProject--jCPUWBc.webp`,Hv=`/Software_Engineer_Portfolio/assets/MoviebrowserProject-CGZjbfhE.webp`,Uv=`/Software_Engineer_Portfolio/assets/ParadiseLodgeProject-C131wpfx.webp`,Wv=`/Software_Engineer_Portfolio/assets/PlasmaLibraryProject-CCVuhmsX.webp`,Gv=`/Software_Engineer_Portfolio/assets/ReactQuizProject-BfR_y_IQ.webp`,Kv=`/Software_Engineer_Portfolio/assets/TaskListProject-BNjI0CDq.webp`,qv=`/Software_Engineer_Portfolio/assets/WTMMusicProject-XJslUYwY.webp`,Jv=`/Software_Engineer_Portfolio/assets/currency_converter_modal-yiQhlxS4.webp`,Yv=`/Software_Engineer_Portfolio/assets/eat_n_split_modal-1iFhqEv6.webp`,Xv=`/Software_Engineer_Portfolio/assets/fast_pizza_co_modal-CBLbTRXB.webp`,Zv=`/Software_Engineer_Portfolio/assets/movie_browser_modal-Bee53_px.webp`,Qv=`/Software_Engineer_Portfolio/assets/paradise_lodge_modal-2n84hDqP.webp`,$v=`/Software_Engineer_Portfolio/assets/plasma_library_modal-4f9uwF5D.webp`,ey=`/Software_Engineer_Portfolio/assets/react_quiz_modal-BfWySBAT.webp`,ty=`/Software_Engineer_Portfolio/assets/tasks_list_modal-CdLpKg1H.webp`,ny=1200,ry=[{title:{English:`🎵 WTM AI Music Generation Website`,Polish:`🎵 WTM AI Music Generation - Strona Generowania Muzyki AI`,Spanish:`🎵 WTM AI Music Generation - Sitio Web de Generación de Música con IA`},available:`web`,description:{English:`<p>WTM is a production-grade SaaS platform for generating and managing AI-generated music, built with Next.js 16, React 19, and TypeScript on managed cloud infrastructure.</p>
+`,Iv=[{id:`react`,name:`React`,icon:L_,iconWidth:600,iconHeight:180},{id:`typescript`,name:`TypeScript`,icon:H_,iconWidth:160,iconHeight:160},{id:`redux`,name:`Redux`,icon:z_,iconWidth:800,iconHeight:800,showLabel:!0},{id:`styled`,name:`Styled Components`,icon:B_,iconWidth:128,iconHeight:128},{id:`supabase`,name:`Supabase`,icon:V_,iconWidth:581,iconHeight:113},{id:`react-query`,name:`React Query`,icon:R_,iconWidth:160,iconHeight:102},{id:`vercel`,name:`Vercel`,icon:U_,iconWidth:160,iconHeight:89}],Lv=[(0,U.jsx)(ym,{},`brain`),(0,U.jsx)(G_,{"aria-hidden":`true`},`stripe`),(0,U.jsx)(Pm,{},`robot`),(0,U.jsx)(W_,{"aria-hidden":`true`},`framer`),(0,U.jsx)(Fm,{},`sitemap`)],Rv=[(0,U.jsx)(_m,{},`bolt`),(0,U.jsx)(Cm,{},`expand`),(0,U.jsx)(Om,{},`laptop`),(0,U.jsx)(jm,{},`brush`)],zv={hidden:{opacity:0,y:40},visible:{opacity:1,y:0,transition:{duration:.6,ease:`easeOut`,staggerChildren:.08}}},Bv={hidden:{opacity:0,y:20},visible:{opacity:1,y:0,transition:{duration:.5}}},Vv=()=>{let{home:e}=Kp(),t=e.toolsShowcase;return(0,U.jsxs)(xv,{initial:`hidden`,whileInView:`visible`,viewport:{once:!0,amount:.2},$variants:zv,children:[(0,U.jsxs)(Sv,{children:[(0,U.jsx)(Fv,{children:(0,U.jsx)(bv,{technologies:Iv,centerIcon:I_,centerIconWidth:160,centerIconHeight:97,centerLabel:`Next.js`})}),(0,U.jsxs)(Cv,{children:[(0,U.jsxs)(wv,{children:[(0,U.jsx)(Im,{}),e.skillsetHeader]}),(0,U.jsxs)(Tv,{children:[(0,U.jsx)(Ev,{children:t.titlePlain}),` `,(0,U.jsx)(Dv,{"data-text":t.titleAccent,children:t.titleAccent})]}),(0,U.jsx)(Ov,{children:t.description}),(0,U.jsx)(kv,{children:t.features.map((e,t)=>(0,U.jsxs)(Av,{$variants:Bv,transition:{type:`spring`,stiffness:300},children:[(0,U.jsx)(jv,{children:Rv[t]}),(0,U.jsxs)(Mv,{children:[(0,U.jsx)(Nv,{children:e.title}),(0,U.jsx)(Pv,{children:e.subtitle})]})]},t))})]})]}),(0,U.jsxs)(K_,{$variants:Bv,children:[(0,U.jsxs)(q_,{children:[(0,U.jsxs)(J_,{children:[(0,U.jsx)(xm,{}),e.learnNextHeader]}),(0,U.jsx)(Y_,{children:t.exploreParagraph})]}),(0,U.jsxs)(X_,{role:`region`,"aria-label":t.exploreAriaLabel,tabIndex:0,children:[t.exploreItems.map((e,t)=>(0,U.jsxs)(Z_,{initial:{opacity:0,y:10},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{delay:.1+t*.05},whileHover:{scale:1.02},children:[(0,U.jsxs)(Q_,{children:[Lv[t],e.name]}),(0,U.jsx)($_,{children:e.description})]},e.name)),(0,U.jsxs)(ev,{initial:{opacity:0,y:10},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{delay:.1+t.exploreItems.length*.05},children:[(0,U.jsxs)(tv,{children:[(0,U.jsx)(xm,{}),t.moreTitle]}),(0,U.jsx)(nv,{children:t.moreSubtitle})]})]})]})]})},Hv=`/Software_Engineer_Portfolio/profileImage.webp`,Uv=`/Software_Engineer_Portfolio/light_theme_profile.webp`,Wv=({id:e})=>{let{home:t}=Kp(),{language:n}=Rp(),{isDark:r}=Wp(),i=Mh[n][2],a=th(`(max-width: ${Ch.breakpoint.md})`),o=th(`(pointer: coarse)`),s=navigator.userAgentData?.mobile??o?t.cvPdfUrl:t.cvUrl,c=a&&i.offsetMobile!=null?i.offsetMobile:i.offset;return(0,U.jsxs)(S_,{id:e,children:[(0,U.jsxs)(C_,{children:[(0,U.jsxs)(w_,{children:[(0,U.jsxs)(h_,{children:[(0,U.jsx)(Im,{}),t.welcomeLabel]}),(0,U.jsxs)(g_,{children:[t.contentHeaderPlain,` `,(0,U.jsx)(__,{"data-text":t.contentHeaderAccent,children:t.contentHeaderAccent})]}),(0,U.jsx)(v_,{children:t.contentHeaderTechStack}),(0,U.jsx)(y_,{children:t.headerParagraph}),(0,U.jsxs)(b_,{children:[(0,U.jsxs)(m_,{to:i.slug,href:`#${i.slug}`,smooth:!0,offset:c,duration:700,children:[t.viewMyWork,(0,U.jsx)(gm,{})]}),(0,U.jsxs)(p_,{$variant:`outline`,href:s,target:`_blank`,rel:`noopener noreferrer`,children:[t.viewCV,(0,U.jsx)(Tm,{})]})]})]}),(0,U.jsxs)(T_,{children:[(0,U.jsx)(E_,{ref:e=>e?.setAttribute(`fetchpriority`,`high`),src:r?Hv:Uv,alt:t.portraitAlt,width:640,height:640}),(0,U.jsx)(F_,{poster:Hv})]})]}),(0,U.jsx)(Vv,{})]})},Gv=`/Software_Engineer_Portfolio/assets/CurrencycalculatorProject-CC8FueQ4.webp`,Kv=`/Software_Engineer_Portfolio/assets/EatNSplitProject-BTopAJ3o.webp`,qv=`/Software_Engineer_Portfolio/assets/FastPizzaProject--jCPUWBc.webp`,Jv=`/Software_Engineer_Portfolio/assets/MoviebrowserProject-CGZjbfhE.webp`,Yv=`/Software_Engineer_Portfolio/assets/ParadiseLodgeProject-C131wpfx.webp`,Xv=`/Software_Engineer_Portfolio/assets/PlasmaLibraryProject-CCVuhmsX.webp`,Zv=`/Software_Engineer_Portfolio/assets/ReactQuizProject-BfR_y_IQ.webp`,Qv=`/Software_Engineer_Portfolio/assets/TaskListProject-BNjI0CDq.webp`,$v=`/Software_Engineer_Portfolio/assets/WTMMusicProject-XJslUYwY.webp`,ey=`/Software_Engineer_Portfolio/assets/currency_converter_modal-yiQhlxS4.webp`,ty=`/Software_Engineer_Portfolio/assets/eat_n_split_modal-1iFhqEv6.webp`,ny=`/Software_Engineer_Portfolio/assets/fast_pizza_co_modal-CBLbTRXB.webp`,ry=`/Software_Engineer_Portfolio/assets/movie_browser_modal-Bee53_px.webp`,iy=`/Software_Engineer_Portfolio/assets/paradise_lodge_modal-2n84hDqP.webp`,ay=`/Software_Engineer_Portfolio/assets/plasma_library_modal-4f9uwF5D.webp`,oy=`/Software_Engineer_Portfolio/assets/react_quiz_modal-BfWySBAT.webp`,sy=`/Software_Engineer_Portfolio/assets/tasks_list_modal-CdLpKg1H.webp`,cy=1200,ly=[{title:{English:`🎵 WTM AI Music Generation Website`,Polish:`🎵 WTM AI Music Generation - Strona Generowania Muzyki AI`,Spanish:`🎵 WTM AI Music Generation - Sitio Web de Generación de Música con IA`},available:`web`,description:{English:`<p>WTM is a production-grade SaaS platform for generating and managing AI-generated music, built with Next.js 16, React 19, and TypeScript on managed cloud infrastructure.</p>
               <p>Users queue generation jobs, monitor progress in real time, and manage their track library through a full-stack architecture designed for production workloads.</p>
               <ul>
                 <li><strong>Async generation pipeline</strong> — BullMQ + Redis workers for long-running AI jobs</li>
@@ -2502,7 +2573,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                 <li><strong>Autenticación y seguridad</strong> — NextAuth, rutas protegidas, validación con Zod, control de acceso</li>
                 <li><strong>Datos</strong> — Supabase/PostgreSQL para usuarios, metadatos y almacenamiento</li>
                 <li><strong>Observabilidad</strong> — monitorización con Sentry + logs estructurados con Pino</li>
-              </ul>`},imageURL:`${qv}`,technologies:[`Next.js`,`TypeScript`,`Supabase`,`PostgreSQL`,`BullMQ`,`Redis`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},inverted:!0,border:!1,variant:`comingSoon`},{title:{English:`🏡 The Paradise Lodge - Luxury Cabin Booking Website`,Polish:`🏡 The Paradise Lodge - Luksusowa Strona Rezerwacji Domków`,Spanish:`🏡 The Paradise Lodge - Sitio Web de Reservas de Cabañas de Lujo`},available:`web`,description:{English:`<p>Cabin booking platform built with Next.js App Router and Supabase. Users browse cabins, check real-time availability, and create and manage reservations through authenticated accounts.</p>
+              </ul>`},imageURL:`${$v}`,technologies:[`Next.js`,`TypeScript`,`Supabase`,`PostgreSQL`,`BullMQ`,`Redis`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},inverted:!0,border:!1,variant:`comingSoon`},{title:{English:`🏡 The Paradise Lodge - Luxury Cabin Booking Website`,Polish:`🏡 The Paradise Lodge - Luksusowa Strona Rezerwacji Domków`,Spanish:`🏡 The Paradise Lodge - Sitio Web de Reservas de Cabañas de Lujo`},available:`web`,description:{English:`<p>Cabin booking platform built with Next.js App Router and Supabase. Users browse cabins, check real-time availability, and create and manage reservations through authenticated accounts.</p>
                 <ul>
                   <li><strong>Full-stack</strong> — Next.js App Router and React Server Components</li>
                   <li><strong>Authentication</strong> — NextAuth: sign-in, protected routes, per-user bookings</li>
@@ -2523,7 +2594,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Datos</strong> — Supabase/PostgreSQL para cabañas, usuarios y reservas + almacenamiento de imágenes</li>
                   <li><strong>Sistema de reservas</strong> — verificación de disponibilidad, creación de reservas, gestión de huéspedes</li>
                   <li><strong>Interfaz</strong> — Tailwind CSS, experiencia optimizada para escritorio</li>
-                </ul>`},imageURL:`${Uv}`,modalImageURL:`${Qv}`,modalImageWidth:1920,modalImageHeight:942,technologies:[`Next.js`,`React`,`JavaScript`,`Supabase`,`NextAuth`,`Tailwind CSS`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://paradise-lodge-web.vercel.app`,GitHubRepoURL:`https://github.com/BoosterTech/ParadiseLodge-website.git`,inverted:!0,border:!1},{title:{English:`🎥 Movies Browser`,Polish:`🎥 Przeglądarka Filmów `,Spanish:`🎥 Navegador de Películas `},available:`web & mob`,description:{English:`<p>Movie discovery app built with React, Redux, and React Router on the TMDb API — browse films, actors, and crew with detailed views. Final team project of the YouCode Front-End program: three developers, four weeks, professional Git workflow.</p>
+                </ul>`},imageURL:`${Yv}`,modalImageURL:`${iy}`,modalImageWidth:1920,modalImageHeight:942,technologies:[`Next.js`,`React`,`JavaScript`,`Supabase`,`NextAuth`,`Tailwind CSS`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://paradise-lodge-web.vercel.app`,GitHubRepoURL:`https://github.com/BoosterTech/ParadiseLodge-website.git`,inverted:!0,border:!1},{title:{English:`🎥 Movies Browser`,Polish:`🎥 Przeglądarka Filmów `,Spanish:`🎥 Navegador de Películas `},available:`web & mob`,description:{English:`<p>Movie discovery app built with React, Redux, and React Router on the TMDb API — browse films, actors, and crew with detailed views. Final team project of the YouCode Front-End program: three developers, four weeks, professional Git workflow.</p>
                 <ul>
                   <li><strong>Architecture</strong> — reusable React components, Redux state for movies, actors, and UI</li>
                   <li><strong>Data</strong> — TMDb REST API via Axios for movies, cast, and crew details</li>
@@ -2544,7 +2615,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Routing</strong> — navegación React Router entre vistas de lista y detalle</li>
                   <li><strong>Trabajo en equipo</strong> — feature branches, pull requests, code reviews, planificación compartida</li>
                   <li><strong>Interfaz</strong> — styled-components implementando un diseño profesional, desktop y móvil</li>
-                </ul>`},imageURL:`${Hv}`,modalImageURL:`${Zv}`,modalImageWidth:1766,modalImageHeight:912,technologies:[`React`,`Redux`,`React Router`,`Axios`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/MovieBrowser/#/movies`,GitHubRepoURL:`https://github.com/BoosterTech/MovieBrowser.git`,inverted:!1},{title:{English:`📝Tasks List`,Polish:`📝Lista Zadań`,Spanish:`📝Lista de Tareas`},description:{English:`<p>Task manager built with React, Redux Toolkit, and Redux-Saga — create, complete, hide, and remove tasks with detail views and localStorage persistence.</p>
+                </ul>`},imageURL:`${Jv}`,modalImageURL:`${ry}`,modalImageWidth:1766,modalImageHeight:912,technologies:[`React`,`Redux`,`React Router`,`Axios`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/MovieBrowser/#/movies`,GitHubRepoURL:`https://github.com/BoosterTech/MovieBrowser.git`,inverted:!1},{title:{English:`📝Tasks List`,Polish:`📝Lista Zadań`,Spanish:`📝Lista de Tareas`},description:{English:`<p>Task manager built with React, Redux Toolkit, and Redux-Saga — create, complete, hide, and remove tasks with detail views and localStorage persistence.</p>
                 <ul>
                   <li><strong>State</strong> — Redux Toolkit store with Redux-Saga handling asynchronous workflows</li>
                   <li><strong>Tasks</strong> — create, toggle, hide completed, remove, and per-task detail pages</li>
@@ -2562,7 +2633,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Tareas</strong> — crear, marcar, ocultar completadas, eliminar y páginas de detalle</li>
                   <li><strong>Routing</strong> — navegación React Router entre la lista y las vistas de detalle</li>
                   <li><strong>Interfaz</strong> — styled-components, diseños responsivos para escritorio y móvil</li>
-                </ul>`},imageURL:`${Kv}`,modalImageURL:`${ty}`,modalImageWidth:1920,modalImageHeight:945,technologies:[`React`,`Redux Toolkit`,`Redux-Saga`,`React Router`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/To-Do-List-Redux-Saga-Module-14/#/todo-list-module-14/tasks`,GitHubRepoURL:`https://github.com/BoosterTech/To-Do-List-Redux-Saga-Module-14.git`,inverted:!0,border:!0},{title:{English:`💱Currency Converter`,Polish:`💱Kalkulator Walut`,Spanish:`💱Conversor de Divisas`},available:`web & mob`,description:{English:`<p>Currency converter built with React and styled-components, powered by live exchange rates from the European Central Bank API.</p>
+                </ul>`},imageURL:`${Qv}`,modalImageURL:`${sy}`,modalImageWidth:1920,modalImageHeight:945,technologies:[`React`,`Redux Toolkit`,`Redux-Saga`,`React Router`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/To-Do-List-Redux-Saga-Module-14/#/todo-list-module-14/tasks`,GitHubRepoURL:`https://github.com/BoosterTech/To-Do-List-Redux-Saga-Module-14.git`,inverted:!0,border:!0},{title:{English:`💱Currency Converter`,Polish:`💱Kalkulator Walut`,Spanish:`💱Conversor de Divisas`},available:`web & mob`,description:{English:`<p>Currency converter built with React and styled-components, powered by live exchange rates from the European Central Bank API.</p>
                 <ul>
                   <li><strong>Data</strong> — async fetching of ECB rates via Axios, loading and error states handled</li>
                   <li><strong>Logic</strong> — conversion math across a wide currency set, driven by controlled inputs</li>
@@ -2577,7 +2648,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Datos</strong> — obtención asíncrona de tipos del BCE vía Axios, con estados de carga y error</li>
                   <li><strong>Lógica</strong> — cálculo de conversiones sobre un amplio conjunto de divisas, con inputs controlados</li>
                   <li><strong>Interfaz</strong> — styled-components, diseño limpio y responsivo</li>
-                </ul>`},imageURL:`${zv}`,modalImageURL:`${Jv}`,modalImageWidth:1920,modalImageHeight:942,technologies:[`React`,`Axios`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Currency-Converter-Fetch-Module-12/`,GitHubRepoURL:`https://github.com/BoosterTech/Currency-Converter-Fetch-Module-12.git`,inverted:!1,border:!0},{title:{English:`❓React Quiz App`,Polish:`❓React Quiz App`,Spanish:`❓React Quiz App`},description:{English:`<p>Interactive React quiz — 30 questions on components, hooks, and state, tracking progress and scoring each run.</p>
+                </ul>`},imageURL:`${Gv}`,modalImageURL:`${ey}`,modalImageWidth:1920,modalImageHeight:942,technologies:[`React`,`Axios`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Currency-Converter-Fetch-Module-12/`,GitHubRepoURL:`https://github.com/BoosterTech/Currency-Converter-Fetch-Module-12.git`,inverted:!1,border:!0},{title:{English:`❓React Quiz App`,Polish:`❓React Quiz App`,Spanish:`❓React Quiz App`},description:{English:`<p>Interactive React quiz — 30 questions on components, hooks, and state, tracking progress and scoring each run.</p>
                 <ul>
                   <li><strong>State</strong> — useReducer state machine driving quiz phases, answers, and score</li>
                   <li><strong>UI</strong> — styled-components, conditional rendering per quiz phase</li>
@@ -2592,7 +2663,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Estado</strong> — máquina de estados con useReducer que controla las fases del quiz, las respuestas y la puntuación</li>
                   <li><strong>Interfaz</strong> — styled-components, renderizado condicional por fase del quiz</li>
                   <li><strong>Fundamentos</strong> — componentes funcionales, hooks, estado derivado</li>
-                </ul>`},available:`web & mob`,imageURL:`${Gv}`,modalImageURL:`${ey}`,modalImageWidth:656,modalImageHeight:545,technologies:[`React`,`useReducer`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/react-quiz/`,GitHubRepoURL:`https://github.com/BoosterTech/react-quiz.git`,inverted:!0,border:!0},{title:{English:`⚛️Plasma Library`,Polish:`⚛️Biblioteka Plazma`,Spanish:`⚛️Biblioteca de Plasma`},description:{English:`<p>Informational site on plasma physics — my first web project, built with plain HTML, CSS, and JavaScript and preserved as originally written.</p>
+                </ul>`},available:`web & mob`,imageURL:`${Zv}`,modalImageURL:`${oy}`,modalImageWidth:656,modalImageHeight:545,technologies:[`React`,`useReducer`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/react-quiz/`,GitHubRepoURL:`https://github.com/BoosterTech/react-quiz.git`,inverted:!0,border:!0},{title:{English:`⚛️Plasma Library`,Polish:`⚛️Biblioteka Plazma`,Spanish:`⚛️Biblioteca de Plasma`},description:{English:`<p>Informational site on plasma physics — my first web project, built with plain HTML, CSS, and JavaScript and preserved as originally written.</p>
                 <ul>
                   <li><strong>Foundations</strong> — semantic HTML structure, hand-written CSS, vanilla JS interactivity</li>
                   <li><strong>Responsive</strong> — fluid layout adapting across screen sizes</li>
@@ -2607,7 +2678,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Fundamentos</strong> — estructura HTML semántica, CSS escrito a mano, interactividad en JS vanilla</li>
                   <li><strong>Responsivo</strong> — diseño fluido que se adapta a distintas pantallas</li>
                   <li><strong>Contenido</strong> — libros y publicaciones seleccionados sobre física de plasmas</li>
-                </ul>`},available:`web & mob`,imageURL:`${Wv}`,modalImageURL:`${$v}`,modalImageWidth:1903,modalImageHeight:942,technologies:[`HTML`,`CSS`,`JavaScript`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Plasma-Library/`,GitHubRepoURL:`https://github.com/BoosterTech/Plasma-Library.git`,inverted:!1,border:!0},{title:{English:`🍴Eat-n-split💶`,Polish:`🍴Eat-n-split💶`,Spanish:`🍴Eat-n-split💶`},description:{English:`<p>Bill-splitting app built with React and styled-components — add friends, enter expenses, and see what each person owes calculated live from shared state.</p>
+                </ul>`},available:`web & mob`,imageURL:`${Xv}`,modalImageURL:`${ay}`,modalImageWidth:1903,modalImageHeight:942,technologies:[`HTML`,`CSS`,`JavaScript`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Plasma-Library/`,GitHubRepoURL:`https://github.com/BoosterTech/Plasma-Library.git`,inverted:!1,border:!0},{title:{English:`🍴Eat-n-split💶`,Polish:`🍴Eat-n-split💶`,Spanish:`🍴Eat-n-split💶`},description:{English:`<p>Bill-splitting app built with React and styled-components — add friends, enter expenses, and see what each person owes calculated live from shared state.</p>
                 <ul>
                   <li><strong>State</strong> — controlled forms and lifted state driving per-person balances</li>
                   <li><strong>UI</strong> — styled-components for a consistent, responsive interface</li>
@@ -2622,7 +2693,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Estado</strong> — formularios controlados y estado elevado que calcula los saldos por persona</li>
                   <li><strong>Interfaz</strong> — styled-components para una interfaz consistente y responsiva</li>
                   <li><strong>Fundamentos</strong> — props, composición de componentes, renderizado condicional</li>
-                </ul>`},available:`web`,imageURL:`${Bv}`,modalImageURL:`${Yv}`,modalImageWidth:906,modalImageHeight:371,technologies:[`React`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/eat-n-split/`,GitHubRepoURL:`https://github.com/BoosterTech/eat-n-split.git`,inverted:!0,border:!0},{title:{English:`🍕 Fast React Pizza Co. `,Polish:`🍕 Fast React Pizza Co.`,Spanish:`🍕 Fast React Pizza Co.`},description:{English:`<p>Pizza ordering app built with React, Redux Toolkit, and React Router — browse the API-loaded menu, build a cart, and place orders with priority pricing and order tracking.</p>
+                </ul>`},available:`web`,imageURL:`${Kv}`,modalImageURL:`${ty}`,modalImageWidth:906,modalImageHeight:371,technologies:[`React`,`Styled Components`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/eat-n-split/`,GitHubRepoURL:`https://github.com/BoosterTech/eat-n-split.git`,inverted:!0,border:!0},{title:{English:`🍕 Fast React Pizza Co. `,Polish:`🍕 Fast React Pizza Co.`,Spanish:`🍕 Fast React Pizza Co.`},description:{English:`<p>Pizza ordering app built with React, Redux Toolkit, and React Router — browse the API-loaded menu, build a cart, and place orders with priority pricing and order tracking.</p>
                 <ul>
                   <li><strong>Routing &amp; data</strong> — React Router loaders and actions for menu fetching and order submission</li>
                   <li><strong>State</strong> — Redux Toolkit cart with derived totals and priority pricing</li>
@@ -2640,17 +2711,17 @@ A Software Engineer focused on building modern web applications and AI-powered S
                   <li><strong>Estado</strong> — carrito en Redux Toolkit con totales derivados y precio prioritario</li>
                   <li><strong>Interfaz</strong> — estilos utility de Tailwind CSS, responsiva en distintas pantallas</li>
                   <li><strong>Herramientas</strong> — build con Vite, desplegada en GitHub Pages</li>
-                </ul>`},available:`web & mob`,imageURL:`${Vv}`,modalImageURL:`${Xv}`,modalImageWidth:573,modalImageHeight:847,technologies:[`React`,`Redux Toolkit`,`React Router`,`Tailwind CSS`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Fast-Pizza-Co/`,GitHubRepoURL:`https://github.com/BoosterTech/Fast-Pizza-Co.git`,inverted:!1,border:!1}],iy=Pp`
+                </ul>`},available:`web & mob`,imageURL:`${qv}`,modalImageURL:`${ny}`,modalImageWidth:573,modalImageHeight:847,technologies:[`React`,`Redux Toolkit`,`React Router`,`Tailwind CSS`],GitHubPagesURLTag:{English:`Go to the Website`,Polish:`Przejdź do Strony`,Spanish:`Ir al Sitio Web`},GitHubRepoURLTag:{English:`Go to the GitHub Repository`,Polish:`Przejdź do Repozytorium GitHub`,Spanish:`Ir al Repositorio de GitHub`},GitHubPagesURL:`https://boostertech.github.io/Fast-Pizza-Co/`,GitHubRepoURL:`https://github.com/BoosterTech/Fast-Pizza-Co.git`,inverted:!1,border:!1}],uy=Pp`
   0% {
-    box-shadow: 0 0 0 0 rgb(var(--color-primary-rgb) / 0.45);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.45);
   }
   70% {
-    box-shadow: 0 0 0 8px rgb(var(--color-primary-rgb) / 0);
+    box-shadow: 0 0 0 8px rgba(var(--color-primary-rgb), 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(var(--color-primary-rgb) / 0);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0);
   }
-`,ay=Pp`
+`,dy=Pp`
   0% {
     transform: translateX(-120%);
   }
@@ -2658,7 +2729,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   100% {
     transform: translateX(280%);
   }
-`,oy=Q(K.div)`
+`,fy=Q(K.div)`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -2666,8 +2737,8 @@ A Software Engineer focused on building modern web applications and AI-powered S
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 1px solid rgb(var(--color-primary-rgb) / 0.35);
-  background: rgb(var(--color-surface-rgb) / 0.78);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.35);
+  background: rgba(var(--color-surface-rgb), 0.78);
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow-lg);
   color: var(--color-text-primary);
@@ -2684,7 +2755,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     height: 7px;
     border-radius: 50%;
     background: var(--color-primary);
-    animation: ${iy} 2.2s ease-out infinite;
+    animation: ${uy} 2.2s ease-out infinite;
   }
 
   &::after {
@@ -2697,10 +2768,10 @@ A Software Engineer focused on building modern web applications and AI-powered S
     background: linear-gradient(
       90deg,
       transparent,
-      rgb(var(--color-primary-rgb) / 0.18),
+      rgba(var(--color-primary-rgb), 0.18),
       transparent
     );
-    animation: ${ay} 3s ease-in-out infinite;
+    animation: ${dy} 3s ease-in-out infinite;
   }
 
   ${({$inline:e})=>e?Z`
@@ -2725,7 +2796,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
       display: none;
     }
   }
-`,sy=Q(K.div)`
+`,py=Q(K.div)`
   position: relative;
   flex: 0 0 var(--card-width);
   aspect-ratio: 16 / 10;
@@ -2759,14 +2830,14 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.md}) {
     aspect-ratio: 16 / 9;
   }
-`,cy=Q.img`
+`,my=Q.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: top center;
   display: block;
   pointer-events: none;
-`,ly=Q(K.div)`
+`,hy=Q(K.div)`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -2778,7 +2849,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.md}) {
     display: none;
   }
-`,uy=Q.div`
+`,gy=Q.div`
   position: relative;
   z-index: 1;
   display: flex;
@@ -2793,12 +2864,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     padding-bottom: var(--spacing-xs);
   }
-`,dy=Q.div`
+`,_y=Q.div`
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
   min-width: 0;
-`,fy=Q.div`
+`,vy=Q.div`
   position: relative;
   z-index: 1;
   display: flex;
@@ -2810,7 +2881,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.md}) {
     display: none;
   }
-`,py=Q(d_)`
+`,yy=Q(p_)`
   min-height: 0;
   height: clamp(22px, 4.5cqw, 34px);
   padding: clamp(0px, 0.5cqw, var(--spacing-xs))
@@ -2843,7 +2914,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     width: clamp(11px, 2cqw, 14px);
     height: clamp(11px, 2cqw, 14px);
   }
-`,my=Q.button`
+`,by=Q.button`
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-sm);
@@ -2852,7 +2923,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   height: 32px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  background: rgb(var(--color-surface-rgb) / 0.85);
+  background: rgba(var(--color-surface-rgb), 0.85);
   color: var(--color-text-primary);
   cursor: pointer;
   display: flex;
@@ -2881,7 +2952,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     display: none;
   }
-`,hy=({project:e,isActive:t,position:n,onClick:r,onExpand:i})=>{let{language:a}=Rp(),{projects:o}=Kp(),s=()=>{let t=e.modalImageURL||e.imageURL;t&&(new Image().src=t)};return(0,U.jsxs)(sy,{$isActive:t,$position:n,role:`group`,"aria-roledescription":`slide`,"aria-label":e.title[a],onClick:t?e=>i(e.currentTarget):r,onMouseEnter:s,children:[(0,U.jsx)(cy,{src:e.imageURL,alt:o.screenshotAlt.replace(`{title}`,e.title[a]),width:ny,height:675,loading:`lazy`}),t&&e.variant!==`comingSoon`&&(0,U.jsx)(my,{onFocus:s,onClick:e=>{e.stopPropagation(),i(e.currentTarget)},"aria-label":o.expandLabel.replace(`{title}`,e.title[a]),children:(0,U.jsx)(Cm,{})}),e.variant!==`comingSoon`&&(0,U.jsx)(ly,{initial:!1,animate:{y:t?0:`100%`},transition:{duration:.35,ease:[.4,0,.2,1]},children:(0,U.jsx)(uy,{children:(0,U.jsx)(dy,{children:(0,U.jsxs)(fy,{children:[t&&e.GitHubPagesURL&&(0,U.jsxs)(py,{href:e.GitHubPagesURL,target:`_blank`,rel:`noopener noreferrer`,onClick:e=>e.stopPropagation(),children:[(0,U.jsx)(wm,{}),e.GitHubPagesURLTag?.[a]||o.liveDemoLabel]}),t&&e.GitHubRepoURL&&(0,U.jsxs)(py,{$secondary:!0,href:e.GitHubRepoURL,target:`_blank`,rel:`noopener noreferrer`,onClick:e=>e.stopPropagation(),children:[(0,U.jsx)(hm,{}),e.GitHubRepoURLTag?.[a]||o.repoLabel]})]})})})}),e.variant===`comingSoon`&&(0,U.jsx)(oy,{children:o.comingSoonLabel})]})},gy=Tu(),_y=Q(K.div)`
+`,xy=({project:e,isActive:t,position:n,onClick:r,onExpand:i})=>{let{language:a}=Rp(),{projects:o}=Kp(),s=()=>{let t=e.modalImageURL||e.imageURL;t&&(new Image().src=t)};return(0,U.jsxs)(py,{$isActive:t,$position:n,role:`group`,"aria-roledescription":`slide`,"aria-label":e.title[a],onClick:t?e=>i(e.currentTarget):r,onMouseEnter:s,children:[(0,U.jsx)(my,{src:e.imageURL,alt:o.screenshotAlt.replace(`{title}`,e.title[a]),width:cy,height:675,loading:`lazy`}),t&&e.variant!==`comingSoon`&&(0,U.jsx)(by,{onFocus:s,onClick:e=>{e.stopPropagation(),i(e.currentTarget)},"aria-label":o.expandLabel.replace(`{title}`,e.title[a]),children:(0,U.jsx)(Cm,{})}),e.variant!==`comingSoon`&&(0,U.jsx)(hy,{initial:!1,animate:{y:t?0:`100%`},transition:{duration:.35,ease:[.4,0,.2,1]},children:(0,U.jsx)(gy,{children:(0,U.jsx)(_y,{children:(0,U.jsxs)(vy,{children:[t&&e.GitHubPagesURL&&(0,U.jsxs)(yy,{href:e.GitHubPagesURL,target:`_blank`,rel:`noopener noreferrer`,onClick:e=>e.stopPropagation(),children:[(0,U.jsx)(wm,{}),e.GitHubPagesURLTag?.[a]||o.liveDemoLabel]}),t&&e.GitHubRepoURL&&(0,U.jsxs)(yy,{$secondary:!0,href:e.GitHubRepoURL,target:`_blank`,rel:`noopener noreferrer`,onClick:e=>e.stopPropagation(),children:[(0,U.jsx)(hm,{}),e.GitHubRepoURLTag?.[a]||o.repoLabel]})]})})})}),e.variant===`comingSoon`&&(0,U.jsx)(fy,{children:o.comingSoonLabel})]})},Sy=Tu(),Cy=Q(K.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -2891,14 +2962,14 @@ A Software Engineer focused on building modern web applications and AI-powered S
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(var(--color-black-rgb) / 0.8);
+  background: rgba(var(--color-black-rgb), 0.8);
   backdrop-filter: blur(6px);
   padding: var(--spacing-lg);
 
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     padding: 0;
   }
-`,vy=Q(K.div)`
+`,wy=Q(K.div)`
   position: relative;
   width: 100%;
   max-width: 800px;
@@ -2907,7 +2978,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   border-radius: var(--radius-xl);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  box-shadow: 0 24px 80px rgb(var(--color-black-rgb) / 0.5);
+  box-shadow: 0 24px 80px rgba(var(--color-black-rgb), 0.5);
 
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     max-width: 100%;
@@ -2916,7 +2987,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     border-radius: 0;
     border: none;
   }
-`,yy=Q.div`
+`,Ty=Q.div`
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
@@ -2939,7 +3010,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     max-height: none;
   }
-`,by=Z`
+`,Ey=Z`
   position: absolute;
   z-index: 10;
   display: flex;
@@ -2968,12 +3039,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
     width: 18px;
     height: 18px;
   }
-`,xy=Q.button`
-  ${by}
+`,Dy=Q.button`
+  ${Ey}
   top: max(var(--spacing-md), env(safe-area-inset-top, 0px));
   right: max(var(--spacing-md), env(safe-area-inset-right, 0px));
-`,Sy=Q.button`
-  ${by}
+`,Oy=Q.button`
+  ${Ey}
   top: 50%;
   transform: translateY(-50%);
   ${({$left:e})=>e?`left: var(--spacing-md);`:`right: var(--spacing-md);`}
@@ -2981,12 +3052,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     display: none;
   }
-`,Cy=Q(K.div)`
+`,ky=Q(K.div)`
   position: relative;
   overflow: clip;
-`,wy=Q(K.div)`
+`,Ay=Q(K.div)`
   background: var(--color-surface);
-`,Ty=Q.div`
+`,jy=Q.div`
   position: relative;
   border-bottom: 1px solid var(--color-border);
 
@@ -3006,7 +3077,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
       left: 0;
       background: linear-gradient(
         90deg,
-        rgb(var(--color-black-rgb) / 0.55) 0%,
+        rgba(var(--color-black-rgb), 0.55) 0%,
         transparent 100%
       );
     }
@@ -3015,12 +3086,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
       right: 0;
       background: linear-gradient(
         -90deg,
-        rgb(var(--color-black-rgb) / 0.55) 0%,
+        rgba(var(--color-black-rgb), 0.55) 0%,
         transparent 100%
       );
     }
   }
-`,Ey=Q.img`
+`,My=Q.img`
   width: 100%;
   height: auto;
   max-height: 450px;
@@ -3043,7 +3114,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-height: 500px) {
     max-height: 200px;
   }
-`,Dy=Q.div`
+`,Ny=Q.div`
   padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-2xl);
 
   @media (max-width: ${({theme:e})=>e.breakpoint.sm}) {
@@ -3053,13 +3124,13 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-height: 500px) {
     padding: var(--spacing-md);
   }
-`,Oy=Q.h2`
+`,Py=Q.h2`
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 800;
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-md) 0;
   line-height: 1.3;
-`,ky=Q.div`
+`,Fy=Q.div`
   font-size: 1rem;
   line-height: 1.8;
   color: var(--color-text-secondary);
@@ -3084,12 +3155,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   li:last-child {
     margin-bottom: 0;
   }
-`,Ay=Q.div`
+`,Iy=Q.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
   margin: var(--spacing-lg) 0;
-`,jy=Q.span`
+`,Ly=Q.span`
   display: inline-flex;
   align-items: center;
   padding: var(--spacing-xxs) var(--spacing-sm);
@@ -3099,12 +3170,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   background: rgba(var(--color-text-primary-rgb), 0.08);
   border: 1px solid rgba(var(--color-text-primary-rgb), 0.18);
   border-radius: var(--radius-md);
-`,My=Q.div`
+`,Ry=Q.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-lg);
-`,Ny=Q(d_)`
+`,zy=Q(p_)`
   min-height: 36px;
   padding: var(--spacing-xs) var(--spacing-md);
   font-size: 0.9rem;
@@ -3138,7 +3209,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     width: 16px;
     height: 16px;
   }
-`,Py=({project:e,onClose:t,onPrev:n,onNext:r,hasPrev:i,hasNext:a,returnFocusRef:o})=>{let{language:s}=Rp(),{projects:c}=Kp(),l=xu(),u=th(`(max-width: ${Ch.breakpoint.lg})`),d=(0,g.useRef)(null),f=(0,g.useRef)(null),p=(0,g.useRef)(null),[m,h]=(0,g.useState)(0),[_,v]=(0,g.useState)(null),y=(0,g.useCallback)(()=>{h(-1),n()},[n]),b=(0,g.useCallback)(()=>{h(1),r()},[r]);if((0,g.useEffect)(()=>{if(!e)return;let t=o?.current??document.activeElement,n=window.scrollY;return document.body.style.position=`fixed`,document.body.style.top=`-${n}px`,document.body.style.left=`0`,document.body.style.right=`0`,p.current?.focus(),()=>{document.body.style.position=``,document.body.style.top=``,document.body.style.left=``,document.body.style.right=``,window.scrollTo(0,n),t instanceof HTMLElement&&t.focus({preventScroll:!0})}},[!!e]),(0,g.useEffect)(()=>{if(!e)return;let n=e=>{if(e.key===`Escape`){t();return}if(e.key===`ArrowLeft`&&i&&y(),e.key===`ArrowRight`&&a&&b(),e.key===`Tab`&&d.current){let t=d.current.querySelectorAll(`button, a[href], [tabindex]:not([tabindex="-1"])`);if(!t.length)return;let n=t[0],r=t[t.length-1];d.current.contains(document.activeElement)?e.shiftKey&&document.activeElement===n?(r.focus(),e.preventDefault()):!e.shiftKey&&document.activeElement===r&&(n.focus(),e.preventDefault()):(n.focus(),e.preventDefault())}};return window.addEventListener(`keydown`,n),()=>window.removeEventListener(`keydown`,n)},[e,t,y,b,i,a]),(0,g.useEffect)(()=>{f.current?.scrollTo({top:0})},[e]),!e)return null;let x=e.modalImageURL||e.imageURL,S=l?{duration:.15}:{type:`spring`,stiffness:420,damping:34},C=l?{opacity:0}:{scale:.95,opacity:0,y:16},w=l?{opacity:0}:{scale:.97,opacity:0,y:8,transition:{duration:.16,ease:`easeIn`}},T=l?0:55,ee=l?{duration:.15}:{type:`spring`,stiffness:260,damping:28};return(0,gy.createPortal)((0,U.jsx)(_y,{initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:l?.1:.18},onClick:t,"data-testid":`project-modal-backdrop`,children:(0,U.jsxs)(vy,{ref:d,role:`dialog`,"aria-modal":`true`,"aria-label":e.title[s],"aria-describedby":`project-modal-description`,initial:C,animate:{scale:1,opacity:1,y:0},exit:w,transition:S,onClick:e=>e.stopPropagation(),drag:u?`x`:!1,dragConstraints:{left:0,right:0},dragElastic:0,dragMomentum:!1,dragDirectionLock:!0,onDragEnd:(e,t)=>{let{offset:n,velocity:r}=t;(n.x<-60||r.x<-400)&&a?b():(n.x>60||r.x>400)&&i&&y()},style:{touchAction:u?`pan-y`:`auto`},children:[(0,U.jsx)(xy,{ref:p,onClick:t,"aria-label":c.closeLabel,children:(0,U.jsx)(Lm,{})}),i&&(0,U.jsx)(Sy,{$left:!0,onClick:y,"aria-label":c.previousLabel,children:(0,U.jsx)(Fg,{})}),a&&(0,U.jsx)(Sy,{onClick:b,"aria-label":c.nextLabel,children:(0,U.jsx)(Ig,{})}),(0,U.jsx)(yy,{ref:f,children:(0,U.jsx)(Cy,{layout:!0,children:(0,U.jsx)(xc,{mode:`popLayout`,initial:!1,children:(0,U.jsxs)(wy,{initial:{opacity:0,x:`${T*m}%`},animate:{opacity:1,x:0,scale:1},exit:{opacity:0,scale:l?1:.95,x:`${-T*m}%`},transition:ee,children:[(0,U.jsx)(Ty,{children:(0,U.jsx)(Ey,{$loaded:_===x,src:x,width:e.modalImageURL?e.modalImageWidth:ny,height:e.modalImageURL?e.modalImageHeight:675,alt:c.screenshotAlt.replace(`{title}`,e.title[s]),onLoad:()=>v(x)})}),(0,U.jsxs)(Dy,{children:[(0,U.jsx)(Oy,{children:e.title[s]}),(0,U.jsx)(ky,{id:`project-modal-description`,dangerouslySetInnerHTML:{__html:e.description[s]}}),e.technologies?.length>0&&(0,U.jsx)(Ay,{children:e.technologies.map(e=>(0,U.jsx)(jy,{children:e},e))}),(0,U.jsxs)(My,{children:[e.variant===`comingSoon`&&(0,U.jsx)(oy,{$inline:!0,children:c.comingSoonLabel}),e.GitHubPagesURL&&(0,U.jsxs)(Ny,{href:e.GitHubPagesURL,target:`_blank`,rel:`noopener noreferrer`,children:[(0,U.jsx)(wm,{}),e.GitHubPagesURLTag?.[s]||`Live Demo`]}),e.GitHubRepoURL&&(0,U.jsxs)(Ny,{$secondary:!0,href:e.GitHubRepoURL,target:`_blank`,rel:`noopener noreferrer`,children:[(0,U.jsx)(hm,{}),e.GitHubRepoURLTag?.[s]||`GitHub`]})]})]})]},e.title.English)})})})]})}),document.body)},Fy=Q.section`
+`,By=({project:e,onClose:t,onPrev:n,onNext:r,hasPrev:i,hasNext:a,returnFocusRef:o})=>{let{language:s}=Rp(),{projects:c}=Kp(),l=xu(),u=th(`(max-width: ${Ch.breakpoint.lg})`),d=(0,g.useRef)(null),f=(0,g.useRef)(null),p=(0,g.useRef)(null),[m,h]=(0,g.useState)(0),[_,v]=(0,g.useState)(null),y=(0,g.useCallback)(()=>{h(-1),n()},[n]),b=(0,g.useCallback)(()=>{h(1),r()},[r]);if((0,g.useEffect)(()=>{if(!e)return;let t=o?.current??document.activeElement,n=window.scrollY;return document.body.style.position=`fixed`,document.body.style.top=`-${n}px`,document.body.style.left=`0`,document.body.style.right=`0`,p.current?.focus(),()=>{document.body.style.position=``,document.body.style.top=``,document.body.style.left=``,document.body.style.right=``,window.scrollTo(0,n),t instanceof HTMLElement&&t.focus({preventScroll:!0})}},[!!e]),(0,g.useEffect)(()=>{if(!e)return;let n=e=>{if(e.key===`Escape`){t();return}if(e.key===`ArrowLeft`&&i&&y(),e.key===`ArrowRight`&&a&&b(),e.key===`Tab`&&d.current){let t=d.current.querySelectorAll(`button, a[href], [tabindex]:not([tabindex="-1"])`);if(!t.length)return;let n=t[0],r=t[t.length-1];d.current.contains(document.activeElement)?e.shiftKey&&document.activeElement===n?(r.focus(),e.preventDefault()):!e.shiftKey&&document.activeElement===r&&(n.focus(),e.preventDefault()):(n.focus(),e.preventDefault())}};return window.addEventListener(`keydown`,n),()=>window.removeEventListener(`keydown`,n)},[e,t,y,b,i,a]),(0,g.useEffect)(()=>{f.current?.scrollTo({top:0})},[e]),!e)return null;let x=e.modalImageURL||e.imageURL,S=l?{duration:.15}:{type:`spring`,stiffness:420,damping:34},C=l?{opacity:0}:{scale:.95,opacity:0,y:16},w=l?{opacity:0}:{scale:.97,opacity:0,y:8,transition:{duration:.16,ease:`easeIn`}},T=l?0:55,ee=l?{duration:.15}:{type:`spring`,stiffness:260,damping:28};return(0,Sy.createPortal)((0,U.jsx)(Cy,{initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:l?.1:.18},onClick:t,"data-testid":`project-modal-backdrop`,children:(0,U.jsxs)(wy,{ref:d,role:`dialog`,"aria-modal":`true`,"aria-label":e.title[s],"aria-describedby":`project-modal-description`,initial:C,animate:{scale:1,opacity:1,y:0},exit:w,transition:S,onClick:e=>e.stopPropagation(),drag:u?`x`:!1,dragConstraints:{left:0,right:0},dragElastic:0,dragMomentum:!1,dragDirectionLock:!0,onDragEnd:(e,t)=>{let{offset:n,velocity:r}=t;(n.x<-60||r.x<-400)&&a?b():(n.x>60||r.x>400)&&i&&y()},style:{touchAction:u?`pan-y`:`auto`},children:[(0,U.jsx)(Dy,{ref:p,onClick:t,"aria-label":c.closeLabel,children:(0,U.jsx)(Lm,{})}),i&&(0,U.jsx)(Oy,{$left:!0,onClick:y,"aria-label":c.previousLabel,children:(0,U.jsx)(Fg,{})}),a&&(0,U.jsx)(Oy,{onClick:b,"aria-label":c.nextLabel,children:(0,U.jsx)(Ig,{})}),(0,U.jsx)(Ty,{ref:f,children:(0,U.jsx)(ky,{layout:!0,children:(0,U.jsx)(xc,{mode:`popLayout`,initial:!1,children:(0,U.jsxs)(Ay,{initial:{opacity:0,x:`${T*m}%`},animate:{opacity:1,x:0,scale:1},exit:{opacity:0,scale:l?1:.95,x:`${-T*m}%`},transition:ee,children:[(0,U.jsx)(jy,{children:(0,U.jsx)(My,{$loaded:_===x,src:x,width:e.modalImageURL?e.modalImageWidth:cy,height:e.modalImageURL?e.modalImageHeight:675,alt:c.screenshotAlt.replace(`{title}`,e.title[s]),onLoad:()=>v(x)})}),(0,U.jsxs)(Ny,{children:[(0,U.jsx)(Py,{children:e.title[s]}),(0,U.jsx)(Fy,{id:`project-modal-description`,dangerouslySetInnerHTML:{__html:e.description[s]}}),e.technologies?.length>0&&(0,U.jsx)(Iy,{children:e.technologies.map(e=>(0,U.jsx)(Ly,{children:e},e))}),(0,U.jsxs)(Ry,{children:[e.variant===`comingSoon`&&(0,U.jsx)(fy,{$inline:!0,children:c.comingSoonLabel}),e.GitHubPagesURL&&(0,U.jsxs)(zy,{href:e.GitHubPagesURL,target:`_blank`,rel:`noopener noreferrer`,children:[(0,U.jsx)(wm,{}),e.GitHubPagesURLTag?.[s]||`Live Demo`]}),e.GitHubRepoURL&&(0,U.jsxs)(zy,{$secondary:!0,href:e.GitHubRepoURL,target:`_blank`,rel:`noopener noreferrer`,children:[(0,U.jsx)(hm,{}),e.GitHubRepoURLTag?.[s]||`GitHub`]})]})]})]},e.title.English)})})})]})}),document.body)},Vy=Q.section`
   padding: var(--spacing-3xl) 0;
   margin: var(--spacing-md) 0;
   border-radius: var(--radius-xl);
@@ -3149,7 +3220,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     margin: var(--spacing-2xl) 0;
     padding: 10px var(--spacing-lg) var(--spacing-2xl) var(--spacing-lg);
   }
-`,Iy=Q.div`
+`,Hy=Q.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3161,7 +3232,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-lg);
   }
-`,Ly=Q.h2`
+`,Uy=Q.h2`
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
   margin: 0;
@@ -3191,7 +3262,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.lg}) {
     transform: ${({$lang:e})=>e===`English`?`translateX(0px)`:e===`Polish`?`translateX(1px)`:`none`};
   }
-`,Ry=Q(K.div)`
+`,Wy=Q(K.div)`
   width: 100%;
   touch-action: pan-y;
   will-change: transform;
@@ -3214,7 +3285,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     -webkit-mask-image: none;
     mask-image: none;
   }
-`,zy=Q.div`
+`,Gy=Q.div`
   position: relative;
   width: 100%;
   max-width: 1200px;
@@ -3222,7 +3293,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   overflow: hidden;
   /* border-radius: var(--radius-xl); */
   /* border-right: 1px solid var(--color-white); */
-`,By=Q.img`
+`,Ky=Q.img`
   width: 70px;
   height: 70px;
   margin-bottom: calc(-4 * var(--spacing-sm));
@@ -3241,7 +3312,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     height: 70px;
     margin-bottom: calc(-3 * var(--spacing-sm));
   }
-`,Vy=Q.div`
+`,qy=Q.div`
   --card-width: 70%;
   --card-gap: 2%;
 
@@ -3262,7 +3333,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
     --card-width: 80%;
     --card-gap: 3%;
   }
-`,Hy=Q.button`
+`,Jy=Q.button`
   position: absolute;
   top: 50%;
   ${({$left:e})=>e?`left: var(--spacing-md)`:`right: var(--spacing-md)`};
@@ -3295,12 +3366,12 @@ A Software Engineer focused on building modern web applications and AI-powered S
   @media (max-width: ${({theme:e})=>e.breakpoint.md}) {
     display: none;
   }
-`,Uy=Q.div`
+`,Yy=Q.div`
   display: flex;
   justify-content: center;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-xl);
-`,Wy=Q.button`
+`,Xy=Q.button`
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -3314,7 +3385,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   &:hover {
     background: ${({$active:e})=>e?`var(--color-primary)`:`var(--color-secondary)`};
   }
-`,Gy=({id:e})=>{let{projects:t}=Kp(),{language:n}=Rp(),[r,i]=(0,g.useState)(1),[a,o]=(0,g.useState)(null),s=a===null?null:ry[a],c=(0,g.useRef)(!1),l=(0,g.useRef)(null),u=(0,g.useRef)(null);(0,g.useEffect)(()=>{if(navigator.connection?.saveData)return;let e=u.current;if(!e||typeof IntersectionObserver>`u`)return;let t=()=>ry.forEach(e=>{e.modalImageURL&&(new Image().src=e.modalImageURL)}),n=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(n.disconnect(),`requestIdleCallback`in window?requestIdleCallback(t):t())},{rootMargin:`600px 0px`});return n.observe(e),()=>n.disconnect()},[]);let d=e=>i(e),f=()=>i(e=>Math.max(0,e-1)),p=()=>i(e=>Math.min(ry.length-1,e+1));return(0,U.jsxs)(Fy,{id:e,ref:u,children:[(0,U.jsxs)(Iy,{children:[(0,U.jsx)(`a`,{href:`https://github.com/BoosterTech`,target:`_blank`,rel:`noopener noreferrer`,"aria-label":t.githubProfileLabel,children:(0,U.jsx)(By,{src:Rg,alt:``})}),(0,U.jsx)(Ly,{$lang:n,"data-text":t.header,"aria-label":Mh[n][2].name,children:t.header})]}),(0,U.jsxs)(zy,{role:`region`,"aria-label":t.regionLabel,onKeyDown:e=>{a===null&&(e.key===`ArrowLeft`&&r>0?(e.preventDefault(),f()):e.key===`ArrowRight`&&r<ry.length-1&&(e.preventDefault(),p()))},children:[r>0&&(0,U.jsx)(Hy,{$left:!0,onClick:f,"aria-label":t.previousLabel,children:(0,U.jsx)(Fg,{})}),(0,U.jsx)(Ry,{drag:`x`,dragDirectionLock:!0,dragConstraints:{left:0,right:0},dragElastic:.15,dragMomentum:!1,onDrag:(e,t)=>{Math.abs(t.offset.x)>8&&(c.current=!0)},onDragEnd:(e,t)=>{let{offset:n,velocity:r}=t;Math.abs(n.x)>Math.abs(n.y)&&(n.x<-60||r.x<-400?p():(n.x>60||r.x>400)&&f()),setTimeout(()=>{c.current=!1},150)},children:(0,U.jsx)(Vy,{style:{"--active-index":r},children:ry.map((e,t)=>(0,U.jsx)(hy,{project:e,isActive:t===r,position:t===r?`center`:t<r?`left`:`right`,onClick:()=>{c.current||d(t)},onExpand:e=>{c.current||(l.current=e,o(t))}},e.title.English))})}),r<ry.length-1&&(0,U.jsx)(Hy,{onClick:p,"aria-label":t.nextLabel,children:(0,U.jsx)(Ig,{})})]}),(0,U.jsx)(Uy,{children:ry.map((e,n)=>(0,U.jsx)(Wy,{$active:n===r,onClick:()=>d(n),"aria-label":`${t.goToLabel} ${n+1}`,"aria-current":n===r?`true`:void 0},n))}),(0,U.jsx)(xc,{children:s&&(0,U.jsx)(Py,{project:s,onClose:()=>o(null),onPrev:()=>o(e=>Math.max(0,e-1)),onNext:()=>o(e=>Math.min(ry.length-1,e+1)),hasPrev:a>0,hasNext:a<ry.length-1,returnFocusRef:l})})]})},Ky=()=>{let{language:e}=Rp();return(0,g.useEffect)(()=>{let e=window.location.hash.slice(1);if(!e)return;let t=()=>document.getElementById(e)?.scrollIntoView();return document.readyState===`complete`?t():window.addEventListener(`load`,t,{once:!0}),()=>window.removeEventListener(`load`,t)},[]),(0,U.jsxs)(U.Fragment,{children:[(0,U.jsx)(cg,{}),(0,U.jsx)(rg,{}),(0,U.jsxs)(zp,{children:[(0,U.jsx)(Rv,{id:Mh[e][0].slug}),(0,U.jsx)(Ng,{id:Mh[e][1].slug}),(0,U.jsx)(Gy,{id:Mh[e][2].slug}),(0,U.jsx)(Xg,{id:Mh[e][3].slug})]}),(0,U.jsx)(a_,{})]})},qy=jp`
+`,Zy=({id:e})=>{let{projects:t}=Kp(),{language:n}=Rp(),[r,i]=(0,g.useState)(1),[a,o]=(0,g.useState)(null),s=a===null?null:ly[a],c=(0,g.useRef)(!1),l=(0,g.useRef)(null),u=(0,g.useRef)(null);(0,g.useEffect)(()=>{if(navigator.connection?.saveData)return;let e=u.current;if(!e||typeof IntersectionObserver>`u`)return;let t=()=>ly.forEach(e=>{e.modalImageURL&&(new Image().src=e.modalImageURL)}),n=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(n.disconnect(),`requestIdleCallback`in window?requestIdleCallback(t):t())},{rootMargin:`600px 0px`});return n.observe(e),()=>n.disconnect()},[]);let d=e=>i(e),f=()=>i(e=>Math.max(0,e-1)),p=()=>i(e=>Math.min(ly.length-1,e+1));return(0,U.jsxs)(Vy,{id:e,ref:u,children:[(0,U.jsxs)(Hy,{children:[(0,U.jsx)(`a`,{href:`https://github.com/BoosterTech`,target:`_blank`,rel:`noopener noreferrer`,"aria-label":t.githubProfileLabel,children:(0,U.jsx)(Ky,{src:Rg,alt:``})}),(0,U.jsx)(Uy,{$lang:n,"data-text":t.header,"aria-label":Mh[n][2].name,children:t.header})]}),(0,U.jsxs)(Gy,{role:`region`,"aria-label":t.regionLabel,onKeyDown:e=>{a===null&&(e.key===`ArrowLeft`&&r>0?(e.preventDefault(),f()):e.key===`ArrowRight`&&r<ly.length-1&&(e.preventDefault(),p()))},children:[r>0&&(0,U.jsx)(Jy,{$left:!0,onClick:f,"aria-label":t.previousLabel,children:(0,U.jsx)(Fg,{})}),(0,U.jsx)(Wy,{drag:`x`,dragDirectionLock:!0,dragConstraints:{left:0,right:0},dragElastic:.15,dragMomentum:!1,onDrag:(e,t)=>{Math.abs(t.offset.x)>8&&(c.current=!0)},onDragEnd:(e,t)=>{let{offset:n,velocity:r}=t;Math.abs(n.x)>Math.abs(n.y)&&(n.x<-60||r.x<-400?p():(n.x>60||r.x>400)&&f()),setTimeout(()=>{c.current=!1},150)},children:(0,U.jsx)(qy,{style:{"--active-index":r},children:ly.map((e,t)=>(0,U.jsx)(xy,{project:e,isActive:t===r,position:t===r?`center`:t<r?`left`:`right`,onClick:()=>{c.current||d(t)},onExpand:e=>{c.current||(l.current=e,o(t))}},e.title.English))})}),r<ly.length-1&&(0,U.jsx)(Jy,{onClick:p,"aria-label":t.nextLabel,children:(0,U.jsx)(Ig,{})})]}),(0,U.jsx)(Yy,{children:ly.map((e,n)=>(0,U.jsx)(Xy,{$active:n===r,onClick:()=>d(n),"aria-label":`${t.goToLabel} ${n+1}`,"aria-current":n===r?`true`:void 0},n))}),(0,U.jsx)(xc,{children:s&&(0,U.jsx)(By,{project:s,onClose:()=>o(null),onPrev:()=>o(e=>Math.max(0,e-1)),onNext:()=>o(e=>Math.min(ly.length-1,e+1)),hasPrev:a>0,hasNext:a<ly.length-1,returnFocusRef:l})})]})},Qy=()=>{let{language:e}=Rp();return(0,g.useEffect)(()=>{let e=window.location.hash.slice(1);if(!e)return;let t=()=>document.getElementById(e)?.scrollIntoView();return document.readyState===`complete`?t():window.addEventListener(`load`,t,{once:!0}),()=>window.removeEventListener(`load`,t)},[]),(0,U.jsxs)(U.Fragment,{children:[(0,U.jsx)(cg,{}),(0,U.jsx)(rg,{}),(0,U.jsxs)(zp,{children:[(0,U.jsx)(Wv,{id:Mh[e][0].slug}),(0,U.jsx)(Ng,{id:Mh[e][1].slug}),(0,U.jsx)(Zy,{id:Mh[e][2].slug}),(0,U.jsx)(Xg,{id:Mh[e][3].slug})]}),(0,U.jsx)(s_,{})]})},$y=jp`
 ${Vp}
 ${Z`
   html {
@@ -3515,4 +3586,4 @@ ${Z`
     animation-play-state: paused !important;
   }
 `}
-`;Ad.createRoot(document.getElementById(`root`)).render((0,U.jsx)(g.StrictMode,{children:(0,U.jsx)(Lp,{children:(0,U.jsx)(Up,{children:(0,U.jsxs)(bp,{theme:Ch,children:[(0,U.jsx)(qy,{}),(0,U.jsx)(Oc,{features:bu,strict:!0,children:(0,U.jsx)(Ky,{})})]})})})}));
+`;Ad.createRoot(document.getElementById(`root`)).render((0,U.jsx)(g.StrictMode,{children:(0,U.jsx)(Lp,{children:(0,U.jsx)(Up,{children:(0,U.jsxs)(bp,{theme:Ch,children:[(0,U.jsx)($y,{}),(0,U.jsx)(Oc,{features:bu,strict:!0,children:(0,U.jsx)(Qy,{})})]})})})}));
