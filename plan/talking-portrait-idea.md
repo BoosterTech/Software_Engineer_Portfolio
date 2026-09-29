@@ -51,9 +51,21 @@ over the still (flicker guard) and now uses `preload="metadata"` — the ~1.2 MB
 MP4 downloads only on tap. Available in all languages and both themes; while
 playing, a `.portrait-playing` class on `<html>` pauses decorative CSS
 animations (verified low-end-Android stall fix). Clip re-encoded to 480×480
-H.264 (~1.2 MB).
+H.264 (~1.2 MB). No `poster` — the still underneath is the idle visual, so a
+poster was a redundant eager fetch.
+
+### Status update (captions)
+
+`<track>` captions shipped: `profile-dark-en.vtt` loads in `hidden` mode —
+browser-rendered captions would be clipped by the circular crop, so cue text
+surfaces in a styled speech bubble (`aria-live="polite"`, `aria-atomic`) below
+the portrait instead. The final cue ("Scroll down and see what I've built.")
+lingers ~3.5 s after `ended` as a scroll nudge, then fades over 500 ms with a
+slight downward drift; replay/unmount clears the timers and
+`prefers-reduced-motion` drops the transition.
 
 ## Open questions
 
 - pl/es clips or localized captions — currently English-only affordance.
-- WCAG: speech-only clip has no `<track>` captions; add if we keep it.
+- WCAG caption text is English-only (`profile-dark-en.vtt`); generate localized
+  `.vtt` files alongside any future pl/es clips.

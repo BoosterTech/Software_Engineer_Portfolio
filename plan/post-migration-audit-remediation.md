@@ -184,7 +184,11 @@ Nothing. Production is sound.
 
 - **SSR/prerendering:** would fix the ~1.4 s LCP render delay (React must
   parse+exec before the LCP `<img>` exists). Rejected — disproportionate for
-  a static SPA; the SPA tax is already within budget.
+  a static SPA; the SPA tax is already within budget. **Update 2026-09:** a
+  full build-time prerender was later implemented and measured (see
+  `performance-audit-2026-09.md` §H1) — hydration repaints re-stamp the LCP
+  element and the hero entrance animation floors LCP at ~1.5 s even with zero
+  JS. Verified LCP-neutral; reverted. Do not re-attempt for perf reasons.
 - **Full focus containment for the mobile menu:** panel isn't `role="dialog"`;
   Escape + backdrop click work. Add inert/trap only if a WCAG audit demands
   strict 2.4.3 focus-order conformance.

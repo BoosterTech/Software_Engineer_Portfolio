@@ -171,17 +171,16 @@ top: 100%; height: calc(100vh - var(--navbar-height))`. Note: `fixed`
       arrow-key navigation, carousel arrow-key region scoping, mobile (375px)
       hamburger open/close + backdrop tap — 10 tests green
 - [x] `npm audit fix` applied (9 pkgs, 44→38 vulns); remainder all
-      dev-chain-only, fixes need `--force` breaking changes — deferred to
-      Phase 4 CRA decision
+      dev-chain-only, fixes need `--force` breaking changes — resolved by the
+      CRA → Vite migration (Phase 4, shipped)
 - [x] `bundle:check` total budget added: 250 KiB gzip (actual ~156 KiB),
       `BUNDLE_TOTAL_LIMIT` env-overridable
 
 ## Phase 4 — Optional / strategic (decide, don't rush)
 
-- **CRA → Vite** — CRA 5.0.1 is the final release; all 36 audit vulns and the
-  `legacy-javascript` noise live in its frozen transitive chain. Migration
-  buys toolchain hygiene and faster builds, not user-visible perf. Decide
-  deliberately; the current pipeline is CI'd and works.
+- **CRA → Vite** — ✅ SHIPPED (see `audit-remediation-plan.md` item 12 and
+  `post-migration-audit-remediation.md`). Rolldown-based Vite 8 is now the
+  build pipeline; the CRA-vuln motivation this entry cited is resolved.
 - **React 19 / RTL 16 / jest-dom 7 / user-event 14 / framer 13 /
   styled-components 6.5 / react-icons 5.7 / gh-pages 6.3** — pinned upgrades,
   batch and verify; no urgency

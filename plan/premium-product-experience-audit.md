@@ -7,8 +7,9 @@ inspection, network/console traces — zero repo changes made during the audit).
 Legend: Severity — CRITICAL/HIGH/MEDIUM/LOW · Confidence — HIGH/MEDIUM/LOW ·
 Effort — LOW/MEDIUM/HIGH. Items marked UNVERIFIED need confirmation before work.
 
-Status (2026-09-29): **F7 shipped** — `SourceChip` in `Footer/` links to the
-canonical repo URL, localized ×3 (`footer.viewSourceLabel`). **F1 shipped** —
+Status (2026-09-29): **F7 shipped, then removed** — the `SourceChip` footer
+link was shipped and later reverted at the owner's request (component, styles,
+and `footer.viewSourceLabel` ×3 deleted). **F1 shipped** —
 touch devices get the PDF directly (`userAgentData?.mobile ?? (pointer:
 coarse)`), and `public/cv.html` has a branded fallback (name, role, PDF CTA,
 back link). **F3a shipped** — talking-portrait captions via a hidden WebVTT
@@ -70,13 +71,13 @@ AGENTS.md documents the correct pattern.
   mailto/GitHub — no bridging copy.
 - Fix: one line, e.g. "Dariusz 'Derek' Podczasik" (hero or footer).
 
-### F7 — No link to this site's own repository — LOW / MEDIUM conf / LOW effort — DONE
+### F7 — No link to this site's own repository — LOW / MEDIUM conf / LOW effort — ~~DONE~~ REMOVED
 
 - A technical reviewer's natural instinct ("how is this built?") has no outlet.
 - Fix: footer "View source" GitHub link.
-- Shipped: `SourceChip` (GitHub icon + label pill) in `Footer/`, targeting
-  `https://github.com/BoosterTech/Software_Engineer_Portfolio` (canonical —
-  the old `Front-End-Dev-Portfolio` remote name 301-redirects there).
+- Shipped, then **removed at owner request (2026-09-29)** — `SourceChip`,
+  its styles, and `footer.viewSourceLabel` were deleted from all three
+  locales. Intentional absence, not a regression.
 
 ### F8 — Projects have no outcome/result lines — MEDIUM / MEDIUM conf / MEDIUM effort
 

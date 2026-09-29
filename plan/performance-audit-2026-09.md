@@ -57,19 +57,42 @@ the same graph).
 
 ## Findings
 
-### H1 — LCP is ~96% render delay (SPA mount gate) — HIGH
+### H1 — LCP is ~96% render delay (SPA mount gate) — ⚠️ TRIED, REVERTED
 
 - **Finding:** the LCP `<img>` doesn't exist until React mounts; image itself
   loads in ~24 ms.
 - **Evidence:** LCP phases — render delay 1825 ms of ~1.9 s total; mount long
   task 3.1 s at 4× CPU.
-- **Location:** `index.html` → `src/index.js` → full mount.
-- **Approach:** build-time prerender (SSG) of the hero/Home section so the
-  portrait ships in static HTML and hydrates. Must honor the `data-theme`
-  bootstrap and deterministic hydration.
-- **Expected benefit:** LCP ≈ TTFB + image fetch (~0.6–1.2 s lab) — the
-  largest win available.
-- **Risk:** medium-high (hydration parity, theme bootstrap, build complexity).
+- **Implemented then measured (2026-09):** full build-time prerender pipeline
+  (`vite build --ssr` of a `src/prerender.js` entry → `renderToString` +
+  `ServerStyleSheet` → injected markup + inline styles → `hydrateRoot` with
+  recoverable-error filtering; `data-theme` bootstrap patched the baked
+  light-variant img src for saved-dark users; saved-language swapped silently
+  at hydration). All gates green including axe scans — the plumbing worked.
+- **Why it was reverted — the win never materialized:**
+  - Hydration's commit repaints the LCP node and **re-stamps LCP at JS-boot
+    time anyway** — same-session A/B on identical code: SSR ~1.5–1.6 s vs
+    CSR ~1.4–1.8 s unthrottled; ~2.5–3.9 s vs ~3.3 s under 4× CPU.
+  - **Pure static HTML with the JS bundle removed entirely still painted the
+    LCP img at ~1.5–2 s** (loaded at ~120–800 ms): the real floor is the hero
+    entrance animation (`slideInRight`/`fadeInUp`/`slideInLeft` —
+    `opacity: 0` → 1 with `both` fill + 0.2–0.4 s delays). Chrome withholds
+    the LCP candidate until the opacity ramp resolves.
+  - Deferred-hydration variants (rIC, rAF+0, setTimeout 1500) couldn't open a
+    paint slot under 4× CPU — boot eval saturates the main thread either way.
+  - Side effects found & fixed during the attempt: `preload="metadata"` video
+    painted frame 1 and became the LCP element in static markup; `loading="lazy"`
+    carousel imgs fetched ~415 KB at parse (Chrome lazy-distance) → needed
+    `preload="none"` + IO-assigned `src`. Both reverted with the pipeline
+    since the behavior only appears under SSR.
+- **Verdict:** prerender buys content-in-HTML (crawler/no-JS) at the cost of a
+  permanent SSR-safety contract (no render-path `window`/`localStorage`,
+  `ssr.noExternal` bundling, hydration-mismatch surface) — not worth it for a
+  single-route portfolio with neutral LCP.
+- **Actual remaining LCP lever:** the hero entrance animation — a
+  transform-only slide (drop the `opacity` component / `both` fill) on
+  `ImageContainer` would let the portrait paint ~0.8–1 s earlier on every
+  device class, no build machinery required. Visible design change; unowned.
 
 ### H2 — Single 525 KB chunk; no below-fold deferral — HIGH (conditional)
 
@@ -136,12 +159,14 @@ the same graph).
 
 **Phase 2 — Structural**
 
-- H1: build-time prerender of hero/Home (evaluate minimal
-  `renderToString`-at-build vs an SSG plugin; keep `data-theme` bootstrap +
-  hydration deterministic). This is the only change that structurally removes
-  the LCP gate.
-- H2 (fallback if SSG rejected): `React.lazy` below-fold sections with
-  measured `min-height` placeholders to protect anchor offsets.
+- ~~H1: build-time prerender of hero/Home~~ — **implemented, measured,
+  reverted** (see H1: hydration repaint re-stamps LCP; entrance animation is
+  the real floor; LCP-neutral for a permanent SSR contract).
+- Hero entrance animation → transform-only slide (emerged as the true LCP
+  floor during H1 measurement — design-visible change, user decision pending).
+- H2 (still available): `React.lazy` below-fold sections with measured
+  `min-height` placeholders to protect anchor offsets — ~200–400 ms off mount,
+  medium anchor-risk (HIGH-003 class).
 
 **Phase 3 — Optional**
 
