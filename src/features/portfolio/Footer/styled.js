@@ -112,6 +112,35 @@ export const Copyright = styled.p`
   border-top: 1px solid var(--color-footer-border);
 `;
 
+export const SourceChip = styled.a`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+  width: fit-content;
+  margin: var(--spacing-xs) auto 0;
+  padding: var(--spacing-xxs) var(--spacing-sm);
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--color-slate);
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--color-footer-border);
+  border-radius: var(--radius-xl);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    color: var(--color-cyan-light);
+    border-color: var(--color-cyan);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+`;
+
 export const GridTexture = styled.div`
   position: absolute;
   top: 0;

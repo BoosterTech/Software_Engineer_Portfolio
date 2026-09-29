@@ -1,4 +1,5 @@
 import useContent from "common/useContent";
+import { FaGithub } from "react-icons/fa";
 
 import {
   Brand,
@@ -7,9 +8,12 @@ import {
   Container,
   Copyright,
   GridTexture,
+  SourceChip,
   Tagline,
   Wrapper,
 } from "./styled";
+
+const REPO_URL = "https://github.com/BoosterTech/Software_Engineer_Portfolio";
 
 const Footer = () => {
   const { footer } = useContent();
@@ -23,6 +27,9 @@ const Footer = () => {
         <BrandColumn>
           <Brand>Derek.dev</Brand>
           <Tagline>{footer.tagline}</Tagline>
+          <SourceChip href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            <FaGithub aria-hidden="true" /> {footer.viewSourceLabel}
+          </SourceChip>
         </BrandColumn>
         <Copyright>
           &copy; {currentYear} Derek.dev &middot; {footer.rightsReserved}
