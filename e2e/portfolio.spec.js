@@ -32,16 +32,19 @@ test.describe("Portfolio E2E", () => {
   test("toggles dark mode", async ({ page }) => {
     await page.goto("/");
     await page.locator('[data-testid="dark-mode-toggle"]').click();
-    const darkTheme = await page.evaluate(() =>
-      document.documentElement.getAttribute("data-theme")
-    );
-    expect(darkTheme).toBe("dark");
+    // toggleTheme is a startTransition — the commit is async, poll for it
+    await expect
+      .poll(() =>
+        page.evaluate(() => document.documentElement.getAttribute("data-theme"))
+      )
+      .toBe("dark");
 
     await page.locator('[data-testid="dark-mode-toggle"]').click();
-    const lightTheme = await page.evaluate(() =>
-      document.documentElement.getAttribute("data-theme")
-    );
-    expect(lightTheme).toBeNull();
+    await expect
+      .poll(() =>
+        page.evaluate(() => document.documentElement.getAttribute("data-theme"))
+      )
+      .toBeNull();
   });
 
   test("carousel navigates to next project via arrow button", async ({
