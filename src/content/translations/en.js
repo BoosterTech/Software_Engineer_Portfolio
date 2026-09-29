@@ -12,8 +12,10 @@ A Software Engineer focused on building modern web applications and AI-powered S
     viewMyWork: "View My Work",
     viewCV: "View CV",
     cvUrl: `${import.meta.env.BASE_URL}cv.html`,
+    cvPdfUrl: `${import.meta.env.BASE_URL}Dariusz_Podczasik_Software_Engineer_CV.pdf`,
     portraitAlt: "Portrait of Dariusz Podczasik",
     hearMeLabel: "Hear me — play a short video greeting",
+    captionsLabel: "English captions",
     skillsetHeader: "My Technology Stack",
     learnNextHeader: "Currently Exploring",
     toolsShowcase: {
@@ -88,6 +90,7 @@ A Software Engineer focused on building modern web applications and AI-powered S
   footer: {
     tagline: "Engineering excellence through code and design.",
     rightsReserved: "All rights reserved.",
+    viewSourceLabel: "View source on GitHub",
   },
   nav: {
     mainAriaLabel: "Main navigation",
