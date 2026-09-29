@@ -1,5 +1,6 @@
 import {
   createContext,
+  startTransition,
   useCallback,
   useContext,
   useEffect,
@@ -34,7 +35,12 @@ export const ThemeModeProvider = ({ children, initialIsDark }) => {
       .forEach((meta) => meta.setAttribute("content", themeColor));
   }, [isDark]);
 
-  const toggleTheme = useCallback(() => setIsDark((prev) => !prev), []);
+  // The toggle restyles the whole document via CSS vars + re-renders every
+  // isDark consumer — a ~700 ms task under throttle. Non-blocking update.
+  const toggleTheme = useCallback(
+    () => startTransition(() => setIsDark((prev) => !prev)),
+    []
+  );
 
   return (
     <ThemeModeContext.Provider value={{ isDark, toggleTheme }}>

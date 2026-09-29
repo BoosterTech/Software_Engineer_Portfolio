@@ -95,7 +95,7 @@ const Home = ({ id }) => {
             width={640}
             height={640}
           />
-          <TalkingPortrait poster={profileImage} />
+          <TalkingPortrait />
         </ImageContainer>
       </ContentImageContainer>
 
