@@ -17,13 +17,18 @@ const scan = async (page) => {
   // so scanning mid-fade measures blended colors. Wait for finite
   // CSS/WAAPI animations to finish; infinite loops are excluded on purpose.
   await expect
-    .poll(() =>
-      page.evaluate(() =>
-        document
-          .getAnimations()
-          .filter((a) => a.effect?.getComputedTiming().iterations !== Infinity)
-          .every((a) => a.playState === "finished")
-      )
+    .poll(
+      () =>
+        page.evaluate(() =>
+          document
+            .getAnimations()
+            .filter(
+              (a) => a.effect?.getComputedTiming().iterations !== Infinity
+            )
+            .every((a) => a.playState === "finished")
+        ),
+      // WebKit under parallel load can exceed the default 5s poll window
+      { timeout: 15_000 }
     )
     .toBe(true);
   const results = await new AxeBuilder({ page })

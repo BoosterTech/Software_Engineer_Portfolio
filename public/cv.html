@@ -18,9 +18,40 @@
         border: none;
       }
       .fallback {
+        min-height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
         padding: 3rem 1rem;
         text-align: center;
         font-family: system-ui, sans-serif;
+        color: #0f172a;
+        background: #f4f7fb;
+      }
+      .fallback h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      .fallback p {
+        margin: 0;
+        color: #64748b;
+      }
+      .fallback .cta {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .fallback .back {
+        color: #2563eb;
+        font-size: 0.9rem;
       }
     </style>
   </head>
@@ -29,11 +60,19 @@
       data="./Dariusz_Podczasik_Software_Engineer_CV.pdf"
       type="application/pdf"
     >
-      <p class="fallback">
-        <a href="./Dariusz_Podczasik_Software_Engineer_CV.pdf">
+      <div class="fallback">
+        <h1>Dariusz Podczasik</h1>
+        <p>Software Engineer — CV</p>
+        <a
+          class="cta"
+          href="./Dariusz_Podczasik_Software_Engineer_CV.pdf"
+          target="_blank"
+          rel="noopener"
+        >
           Open CV (PDF)
         </a>
-      </p>
+        <a class="back" href="./">&larr; Back to portfolio</a>
+      </div>
     </object>
   </body>
 </html>

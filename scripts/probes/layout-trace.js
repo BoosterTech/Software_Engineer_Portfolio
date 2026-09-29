@@ -35,7 +35,10 @@ const URL_ = process.argv[2] || "http://localhost:3100/";
       if (st?.length) {
         const top = st
           .slice(0, 3)
-          .map((f) => `${f.functionName || "anon"}@${f.url?.split("/").pop()}:${f.lineNumber}:${f.columnNumber}`)
+          .map(
+            (f) =>
+              `${f.functionName || "anon"}@${f.url?.split("/").pop()}:${f.lineNumber}:${f.columnNumber}`
+          )
           .join(" <- ");
         layoutStacks[top] = (layoutStacks[top] || 0) + (e.dur || 0) / 1000;
       }
@@ -49,8 +52,13 @@ const URL_ = process.argv[2] || "http://localhost:3100/";
     .forEach(([k, v]) => console.log(v.toFixed(1).padStart(8), k));
 
   const totalLayout = layoutEvents.reduce((s, e) => s + e.dur, 0);
-  console.log(`\n== layout events: ${layoutEvents.length}, total ${totalLayout.toFixed(1)}ms ==`);
-  const forced = layoutEvents.filter((e) => e.data?.dirtyObjects !== undefined || e.data?.root);
+  console.log(
+    `\n== layout events: ${layoutEvents.length}, total ${totalLayout.toFixed(1)}ms ==`
+  );
+  const forced = layoutEvents.filter(
+    (e) => e.data?.dirtyObjects !== undefined || e.data?.root
+  );
+  console.log(`== forced-reflow candidates: ${forced.length} ==`);
   console.log("== top stacks attributed to layout ==");
   Object.entries(layoutStacks)
     .sort((a, b) => b[1] - a[1])

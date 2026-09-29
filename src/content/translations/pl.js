@@ -11,8 +11,10 @@ export const pl = {
     viewMyWork: "Zobacz projekty",
     viewCV: "Zobacz CV",
     cvUrl: `${import.meta.env.BASE_URL}cv.html`,
+    cvPdfUrl: `${import.meta.env.BASE_URL}Dariusz_Podczasik_Software_Engineer_CV.pdf`,
     portraitAlt: "Portret Dariusza Podczasika",
     hearMeLabel: "Posłuchaj mnie — odtwórz krótkie wideo powitalne",
+    captionsLabel: "Napisy angielskie",
     skillsetHeader: "Mój stack technologiczny",
     learnNextHeader: "Aktualnie rozwijam",
     toolsShowcase: {
@@ -96,6 +98,7 @@ export const pl = {
   footer: {
     tagline: "Doskonałość inżynieryjna w kodzie i designie.",
     rightsReserved: "Wszelkie prawa zastrzeżone.",
+    viewSourceLabel: "Zobacz kod na GitHub",
   },
   nav: {
     mainAriaLabel: "Nawigacja główna",

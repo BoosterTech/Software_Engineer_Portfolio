@@ -6,9 +6,7 @@ const LINE_LIMIT = 300;
 
 // Content data files are verified by src/content/translations.test.js
 // instead of the 300-line rule because they are data, not logic.
-const EXCLUDED_FILES = new Set([
-  path.join("src", "content", "projects.js"),
-]);
+const EXCLUDED_FILES = new Set([path.join("src", "content", "projects.js")]);
 
 // projects.js is kept as a single module because each project is a structured
 // object with per-language fields; splitting by language would force heavy

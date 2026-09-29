@@ -12,7 +12,7 @@ export const Backdrop = styled(m.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(var(--color-black-rgb) / 0.8);
+  background: rgba(var(--color-black-rgb), 0.8);
   backdrop-filter: blur(6px);
   padding: var(--spacing-lg);
 
@@ -30,7 +30,7 @@ export const Modal = styled(m.div)`
   border-radius: var(--radius-xl);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  box-shadow: 0 24px 80px rgb(var(--color-black-rgb) / 0.5);
+  box-shadow: 0 24px 80px rgba(var(--color-black-rgb), 0.5);
 
   @media (max-width: ${({ theme }) => theme.breakpoint.lg}) {
     max-width: 100%;
@@ -144,7 +144,7 @@ export const ModalImageWrapper = styled.div`
       left: 0;
       background: linear-gradient(
         90deg,
-        rgb(var(--color-black-rgb) / 0.55) 0%,
+        rgba(var(--color-black-rgb), 0.55) 0%,
         transparent 100%
       );
     }
@@ -153,7 +153,7 @@ export const ModalImageWrapper = styled.div`
       right: 0;
       background: linear-gradient(
         -90deg,
-        rgb(var(--color-black-rgb) / 0.55) 0%,
+        rgba(var(--color-black-rgb), 0.55) 0%,
         transparent 100%
       );
     }

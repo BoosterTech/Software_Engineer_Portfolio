@@ -5,19 +5,19 @@ desktop preset) on the production build. No RUM exists — all numbers are lab d
 
 ## Measured baseline
 
-| Metric | Mobile (LHCI) | Desktop | Budget | Status |
-|---|---|---|---|---|
-| Performance score | 0.77 | 0.99 | — | mobile ⚠️ |
-| FCP | 0.6 s | 0.2 s | — | ✅ |
-| LCP | **3.05 s** | 0.8 s | ≤ 2.5 s | ❌ fails repo budget |
-| TBT | 660 ms | 30 ms | — | ⚠️ |
-| CLS | 0 | 0 | ≤ 0.1 | ✅ |
-| Speed Index | 3.1 s | 1.1 s | — | ✅ |
-| TTI | 3.8 s | 0.8 s | — | ✅ |
-| Transfer | ~330 KB | ~545 KB | — | ✅ lean |
-| Main-thread work | 5.1 s (mount task 585 ms, styleLayout 1.6 s) | 1.9 s | — | ⚠️ |
-| Unused JS | 65 KB | 64 KB | — | ⚠️ |
-| Responsive-image waste | ~92 KB | — | — | ⚠️ |
+| Metric                 | Mobile (LHCI)                                | Desktop | Budget  | Status               |
+| ---------------------- | -------------------------------------------- | ------- | ------- | -------------------- |
+| Performance score      | 0.77                                         | 0.99    | —       | mobile ⚠️            |
+| FCP                    | 0.6 s                                        | 0.2 s   | —       | ✅                   |
+| LCP                    | **3.05 s**                                   | 0.8 s   | ≤ 2.5 s | ❌ fails repo budget |
+| TBT                    | 660 ms                                       | 30 ms   | —       | ⚠️                   |
+| CLS                    | 0                                            | 0       | ≤ 0.1   | ✅                   |
+| Speed Index            | 3.1 s                                        | 1.1 s   | —       | ✅                   |
+| TTI                    | 3.8 s                                        | 0.8 s   | —       | ✅                   |
+| Transfer               | ~330 KB                                      | ~545 KB | —       | ✅ lean              |
+| Main-thread work       | 5.1 s (mount task 585 ms, styleLayout 1.6 s) | 1.9 s   | —       | ⚠️                   |
+| Unused JS              | 65 KB                                        | 64 KB   | —       | ⚠️                   |
+| Responsive-image waste | ~92 KB                                       | —       | —       | ⚠️                   |
 
 LCP element: `section#home` portrait (`light_theme_profile.webp`, 19.5 KB, rendered
 300×300). Load time 28 ms — **72% of LCP is render delay** waiting for `main.js`
@@ -35,7 +35,7 @@ reports the real LCP failure instead of NO_FCP.
 
 - `fetchpriority="high"` on the portrait (`Home/index.js`). No measurable LCP
   delta — correct prioritization, but mount delay remains the gate. A `<link
-  rel="preload">` was skipped: the asset is webpack-hashed and can't be
+rel="preload">` was skipped: the asset is webpack-hashed and can't be
   hardcoded in `index.html`.
 
 ### 1.2 Render only the active theme's portrait — ✅ DONE
@@ -137,7 +137,7 @@ offset-accuracy risk plus Suspense complexity for ~200–300 ms potential gain).
 
 - **3.1** Data-URI inlining — ✅ REVIEWED, no change. After 2.3 all icons are
   0.8–3 KB (under webpack's 10 KB inline threshold → ~20 KB base64 in main.js).
-  Inlining now *saves* ~15 requests; the earlier 35 KB concern was pre-resize.
+  Inlining now _saves_ ~15 requests; the earlier 35 KB concern was pre-resize.
 - **3.2** `react-scroll` → native — ❌ REJECTED on evidence. Active features:
   `spy`/`activeClass` (scroll-position link highlighting), `smooth`, per-item
   `offset`. Replacement ≈ 60–80 lines (IntersectionObserver spy + offset math)

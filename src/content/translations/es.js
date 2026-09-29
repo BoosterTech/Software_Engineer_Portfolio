@@ -11,8 +11,10 @@ export const es = {
     viewMyWork: "Ver proyectos",
     viewCV: "Ver CV",
     cvUrl: `${import.meta.env.BASE_URL}cv.html`,
+    cvPdfUrl: `${import.meta.env.BASE_URL}Dariusz_Podczasik_Software_Engineer_CV.pdf`,
     portraitAlt: "Retrato de Dariusz Podczasik",
     hearMeLabel: "Escúchame — reproducir un breve saludo en video",
+    captionsLabel: "Subtítulos en inglés",
     skillsetHeader: "Mi stack tecnológico",
     learnNextHeader: "Actualmente aprendiendo",
     toolsShowcase: {
@@ -90,6 +92,7 @@ export const es = {
   footer: {
     tagline: "Excelencia en ingeniería a través del código y el diseño.",
     rightsReserved: "Todos los derechos reservados.",
+    viewSourceLabel: "Ver código en GitHub",
   },
   nav: {
     mainAriaLabel: "Navegación principal",

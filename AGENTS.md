@@ -27,7 +27,9 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 ## Hard rules (CI-enforced)
 
 1. **No hardcoded colors in `src/` JS.** No hex, `rgb()/rgba()` with literals, or bare
-   `white`/`black`. Use `var(--color-*)`; for alpha use `rgb(var(--color-*-rgb) / <a>)`.
+   `white`/`black`. Use `var(--color-*)`; for alpha use `rgba(var(--color-*-rgb), <a>)`
+   — NOT `rgb(var(--x-rgb) / <a>)`: the tokens are comma-separated, so the slash
+   form produces invalid CSS that browsers silently drop (verified bug).
    Allowlist: `styles/tokens.js`, `contactIcons.js`, `common/animations.js`.
    Verified by `npm run check:colors`.
 2. **300-line cap per source file.** `projects.js` is exempt (data). `npm run size-check`.
@@ -117,6 +119,13 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
   directly (the old `MutationObserver` in Home was removed for exactly this).
   The root `index.html` carries an inline bootstrap that applies `data-theme`
   before first paint — keep it in sync with the provider's init logic.
+- Talking-portrait captions: `profile-dark-en.vtt` is loaded as a
+  `mode: "hidden"` track — never render cues in-video (`default`/`showing`),
+  the circular crop clips them. `cuechange` on the text track feeds the
+  `PortraitCaption` speech bubble below the circle (`aria-live="polite"`).
+  The final cue must extend past the clip's audio end (VTT times are clamped
+  to duration); its caption is kept visible ~3.5 s after `ended` via a timer
+  as a scroll nudge.
 
 ## Navigation
 
@@ -198,8 +207,9 @@ backend, no API layer, no auth, no database, no state library. Keep it that way.
 
 ```
 npm run test:coverage  # all green + 70% floors (vitest run --coverage)
-npm run lint
-npm run format:check
+npm run lint         # eslint . — whole repo; env blocks in eslint.config.js
+                     # give scripts/, e2e/, and root configs Node globals
+npm run format:check # prettier --check . — whole repo
 npm run check:colors
 npm run check:circular
 npm run size-check
@@ -227,6 +237,8 @@ barely touched, it's stale CRLF on disk — re-checkout or `prettier --write`.
 ## Commits
 
 - Conventional Commits, atomic scope (`feat(nav):`, `test:`, `chore:`, `style(theme):`)
+- No `Co-Authored-By` trailers or tool-attribution lines — GitHub counts
+  co-authors as repo contributors; the owner wants a solo contributor list
 - Never commit build output, `.env*`, or editor files
 
 ## Do NOT add

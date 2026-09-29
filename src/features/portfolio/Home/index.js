@@ -36,6 +36,13 @@ const Home = ({ id }) => {
 
   const projectsItem = menuItems[language][2];
   const isMobile = useMediaQuery(`(max-width: ${themes.breakpoint.md})`);
+  const isCoarsePointer = useMediaQuery("(pointer: coarse)");
+  // Touch devices can't render the embedded <object> PDF on cv.html — send
+  // them straight to the PDF, which mobile browsers handle natively.
+  const cvHref =
+    (navigator.userAgentData?.mobile ?? isCoarsePointer)
+      ? home.cvPdfUrl
+      : home.cvUrl;
   const projectsOffset =
     isMobile && projectsItem.offsetMobile != null
       ? projectsItem.offsetMobile
@@ -71,7 +78,7 @@ const Home = ({ id }) => {
             </ViewMyWorkButton>
             <DownloadCVButton
               $variant="outline"
-              href={home.cvUrl}
+              href={cvHref}
               target="_blank"
               rel="noopener noreferrer"
             >

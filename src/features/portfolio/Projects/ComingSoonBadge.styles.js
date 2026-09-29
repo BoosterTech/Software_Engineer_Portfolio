@@ -3,13 +3,13 @@ import styled, { css, keyframes } from "styled-components";
 
 const comingSoonPulse = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgb(var(--color-primary-rgb) / 0.45);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.45);
   }
   70% {
-    box-shadow: 0 0 0 8px rgb(var(--color-primary-rgb) / 0);
+    box-shadow: 0 0 0 8px rgba(var(--color-primary-rgb), 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(var(--color-primary-rgb) / 0);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0);
   }
 `;
 
@@ -31,8 +31,8 @@ export const ComingSoonBadge = styled(m.div)`
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 1px solid rgb(var(--color-primary-rgb) / 0.35);
-  background: rgb(var(--color-surface-rgb) / 0.78);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.35);
+  background: rgba(var(--color-surface-rgb), 0.78);
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow-lg);
   color: var(--color-text-primary);
@@ -62,7 +62,7 @@ export const ComingSoonBadge = styled(m.div)`
     background: linear-gradient(
       90deg,
       transparent,
-      rgb(var(--color-primary-rgb) / 0.18),
+      rgba(var(--color-primary-rgb), 0.18),
       transparent
     );
     animation: ${comingSoonShimmer} 3s ease-in-out infinite;
